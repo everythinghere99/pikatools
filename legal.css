@@ -1,0 +1,58 @@
+:root{--bg:#fffaf5;--card:#fffdf9;--soft:#fff1e8;--accent:#ef8658;--accent-dark:#c96c45;--brown:#3d2d29;--muted:#756864;--line:#f1dfd4;--footer:#4b3832}
+*{box-sizing:border-box}
+body.legal-body{margin:0;background:var(--bg);color:var(--brown);font-family:'Nunito',sans-serif}
+.legal-body .site-header{background:rgba(255,253,249,.96);border-bottom:1px solid #f0e5dc;position:sticky;top:0;z-index:20;backdrop-filter:blur(10px)}
+.legal-body .container{width:min(1120px,calc(100% - 40px));margin:0 auto}
+.legal-body .header-inner{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.legal-body .brand{display:inline-flex;align-items:center;gap:14px;color:var(--brown);text-decoration:none}
+.legal-body .brand-mark{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(145deg,#f49a70,#e97849);color:#fff;font-size:30px;font-weight:700;box-shadow:0 10px 24px rgba(224,118,75,.18)}
+.legal-body .brand-name{font-family:'Comic Neue',cursive;font-size:32px;font-weight:700}
+.legal-body .desktop-nav{display:flex;align-items:center;gap:30px}
+.legal-body .desktop-nav a{color:var(--brown);text-decoration:none;font-size:15px;font-weight:700}
+.legal-body .desktop-nav a:hover{color:var(--accent-dark)}
+.legal-page{position:relative;overflow:hidden;padding:64px 0 0}
+.legal-page:before,.legal-page:after{content:'';position:absolute;width:150px;height:150px;border-radius:55% 45% 60% 40%;background:#fde4d6;opacity:.75;z-index:0}
+.legal-page:before{left:-85px;top:20px;transform:rotate(22deg)}.legal-page:after{right:-90px;bottom:80px;transform:rotate(-20deg)}
+.legal-hero{position:relative;z-index:1;text-align:center;max-width:850px;margin:0 auto 42px}
+.legal-kicker{color:var(--accent-dark);font-size:14px;letter-spacing:3px;font-weight:800;margin-bottom:14px}
+.legal-kicker:before,.legal-kicker:after{content:'—';margin:0 12px;color:#efaa8b}
+.legal-hero h1{margin:0;font-family:'Comic Neue',cursive;font-size:clamp(42px,6vw,70px);line-height:1}
+.legal-hero p{max-width:700px;margin:18px auto 0;color:var(--muted);font-size:19px;line-height:1.65}
+.legal-hero-art{position:absolute;right:0;top:0;width:82px;height:92px;border:4px solid #df865c;border-radius:12px;transform:rotate(2deg);opacity:.9}
+.legal-hero-art:before{content:'';position:absolute;left:17px;right:17px;top:26px;height:4px;border-radius:5px;background:#df865c;box-shadow:0 18px 0 #df865c}
+.legal-card{position:relative;z-index:2;width:min(980px,100%);margin:0 auto;padding:38px 42px 34px;background:rgba(255,253,249,.97);border:1px solid #f1e4da;border-radius:26px;box-shadow:0 18px 50px rgba(84,55,43,.09)}
+.legal-date{display:flex;align-items:center;gap:13px;color:#705e58;font-size:16px;font-weight:700;margin-bottom:4px}
+.legal-date-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:var(--soft);color:var(--accent-dark);font-size:20px}
+.legal-section{display:grid;grid-template-columns:58px 1fr;gap:20px;padding:30px 0;border-top:1px solid var(--line)}
+.legal-section:first-of-type{border-top:0}
+.legal-number{width:50px;height:50px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(145deg,#f39768,#e97849);color:#fff;font-size:20px;font-weight:800;box-shadow:0 8px 18px rgba(224,118,75,.18)}
+.legal-section-content h2{margin:3px 0 10px;font-family:'Comic Neue',cursive;font-size:26px;line-height:1.2}
+.legal-section-content p{margin:0;color:var(--muted);font-size:17px;line-height:1.8}
+.legal-section-content a{color:var(--accent-dark);font-weight:700;overflow-wrap:anywhere}
+.legal-note{margin-top:16px;padding:16px 18px;border-radius:17px;background:var(--soft);border:1px solid #f4dfd1}
+.legal-footer{position:relative;margin-top:74px;background:var(--footer);color:#f9eee8;padding:54px 20px 34px;text-align:center;overflow:hidden}
+.legal-footer:before{content:'';position:absolute;left:-5%;right:-5%;top:-34px;height:70px;background:var(--bg);border-radius:50%}
+.legal-footer a{color:#f7a77f;font-weight:700;text-decoration:underline}.legal-footer-inner{position:relative;z-index:1;font-size:14px}
+@media(max-width:760px){.legal-body .container{width:min(100% - 28px,1120px)}.legal-body .header-inner{min-height:76px}.legal-body .brand-mark{width:56px;height:56px;border-radius:17px}.legal-body .brand-name{font-size:29px}.legal-body .desktop-nav{display:none}.legal-page{padding-top:46px}.legal-hero{margin-bottom:30px;padding:0 10px}.legal-hero h1{font-size:45px}.legal-hero p{font-size:17px;line-height:1.55}.legal-hero-art{display:none}.legal-card{padding:24px 18px 22px;border-radius:22px}.legal-date{font-size:15px}.legal-section{grid-template-columns:42px 1fr;gap:13px;padding:24px 0}.legal-number{width:40px;height:40px;font-size:17px}.legal-section-content h2{font-size:23px;margin-top:1px}.legal-section-content p{font-size:16px;line-height:1.7}.legal-note{padding:16px}.legal-footer{margin-top:52px}}
+@media(max-width:420px){.legal-body .brand-name{font-size:27px}.legal-hero h1{font-size:40px}.legal-card{padding-left:15px;padding-right:15px}}
+
+/* Existing PikaTools legal-page markup */
+.legal-body .article-page{position:relative;overflow:hidden;padding:64px 0 0;background:var(--bg)}
+.legal-body .article-page:before,.legal-body .article-page:after{content:'';position:absolute;width:150px;height:150px;border-radius:55% 45% 60% 40%;background:#fde4d6;opacity:.7;z-index:0}
+.legal-body .article-page:before{left:-85px;top:20px;transform:rotate(22deg)}
+.legal-body .article-page:after{right:-90px;bottom:80px;transform:rotate(-20deg)}
+.legal-body .article-box{position:relative;z-index:2;width:min(980px,100%);margin:0 auto;padding:38px 42px 40px;background:rgba(255,253,249,.97);border:1px solid #f1e4da;border-radius:26px;box-shadow:0 18px 50px rgba(84,55,43,.09)}
+.legal-body .article-box h1{margin:0;text-align:center;font-family:'Comic Neue',cursive;font-size:clamp(44px,6vw,68px);line-height:1.05}
+.legal-body .article-date{display:block;text-align:center;margin:14px 0 30px;color:#705e58;font-size:16px;font-weight:700}
+.legal-body .article-box>p:first-of-type{padding:22px 24px;margin:0 0 8px;background:var(--soft);border-radius:18px;color:var(--muted)}
+.legal-body .article-box h2{counter-increment:legal-section;position:relative;margin:0;padding:30px 0 10px 70px;border-top:1px solid var(--line);font-family:'Comic Neue',cursive;font-size:26px;line-height:1.2}
+.legal-body .article-box h2:before{content:counter(legal-section);position:absolute;left:0;top:27px;width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#f39768,#e97849);color:#fff;font-family:'Nunito',sans-serif;font-size:19px;font-weight:800;box-shadow:0 8px 18px rgba(224,118,75,.18)}
+.legal-body .article-box{counter-reset:legal-section}
+.legal-body .article-box h2+p{margin:0;padding:0 0 28px 70px;color:var(--muted);font-size:17px;line-height:1.8}
+.legal-body .article-box code{font-family:'Nunito',sans-serif;overflow-wrap:anywhere}
+.legal-body .article-box a{color:var(--accent-dark)!important;font-weight:700}
+.legal-body .site-footer{background:var(--footer);color:#f9eee8;margin-top:74px;padding:54px 20px 34px;position:relative}
+.legal-body .site-footer:before{content:'';position:absolute;left:-5%;right:-5%;top:-34px;height:70px;background:var(--bg);border-radius:50%}
+.legal-body .footer-bottom{position:relative;z-index:1;text-align:center;font-size:14px;color:#f9eee8}
+.legal-body .footer-bottom a{color:#f7a77f!important;font-weight:700}
+@media(max-width:760px){.legal-body .article-page{padding-top:34px}.legal-body .article-box{padding:28px 18px 26px;border-radius:22px}.legal-body .article-box h1{font-size:45px}.legal-body .article-date{font-size:15px;margin-bottom:22px}.legal-body .article-box>p:first-of-type{padding:18px;margin-bottom:4px;font-size:16px;line-height:1.7}.legal-body .article-box h2{padding:25px 0 9px 53px;font-size:23px}.legal-body .article-box h2:before{top:23px;width:40px;height:40px;font-size:17px}.legal-body .article-box h2+p{padding:0 0 24px 53px;font-size:16px;line-height:1.7}.legal-body .site-footer{margin-top:52px}}
