@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Image Resizer - PikaTools</title>
+
+    <link
+        rel="stylesheet"
+        href="image-resizer.css"
+    >
+
+</head>
+
+<body>
+
+
+<header class="topbar">
+
+    <a
+        href="../index.html"
+        class="brand"
+    >
+        <span>✦</span> PikaTools
+    </a>
+
+    <a
+        href="../index.html"
+        class="back-btn"
+    >
+        ← All Tools
+    </a>
+
+</header>
+
+
+<main class="page">
+
+
+    <!-- INTRO -->
+
+    <section class="intro">
+
+        <div class="eyebrow">
+            ✦ Image Tool
+        </div>
+
+        <h1>
+            Image Resizer
+        </h1>
+
+        <p>
+            Resize your image to the exact width and
+            height you need.
+        </p>
+
+    </section>
+
+
+    <!-- MAIN CARD -->
+
+    <section class="resizer-card">
+
+
+        <!-- UPLOAD -->
+
+        <div
+            id="dropZone"
+            class="drop-zone"
+        >
+
+            <div class="upload-icon">
+                ↔
+            </div>
+
+            <h2>
+                Choose an image
+            </h2>
+
+            <p>
+                JPG, PNG or WebP
+            </p>
+
+            <button
+                id="chooseBtn"
+                class="primary-btn"
+            >
+                Choose Image
+            </button>
+
+            <input
+                type="file"
+                id="fileInput"
+                accept="image/jpeg,image/png,image/webp"
+                hidden
+            >
+
+            <span class="drop-hint">
+                or drag & drop here
+            </span>
+
+        </div>
+
+
+        <!-- WORKSPACE -->
+
+        <div
+            id="workspace"
+            class="workspace hidden"
+        >
+
+
+            <!-- PREVIEW -->
+
+            <div class="preview-box">
+
+                <img
+                    id="previewImage"
+                    alt="Image preview"
+                >
+
+                <div class="image-info">
+
+                    <span id="originalName">
+                        image.jpg
+                    </span>
+
+                    <span id="originalDimensions">
+                        0 × 0 px
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- SETTINGS -->
+
+            <div class="settings">
+
+
+                <div class="dimensions-title">
+                    Resize dimensions
+                </div>
+
+
+                <div class="dimension-grid">
+
+
+                    <div class="dimension-field">
+
+                        <label for="widthInput">
+                            Width
+                        </label>
+
+                        <div class="input-wrap">
+
+                            <input
+                                type="number"
+                                id="widthInput"
+                                min="1"
+                                max="10000"
+                            >
+
+                            <span>px</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="dimension-field">
+
+                        <label for="heightInput">
+                            Height
+                        </label>
+
+                        <div class="input-wrap">
+
+                            <input
+                                type="number"
+                                id="heightInput"
+                                min="1"
+                                max="10000"
+                            >
+
+                            <span>px</span>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- LOCK -->
+
+                <label class="lock-option">
+
+                    <input
+                        type="checkbox"
+                        id="lockRatio"
+                        checked
+                    >
+
+                    <span>
+                        🔒 Keep aspect ratio
+                    </span>
+
+                </label>
+
+
+                <!-- QUICK SIZES -->
+
+                <label class="quick-label">
+                    Quick sizes
+                </label>
+
+                <div class="quick-sizes">
+
+                    <button data-width="1920" data-height="1080">
+                        1920×1080
+                    </button>
+
+                    <button data-width="1280" data-height="720">
+                        1280×720
+                    </button>
+
+                    <button data-width="1080" data-height="1080">
+                        1080×1080
+                    </button>
+
+                    <button data-width="1080" data-height="1350">
+                        1080×1350
+                    </button>
+
+                    <button data-width="1080" data-height="1920">
+                        1080×1920
+                    </button>
+
+                </div>
+
+
+                <!-- FORMAT -->
+
+                <label
+                    for="format"
+                    class="format-label"
+                >
+                    Output format
+                </label>
+
+                <select id="format">
+
+                    <option value="image/jpeg">
+                        JPG
+                    </option>
+
+                    <option value="image/webp">
+                        WebP
+                    </option>
+
+                    <option value="image/png">
+                        PNG
+                    </option>
+
+                </select>
+
+
+                <!-- QUALITY -->
+
+                <label
+                    for="quality"
+                    class="format-label"
+                >
+                    Quality
+                </label>
+
+                <div class="quality-row">
+
+                    <input
+                        type="range"
+                        id="quality"
+                        min="40"
+                        max="100"
+                        value="90"
+                    >
+
+                    <span id="qualityValue">
+                        90%
+                    </span>
+
+                </div>
+
+
+                <button
+                    id="resizeBtn"
+                    class="primary-btn full"
+                >
+                    Resize Image
+                </button>
+
+            </div>
+
+
+            <!-- RESULT -->
+
+            <div
+                id="result"
+                class="result hidden"
+            >
+
+                <div class="result-row">
+
+                    <span>
+                        Original
+                    </span>
+
+                    <strong id="resultOriginal">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="result-row">
+
+                    <span>
+                        New size
+                    </span>
+
+                    <strong id="resultNewSize">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="result-row">
+
+                    <span>
+                        File size
+                    </span>
+
+                    <strong id="resultFileSize">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <button
+                    id="downloadBtn"
+                    class="download-btn"
+                >
+                    ↓ Download Resized Image
+                </button>
+
+            </div>
+
+
+            <p
+                id="status"
+                class="status"
+            ></p>
+
+
+            <button
+                id="resetBtn"
+                class="reset-btn"
+            >
+                Resize another image
+            </button>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- PRIVACY -->
+
+    <section class="privacy">
+
+        <span>
+            🔒
+        </span>
+
+        <div>
+
+            <strong>
+                Your images stay on your device
+            </strong>
+
+            <p>
+                Resizing happens directly in your browser.
+                Your image is not uploaded to a server.
+            </p>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<script src="image-resizer.js"></script>
+
+</body>
+
+</html>
