@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Image Cropper - PikaTools</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="image-cropper.css">
+</head>
+
+<body>
+
+<header class="topbar">
+    <div class="brand">PikaTools</div>
+    <a href="../index.html" class="back-btn">← All Tools</a>
+</header>
+
+<main class="page">
+
+    <section class="intro">
+        <div class="eyebrow">✦ Image Tool</div>
+        <h1>Image Cropper</h1>
+        <p>Crop your image exactly the way you want.</p>
+    </section>
+
+    <section class="cropper-card">
+
+        <!-- Upload -->
+        <div class="drop-zone" id="dropZone">
+
+            <div class="upload-icon">✂</div>
+
+            <h2>Drop your image here</h2>
+            <p>JPG, PNG or WebP</p>
+
+            <button class="primary-btn" id="chooseBtn">
+                Choose Image
+            </button>
+
+            <input
+                type="file"
+                id="fileInput"
+                accept="image/jpeg,image/png,image/webp"
+                hidden
+            >
+        </div>
+
+        <!-- Workspace -->
+        <div class="workspace" id="workspace">
+
+            <div class="preview-box" id="previewBox">
+                <img id="imagePreview" alt="Image preview">
+
+                <div class="crop-box" id="cropBox">
+                    <span class="crop-handle top-left"></span>
+                    <span class="crop-handle top-right"></span>
+                    <span class="crop-handle bottom-left"></span>
+                    <span class="crop-handle bottom-right"></span>
+                </div>
+            </div>
+
+            <div class="image-info">
+                <span id="fileName">image.jpg</span>
+                <span id="originalSize">0 × 0</span>
+            </div>
+
+            <!-- Ratio -->
+            <div class="section-title">Crop Ratio</div>
+
+            <div class="ratio-buttons">
+
+                <button class="ratio-btn active" data-ratio="free">
+                    Free
+                </button>
+
+                <button class="ratio-btn" data-ratio="1">
+                    1:1
+                </button>
+
+                <button class="ratio-btn" data-ratio="1.333333">
+                    4:3
+                </button>
+
+                <button class="ratio-btn" data-ratio="1.777778">
+                    16:9
+                </button>
+
+                <button class="ratio-btn" data-ratio="0.5625">
+                    9:16
+                </button>
+
+            </div>
+
+            <!-- Custom ratio -->
+            <div class="custom-ratio">
+
+                <div class="section-title">Custom Ratio</div>
+
+                <div class="custom-ratio-row">
+
+                    <div class="ratio-input">
+                        <input
+                            type="number"
+                            id="customWidth"
+                            placeholder="Width"
+                            min="1"
+                            inputmode="numeric"
+                        >
+                    </div>
+
+                    <span>:</span>
+
+                    <div class="ratio-input">
+                        <input
+                            type="number"
+                            id="customHeight"
+                            placeholder="Height"
+                            min="1"
+                            inputmode="numeric"
+                        >
+                    </div>
+
+                    <button id="applyRatio">Apply</button>
+
+                </div>
+
+                <small>Example: 3 : 2, 5 : 4, 21 : 9</small>
+
+            </div>
+
+            <!-- Zoom -->
+            <div class="control-section">
+
+                <div class="control-label">
+                    <span>Zoom</span>
+                    <span id="zoomValue">100%</span>
+                </div>
+
+                <input
+                    type="range"
+                    id="zoomSlider"
+                    min="100"
+                    max="300"
+                    value="100"
+                >
+
+            </div>
+
+            <!-- Rotate -->
+            <div class="rotate-row">
+
+                <button id="rotateLeft">↶ Rotate Left</button>
+                <button id="rotateRight">↷ Rotate Right</button>
+
+            </div>
+
+            <!-- Output -->
+            <div class="section-title">Output Format</div>
+
+            <select id="outputFormat">
+                <option value="image/jpeg">JPG</option>
+                <option value="image/webp">WebP</option>
+                <option value="image/png">PNG</option>
+            </select>
+
+            <button class="primary-btn full" id="cropBtn">
+                ✂ Crop Image
+            </button>
+
+            <!-- Result -->
+            <div class="result" id="result">
+
+                <div class="result-title">✓ Crop completed</div>
+
+                <div class="result-row">
+                    <span>Original</span>
+                    <strong id="resultOriginal">—</strong>
+                </div>
+
+                <div class="result-row">
+                    <span>Cropped</span>
+                    <strong id="resultCropped">—</strong>
+                </div>
+
+                <div class="result-row">
+                    <span>File size</span>
+                    <strong id="resultSize">—</strong>
+                </div>
+
+                <button class="download-btn" id="downloadBtn">
+                    ↓ Download Cropped Image
+                </button>
+
+            </div>
+
+            <div class="status" id="status"></div>
+
+            <button class="reset-btn" id="resetBtn">
+                ↻ Crop Another Image
+            </button>
+
+        </div>
+
+    </section>
+
+    <section class="privacy">
+        <strong>🔒 Your image stays private</strong>
+        <p>
+            Your image is processed directly in your browser.
+            Nothing is uploaded to a server.
+        </p>
+    </section>
+
+</main>
+
+<script src="image-cropper.js"></script>
+
+</body>
+</html>
