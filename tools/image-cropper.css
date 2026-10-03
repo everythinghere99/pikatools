@@ -1,0 +1,487 @@
+:root {
+    --bg: #faf6f1;
+    --card: #ffffff;
+    --text: #3f342e;
+    --muted: #8b7c72;
+    --accent: #a76d4d;
+    --accent-dark: #805039;
+    --accent-soft: #f3e3d8;
+    --border: #eaded5;
+    --success: #53795d;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Nunito", sans-serif;
+}
+
+.topbar {
+    height: 68px;
+    padding: 0 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,.8);
+}
+
+.brand {
+    font-family: "Comic Neue", cursive;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.back-btn {
+    color: var(--accent-dark);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.page {
+    width: min(700px, calc(100% - 28px));
+    margin: auto;
+    padding-bottom: 45px;
+}
+
+.intro {
+    text-align: center;
+    padding: 38px 0 26px;
+}
+
+.eyebrow {
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+h1 {
+    font-family: "Comic Neue", cursive;
+    font-size: 48px;
+    line-height: 1;
+    margin: 0 0 12px;
+}
+
+.intro p {
+    color: var(--muted);
+    margin: 0;
+    font-size: 14px;
+}
+
+.cropper-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 18px;
+    box-shadow: 0 10px 35px rgba(74, 52, 40, .06);
+}
+
+.drop-zone {
+    min-height: 300px;
+    border: 2px dashed var(--border);
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 25px;
+}
+
+.upload-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    background: var(--accent-soft);
+    display: grid;
+    place-items: center;
+    font-size: 30px;
+    margin-bottom: 18px;
+}
+
+.drop-zone h2 {
+    font-family: "Comic Neue", cursive;
+    font-size: 25px;
+    margin: 0 0 5px;
+}
+
+.drop-zone p {
+    color: var(--muted);
+    font-size: 13px;
+    margin: 0 0 20px;
+}
+
+.primary-btn {
+    border: 0;
+    border-radius: 12px;
+    background: var(--accent);
+    color: white;
+    padding: 14px 22px;
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.primary-btn:hover {
+    background: var(--accent-dark);
+}
+
+.workspace {
+    display: none;
+    gap: 18px;
+    flex-direction: column;
+}
+
+.preview-box {
+    position: relative;
+    width: 100%;
+    max-height: 480px;
+    background: #2d2926;
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    touch-action: none;
+}
+
+.preview-box img {
+    display: block;
+    max-width: 100%;
+    max-height: 480px;
+    object-fit: contain;
+    user-select: none;
+    pointer-events: none;
+}
+
+.crop-box {
+    position: absolute;
+    width: 55%;
+    height: 55%;
+    left: 22.5%;
+    top: 22.5%;
+    border: 2px solid white;
+    box-shadow: 0 0 0 9999px rgba(0,0,0,.48);
+    cursor: move;
+    touch-action: none;
+}
+
+.crop-handle {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+}
+
+.top-left {
+    left: -8px;
+    top: -8px;
+    cursor: nwse-resize;
+}
+
+.top-right {
+    right: -8px;
+    top: -8px;
+    cursor: nesw-resize;
+}
+
+.bottom-left {
+    left: -8px;
+    bottom: -8px;
+    cursor: nesw-resize;
+}
+
+.bottom-right {
+    right: -8px;
+    bottom: -8px;
+    cursor: nwse-resize;
+}
+
+.image-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 11px 13px;
+    background: var(--accent-soft);
+    border-radius: 12px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.section-title {
+    font-family: "Comic Neue", cursive;
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+.ratio-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.ratio-btn,
+.rotate-row button,
+#applyRatio {
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--text);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.ratio-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+}
+
+.custom-ratio {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.custom-ratio-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ratio-input {
+    flex: 1;
+}
+
+.ratio-input input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font: inherit;
+    outline: none;
+}
+
+.custom-ratio small {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+#applyRatio {
+    background: var(--accent-soft);
+    border-color: var(--accent-soft);
+}
+
+.control-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.control-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+input[type="range"] {
+    width: 100%;
+    accent-color: var(--accent);
+}
+
+.rotate-row {
+    display: flex;
+    gap: 10px;
+}
+
+.rotate-row button {
+    flex: 1;
+}
+
+select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    background: white;
+    color: var(--text);
+    font: inherit;
+}
+
+.full {
+    width: 100%;
+    margin-top: 4px;
+}
+
+.result {
+    display: none;
+    padding: 16px;
+    background: #f4f8f3;
+    border: 1px solid #dce8dd;
+    border-radius: 16px;
+}
+
+.result-title {
+    color: var(--success);
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 13px;
+}
+
+.result-row span {
+    color: var(--muted);
+}
+
+.download-btn {
+    width: 100%;
+    border: 0;
+    border-radius: 11px;
+    padding: 14px;
+    background: var(--success);
+    color: white;
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.status {
+    text-align: center;
+    color: var(--accent-dark);
+    font-size: 12px;
+    min-height: 18px;
+}
+
+.reset-btn {
+    display: block;
+    margin: auto;
+    border: 0;
+    background: transparent;
+    color: var(--accent-dark);
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.privacy {
+    margin-top: 18px;
+    padding: 18px;
+    background: var(--accent-soft);
+    border-radius: 16px;
+}
+
+.privacy strong {
+    font-family: "Comic Neue", cursive;
+    font-size: 17px;
+}
+
+.privacy p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+
+/* 📱 MOBILE */
+@media (max-width: 600px) {
+
+    .topbar {
+        height: 64px;
+        padding: 0 16px;
+    }
+
+    .brand {
+        font-size: 22px;
+    }
+
+    .page {
+        width: 100%;
+        padding: 0 14px 40px;
+    }
+
+    .intro {
+        padding: 30px 4px 24px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    .cropper-card {
+        width: 100%;
+        padding: 14px;
+        border-radius: 20px;
+    }
+
+    .drop-zone {
+        min-height: 280px;
+        padding: 28px 14px;
+    }
+
+    .preview-box {
+        max-height: 390px;
+    }
+
+    .preview-box img {
+        max-height: 390px;
+        max-width: 100%;
+    }
+
+    .crop-box {
+        min-width: 70px;
+        min-height: 70px;
+    }
+
+    .ratio-buttons {
+        gap: 7px;
+    }
+
+    .ratio-btn {
+        padding: 9px 12px;
+        font-size: 12px;
+    }
+
+    .custom-ratio-row {
+        gap: 6px;
+    }
+
+    .rotate-row {
+        gap: 8px;
+    }
+
+    .rotate-row button {
+        padding: 11px 8px;
+        font-size: 12px;
+    }
+
+    .privacy {
+        margin-bottom: 10px;
+    }
+}
