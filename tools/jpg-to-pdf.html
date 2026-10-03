@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>PikaTools - JPG to PDF</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="jpg-to-pdf.css"
+  >
+
+</head>
+
+
+<body>
+
+
+<header class="topbar">
+
+  <a
+    href="../index.html"
+    class="back-btn"
+  >
+    ←
+  </a>
+
+  <div class="brand">
+    PikaTools
+  </div>
+
+</header>
+
+
+<main class="page">
+
+  <h1 class="tool-title">
+    <span>✦</span>
+    JPG to PDF
+    <span>✦</span>
+  </h1>
+
+
+  <!-- UPLOAD -->
+
+  <section
+    class="card"
+    id="uploadCard"
+  >
+
+    <label
+      class="drop-zone"
+      id="dropZone"
+    >
+
+      <div class="upload-icon">
+        🖼️
+      </div>
+
+      <h2>
+        Drop your JPG images here
+      </h2>
+
+      <p>
+        or choose images from your device
+      </p>
+
+      <span class="choose-btn">
+        Choose Images
+      </span>
+
+      <small>
+        JPG / JPEG • Multiple images supported
+      </small>
+
+      <input
+        id="fileInput"
+        type="file"
+        accept="image/jpeg,.jpg,.jpeg"
+        multiple
+        hidden
+      >
+
+    </label>
+
+  </section>
+
+
+  <!-- WORKSPACE -->
+
+  <section
+    id="workspace"
+    class="workspace hidden"
+  >
+
+    <div class="file-head">
+
+      <div>
+
+        <h2>
+          Your Images
+        </h2>
+
+        <p id="imageCount">
+          0 images
+        </p>
+
+      </div>
+
+
+      <button
+        id="addMoreBtn"
+        class="secondary-btn"
+        type="button"
+      >
+        + Add More
+      </button>
+
+    </div>
+
+
+    <div
+      id="imageList"
+      class="image-list"
+    ></div>
+
+
+    <div class="options-card">
+
+      <h2>
+        PDF Options
+      </h2>
+
+
+      <div class="options-grid">
+
+
+        <div class="option-group">
+
+          <label for="pageSize">
+            Page Size
+          </label>
+
+          <select id="pageSize">
+
+            <option value="image">
+              Image Size
+            </option>
+
+            <option
+              value="a4"
+              selected
+            >
+              A4
+            </option>
+
+            <option value="letter">
+              Letter
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="option-group">
+
+          <label for="orientation">
+            Orientation
+          </label>
+
+          <select id="orientation">
+
+            <option
+              value="auto"
+              selected
+            >
+              Auto
+            </option>
+
+            <option value="portrait">
+              Portrait
+            </option>
+
+            <option value="landscape">
+              Landscape
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="option-group">
+
+          <label for="margin">
+            Margin
+          </label>
+
+          <select id="margin">
+
+            <option value="0">
+              No Margin
+            </option>
+
+            <option
+              value="18"
+              selected
+            >
+              Small
+            </option>
+
+            <option value="36">
+              Medium
+            </option>
+
+            <option value="54">
+              Large
+            </option>
+
+          </select>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <button
+      id="convertBtn"
+      class="primary-btn"
+      type="button"
+    >
+      Create PDF
+    </button>
+
+
+    <div
+      id="status"
+      class="status"
+    ></div>
+
+
+    <button
+      id="downloadBtn"
+      class="download-btn hidden"
+      type="button"
+    >
+      Download PDF
+    </button>
+
+
+    <button
+      id="anotherBtn"
+      class="another-btn hidden"
+      type="button"
+    >
+      Convert Another
+    </button>
+
+  </section>
+
+
+  <!-- PRIVACY -->
+
+  <section class="privacy">
+
+    <span>🔒</span>
+
+    <div>
+
+      <b>
+        Your images stay private.
+      </b>
+
+      <p>
+        JPG to PDF conversion happens directly
+        in your browser. Your images are not
+        uploaded to a server.
+      </p>
+
+    </div>
+
+  </section>
+
+
+</main>
+
+
+<script
+  src="jpg-to-pdf.js"
+  type="module"
+></script>
+
+
+</body>
+
+</html>
