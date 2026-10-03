@@ -1,0 +1,776 @@
+*{
+box-sizing:border-box;
+}
+
+:root{
+--bg:#fcf8f1;
+--card:#fffdf9;
+--soft:#fffaf4;
+--brown:#543b30;
+--brown2:#74594b;
+--muted:#9a8579;
+--line:#eadfd3;
+--dash:#d8c8b7;
+--accent:#efe3d6;
+}
+
+html,
+body{
+margin:0;
+width:100%;
+min-height:100%;
+}
+
+body{
+background:var(--bg);
+color:var(--brown);
+font-family:"Nunito",sans-serif;
+-webkit-font-smoothing:antialiased;
+}
+
+/* =========================
+TOP BAR
+========================= */
+
+.topbar{
+width:100%;
+max-width:680px;
+margin:0 auto;
+padding:16px 16px 4px;
+
+display:flex;
+align-items:center;
+gap:11px;
+}
+
+.back-btn{
+flex:0 0 40px;
+
+width:40px;
+height:40px;
+
+border:1px solid #e6dace;
+border-radius:13px;
+
+background:#fffaf4;
+color:var(--brown);
+
+text-decoration:none;
+
+display:grid;
+place-items:center;
+
+font-family:"Nunito",sans-serif;
+font-size:20px;
+font-weight:500;
+
+box-shadow:0 3px 12px rgba(74,50,35,.045);
+}
+
+.brand{
+font-family:"Comic Neue",cursive;
+font-size:23px;
+line-height:1;
+font-weight:700;
+letter-spacing:-.2px;
+}
+
+/* =========================
+PAGE
+========================= */
+
+.page{
+width:100%;
+max-width:680px;
+
+margin:0 auto;
+
+padding:8px 16px 42px;
+}
+
+/* =========================
+TOOL TITLE
+========================= */
+
+.tool-title{
+margin:0 0 15px;
+
+text-align:center;
+
+font-family:"Comic Neue",cursive;
+
+font-size:23px;
+line-height:1.05;
+
+font-weight:700;
+
+letter-spacing:-.2px;
+
+color:#5a4034;
+}
+
+.tool-title span{
+font-size:20px;
+
+vertical-align:3px;
+
+color:#9b7865;
+
+margin:0 3px;
+}
+
+/* =========================
+MAIN CARD
+========================= */
+
+.card{
+width:100%;
+
+background:var(--card);
+
+border:1px solid var(--line);
+
+border-radius:23px;
+
+padding:13px;
+
+box-shadow:
+0 8px 26px rgba(77,51,33,.055);
+}
+
+/* =========================
+UPLOAD BOX
+========================= */
+
+.drop-zone{
+width:100%;
+
+min-height:318px;
+
+border:1.7px dashed var(--dash);
+
+border-radius:19px;
+
+background:#fffcf8;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+
+text-align:center;
+
+padding:30px 18px;
+
+cursor:pointer;
+
+transition:.18s ease;
+
+-webkit-tap-highlight-color:transparent;
+-webkit-touch-callout:none;
+user-select:none;
+-webkit-user-select:none;
+}
+
+.drop-zone:hover{
+background:#fffaf4;
+border-color:#c9b3a0;
+}
+
+.upload-icon{
+font-size:49px;
+line-height:1;
+
+margin-bottom:13px;
+}
+
+.drop-zone h2{
+margin:0;
+
+font-family:"Comic Neue",cursive;
+
+font-size:25px;
+line-height:1.1;
+
+font-weight:700;
+
+letter-spacing:-.1px;
+
+color:#51392e;
+}
+
+.drop-zone p{
+margin:6px 0 18px;
+
+color:#987f72;
+
+font-size:13px;
+line-height:1.4;
+
+font-weight:500;
+}
+
+.choose-btn{
+display:inline-flex;
+
+align-items:center;
+justify-content:center;
+
+min-height:45px;
+
+padding:0 24px;
+
+border-radius:13px;
+
+background:var(--brown);
+color:#fff;
+
+font-size:14px;
+font-weight:700;
+
+box-shadow:
+0 5px 14px rgba(70,47,36,.12);
+}
+
+.drop-zone small{
+margin-top:13px;
+
+color:#a18d82;
+
+font-size:11px;
+
+font-weight:600;
+
+letter-spacing:.05px;
+}
+
+/* =========================
+FILE SECTION
+========================= */
+
+.file-section{
+margin-top:17px;
+}
+
+.section-title{
+display:flex;
+
+align-items:center;
+justify-content:space-between;
+
+margin:0 2px 8px;
+}
+
+.section-title h3,
+.result-title{
+margin:0;
+
+font-family:"Comic Neue",cursive;
+
+font-size:19px;
+line-height:1.1;
+
+font-weight:700;
+
+color:#5a4034;
+}
+
+.text-btn{
+border:0;
+
+background:transparent;
+
+color:#9a6d5b;
+
+padding:4px;
+
+font-family:"Nunito",sans-serif;
+
+font-size:12px;
+font-weight:700;
+
+cursor:pointer;
+}
+
+.file-list{
+display:flex;
+
+flex-direction:column;
+
+gap:8px;
+
+max-height:270px;
+
+overflow:auto;
+
+padding:1px 2px 2px;
+}
+
+.file-item,
+.result-item{
+display:flex;
+
+align-items:center;
+
+gap:9px;
+
+min-width:0;
+
+background:var(--soft);
+
+border:1px solid #eee2d7;
+
+border-radius:13px;
+
+padding:10px;
+}
+
+.file-icon{
+flex:0 0 auto;
+
+width:29px;
+height:29px;
+
+border-radius:9px;
+
+display:grid;
+place-items:center;
+
+background:#f1e5d9;
+
+font-size:16px;
+}
+
+.file-info,
+.result-item .grow{
+min-width:0;
+flex:1;
+}
+
+.file-name{
+color:#5a4237;
+
+font-size:13px;
+line-height:1.2;
+
+font-weight:700;
+
+white-space:nowrap;
+
+overflow:hidden;
+text-overflow:ellipsis;
+}
+
+.file-meta,
+.result-size{
+margin-top:3px;
+
+color:#9b877c;
+
+font-size:10.5px;
+line-height:1.2;
+
+font-weight:500;
+}
+
+.file-status{
+flex:0 0 auto;
+
+color:#96796b;
+
+font-size:10.5px;
+
+font-weight:700;
+
+white-space:nowrap;
+}
+
+.file-status.done{
+color:#66806b;
+}
+
+.file-status.error{
+color:#aa6358;
+}
+
+.download-one{
+flex:0 0 auto;
+
+border:0;
+
+border-radius:10px;
+
+background:var(--brown);
+color:#fff;
+
+padding:8px 10px;
+
+font-family:"Nunito",sans-serif;
+
+font-size:10.5px;
+font-weight:700;
+
+white-space:nowrap;
+
+cursor:pointer;
+}
+
+/* =========================
+CIRCULAR PROGRESS
+========================= */
+
+.progress-wrap{
+flex:0 0 auto;
+
+width:39px;
+height:39px;
+
+display:grid;
+place-items:center;
+}
+
+.progress-circle{
+--progress:0%;
+
+width:36px;
+height:36px;
+
+border-radius:50%;
+
+background:
+conic-gradient(
+#8d6c5c var(--progress),
+#eadfd5 var(--progress)
+);
+
+display:grid;
+place-items:center;
+
+position:relative;
+
+transition:
+background .2s ease,
+transform .2s ease;
+}
+
+.progress-circle::before{
+content:"";
+
+position:absolute;
+
+width:27px;
+height:27px;
+
+border-radius:50%;
+
+background:var(--soft);
+}
+
+.progress-circle span{
+position:relative;
+z-index:1;
+
+color:#76594b;
+
+font-size:8px;
+line-height:1;
+
+font-weight:800;
+}
+
+.progress-circle.complete{
+background:
+conic-gradient(
+#66806b 100%,
+#66806b 100%
+);
+
+transform:scale(1.04);
+}
+
+.progress-circle.complete span{
+color:#66806b;
+}
+
+/* =========================
+BUTTONS
+========================= */
+
+.primary-btn,
+.download-all{
+width:100%;
+
+min-height:48px;
+
+margin-top:16px;
+
+border:0;
+
+border-radius:14px;
+
+background:var(--brown);
+
+color:#fff;
+
+font-family:"Nunito",sans-serif;
+
+font-size:13.5px;
+
+font-weight:700;
+
+cursor:pointer;
+
+box-shadow:
+0 5px 14px rgba(70,47,36,.11);
+}
+
+.primary-btn:disabled,
+.download-all:disabled{
+opacity:.6;
+
+cursor:not-allowed;
+}
+
+.download-all{
+background:#67493b;
+
+margin-top:13px;
+}
+
+.reset-btn{
+width:100%;
+
+min-height:44px;
+
+margin-top:8px;
+
+border:1px solid #ddcfc2;
+
+border-radius:13px;
+
+background:#fffaf4;
+
+color:#684d40;
+
+font-family:"Nunito",sans-serif;
+
+font-size:12px;
+
+font-weight:700;
+
+cursor:pointer;
+}
+
+/* =========================
+STATUS / RESULTS
+========================= */
+
+.engine-status{
+min-height:17px;
+
+margin-top:8px;
+
+text-align:center;
+
+color:#987f72;
+
+font-size:10.5px;
+
+font-weight:600;
+}
+
+.results{
+display:flex;
+
+flex-direction:column;
+
+gap:8px;
+
+margin-top:18px;
+}
+
+.result-title{
+margin:0 2px 1px;
+}
+
+/* =========================
+PRIVACY
+========================= */
+
+.privacy{
+width:100%;
+
+max-width:680px;
+
+margin:13px auto 0;
+
+display:flex;
+
+align-items:flex-start;
+
+gap:9px;
+
+background:#f2e9df;
+
+border-radius:15px;
+
+padding:13px 14px;
+
+color:#60493d;
+}
+
+.privacy span{
+flex:0 0 auto;
+
+font-size:17px;
+
+line-height:1.1;
+}
+
+.privacy b{
+display:block;
+
+font-size:11.5px;
+
+line-height:1.2;
+}
+
+.privacy p{
+margin:3px 0 0;
+
+color:#90786c;
+
+font-size:10px;
+
+line-height:1.35;
+}
+
+.hidden{
+display:none!important;
+}
+
+/* =========================
+MOBILE
+========================= */
+
+@media(max-width:600px){
+
+.topbar{
+padding:15px 14px 4px;
+}
+
+.brand{
+font-size:22px;
+}
+
+.page{
+padding:7px 13px 35px;
+}
+
+.tool-title{
+margin-bottom:13px;
+
+font-size:22px;
+
+}
+
+.tool-title span{
+font-size:18px;
+
+vertical-align:2px;
+
+margin:0 2px;
+
+}
+
+.card{
+padding:11px;
+
+border-radius:21px;
+
+}
+
+.drop-zone{
+min-height:292px;
+
+border-radius:18px;
+
+padding:25px 14px;
+
+}
+
+.upload-icon{
+font-size:46px;
+
+margin-bottom:12px;
+
+}
+
+.drop-zone h2{
+font-size:23px;
+}
+
+.drop-zone p{
+font-size:12.5px;
+
+margin-bottom:17px;
+
+}
+
+.choose-btn{
+min-height:44px;
+
+padding:0 22px;
+
+font-size:13.5px;
+
+}
+
+.drop-zone small{
+font-size:10.5px;
+}
+
+.file-list{
+max-height:250px;
+}
+
+.file-item,
+.result-item{
+padding:9px;
+}
+
+.file-name{
+font-size:12px;
+}
+
+.download-one{
+padding:8px 9px;
+
+font-size:10px;
+
+}
+
+.section-title h3,
+.result-title{
+font-size:18px;
+}
+
+.progress-wrap{
+width:36px;
+height:36px;
+}
+
+.progress-circle{
+width:33px;
+height:33px;
+}
+
+.progress-circle::before{
+width:25px;
+height:25px;
+}
+
+.progress-circle span{
+font-size:7.5px;
+}
+}
