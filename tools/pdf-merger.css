@@ -1,0 +1,506 @@
+:root {
+  --bg: #f7f0e9;
+  --card: #fffaf5;
+  --soft: #f1e7de;
+  --line: #dfd0c3;
+  --text: #493a32;
+  --muted: #8a776b;
+  --brown: #76594b;
+  --brown-dark: #60473b;
+  --green: #66806b;
+  --white: #ffffff;
+  --danger: #b96d62;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Nunito", sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button,
+label {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.topbar {
+  height: 68px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 250, 245, 0.9);
+}
+
+.back-btn{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  text-decoration:none;
+  color:var(--brown);
+  background:var(--soft);
+  border-radius:12px;
+  font-size:22px
+}
+
+.brand {
+  font-family: "Comic Neue", cursive;
+  font-size: 25px;
+  font-weight: 700;
+  color: var(--brown-dark);
+}
+
+.page {
+  width: min(760px, calc(100% - 30px));
+  margin: 42px auto 60px;
+}
+
+.tool-title {
+  margin: 0 0 25px;
+  text-align: center;
+  font-family: "Comic Neue", cursive;
+  font-size: clamp(31px, 6vw, 43px);
+  font-weight: 700;
+  color: var(--brown-dark);
+}
+
+.tool-title span {
+  margin: 0 9px;
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 10px 35px rgba(92, 65, 49, 0.07);
+}
+
+.drop-zone {
+  min-height: 360px;
+  border: 2px dashed var(--line);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 35px 20px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.drop-zone:hover,
+.drop-zone.drag-over {
+  border-color: var(--brown);
+  background: #fdf6ef;
+}
+
+.upload-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 31px;
+  margin-bottom: 18px;
+}
+
+.drop-zone h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.drop-zone p {
+  margin: 7px 0 18px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.choose-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 21px;
+  background: var(--brown);
+  color: white;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.drop-zone small {
+  margin-top: 13px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+/* WORKSPACE */
+
+.workspace {
+  width: 100%;
+}
+
+.list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.list-heading h2 {
+  margin: 0;
+  font-size: 21px;
+}
+
+.list-heading p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+
+/* PDF LIST */
+
+.pdf-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+
+/* SINGLE PDF ROW */
+
+.pdf-item {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  cursor: grab;
+  user-select: none;
+  touch-action: manipulation;
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    opacity 0.18s ease,
+    transform 0.18s ease;
+}
+
+.pdf-item:active {
+  cursor: grabbing;
+}
+
+.pdf-item.dragging {
+  opacity: 0.45;
+}
+
+.pdf-item.drag-over {
+  border-color: var(--brown);
+  background: #fdf6ef;
+  transform: translateY(-1px);
+}
+
+
+/* PDF ICON */
+
+.pdf-icon {
+  width: 40px;
+  height: 44px;
+  flex: 0 0 40px;
+  border-radius: 9px;
+  background: var(--soft);
+  color: var(--brown);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Comic Neue", cursive;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* FILE INFO */
+
+.pdf-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.pdf-name {
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pdf-meta {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+
+/* PROCESSING CIRCLE */
+
+.file-loader {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  border-top-color: var(--brown);
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* REMOVE BUTTON */
+
+.remove-file-btn {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--soft);
+  color: var(--brown);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  line-height: 1;
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+
+.remove-file-btn:hover {
+  background: #ead9cd;
+  color: var(--danger);
+}
+
+
+/* ADD MORE */
+
+.add-more-btn {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 13px;
+  border: 1px dashed var(--line);
+  border-radius: 13px;
+  background: transparent;
+  color: var(--brown);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  transition: 0.18s ease;
+}
+
+.add-more-btn span:first-child {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.add-more-btn:hover {
+  border-color: var(--brown);
+  background: var(--soft);
+}
+
+
+/* MERGE */
+
+.merge-btn,
+.download-btn {
+  width: 100%;
+  min-height: 52px;
+  border: 0;
+  border-radius: 13px;
+  margin-top: 18px;
+  background: var(--brown);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+
+.merge-btn:hover,
+.download-btn:hover {
+  background: var(--brown-dark);
+}
+
+.merge-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+
+/* RESET */
+
+.reset-btn {
+  width: 100%;
+  min-height: 46px;
+  margin-top: 10px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: transparent;
+  color: var(--brown);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+
+.reset-btn:hover {
+  background: var(--soft);
+}
+
+
+/* STATUS */
+
+.status {
+  min-height: 22px;
+  margin-top: 12px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.status.success {
+  color: var(--green);
+}
+
+.status.error {
+  color: var(--danger);
+}
+
+
+/* PRIVACY */
+
+.privacy {
+  margin: 18px 4px 0;
+  padding: 16px 17px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 250, 245, 0.65);
+}
+
+.privacy > span {
+  font-size: 18px;
+}
+
+.privacy b {
+  font-size: 13px;
+}
+
+.privacy p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .topbar {
+    height: 60px;
+    padding: 0 15px;
+  }
+
+  .brand {
+    font-size: 23px;
+  }
+
+  .page {
+    width: min(100% - 20px, 760px);
+    margin: 28px auto 40px;
+  }
+
+  .tool-title {
+    margin-bottom: 20px;
+  }
+
+  .card {
+    padding: 14px;
+    border-radius: 19px;
+  }
+
+  .drop-zone {
+    min-height: 320px;
+    border-radius: 16px;
+  }
+
+  .pdf-item {
+    min-height: 64px;
+    padding: 9px;
+  }
+
+  .pdf-icon {
+    width: 37px;
+    height: 41px;
+    flex-basis: 37px;
+  }
+
+  .pdf-name {
+    font-size: 13px;
+  }
+
+  .remove-file-btn {
+    width: 29px;
+    height: 29px;
+    flex-basis: 29px;
+  }
+
+  .privacy {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
