@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Image Compressor - PikaTools</title>
+
+    <link rel="stylesheet" href="image-compressor.css">
+</head>
+
+<body>
+
+<header class="topbar">
+    <a href="../index.html" class="brand">
+        <span>✦</span> PikaTools
+    </a>
+
+    <a href="../index.html" class="back-btn">← All Tools</a>
+</header>
+
+
+<main class="page">
+
+    <section class="intro">
+        <div class="eyebrow">✦ Image Tool</div>
+
+        <h1>Image Compressor</h1>
+
+        <p>
+            Compress your image to a smaller size without unnecessary quality loss.
+        </p>
+    </section>
+
+
+    <section class="compressor-card">
+
+        <div id="dropZone" class="drop-zone">
+
+            <div class="upload-icon">↑</div>
+
+            <h2>Choose an image</h2>
+
+            <p>JPG, PNG or WebP</p>
+
+            <button id="chooseBtn" class="primary-btn">
+                Choose Image
+            </button>
+
+            <input
+                type="file"
+                id="fileInput"
+                accept="image/jpeg,image/png,image/webp"
+                hidden
+            >
+
+            <span class="drop-hint">
+                or drag & drop here
+            </span>
+
+        </div>
+
+
+        <div id="workspace" class="workspace hidden">
+
+            <div class="preview-box">
+
+                <img id="previewImage" alt="Image preview">
+
+                <div class="image-info">
+                    <span id="originalName">image.jpg</span>
+                    <span id="originalSize">0 KB</span>
+                </div>
+
+            </div>
+
+
+            <div class="settings">
+
+                <label for="targetSize">
+                    Target size
+                </label>
+
+                <div class="size-input">
+
+                    <input
+                        type="number"
+                        id="targetSize"
+                        value="200"
+                        min="10"
+                        max="50000"
+                    >
+
+                    <span>KB</span>
+
+                </div>
+
+                <div class="quick-sizes">
+
+                    <button data-size="50">50 KB</button>
+                    <button data-size="100">100 KB</button>
+                    <button data-size="200">200 KB</button>
+                    <button data-size="500">500 KB</button>
+
+                </div>
+
+
+                <label for="format">
+                    Output format
+                </label>
+
+                <select id="format">
+
+                    <option value="image/jpeg">
+                        JPG
+                    </option>
+
+                    <option value="image/webp">
+                        WebP
+                    </option>
+
+                    <option value="image/png">
+                        PNG
+                    </option>
+
+                </select>
+
+
+                <button id="compressBtn" class="primary-btn full">
+                    Compress Image
+                </button>
+
+            </div>
+
+
+            <div id="result" class="result hidden">
+
+                <div class="result-row">
+                    <span>Original</span>
+                    <strong id="resultOriginal">—</strong>
+                </div>
+
+                <div class="result-row">
+                    <span>Compressed</span>
+                    <strong id="resultCompressed">—</strong>
+                </div>
+
+                <div class="result-row">
+                    <span>Reduction</span>
+                    <strong id="resultReduction">—</strong>
+                </div>
+
+                <button id="downloadBtn" class="download-btn">
+                    ↓ Download Compressed Image
+                </button>
+
+            </div>
+
+            <p id="status" class="status"></p>
+
+            <button id="resetBtn" class="reset-btn">
+                Compress another image
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <section class="privacy">
+
+        <span>🔒</span>
+
+        <div>
+            <strong>Your images stay on your device</strong>
+            <p>
+                Compression happens directly in your browser.
+                Your image is not uploaded to a server.
+            </p>
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="image-compressor.js"></script>
+
+</body>
+</html>
