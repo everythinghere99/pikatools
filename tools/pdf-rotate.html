@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>PikaTools - PDF Rotate</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="pdf-rotate.css">
+</head>
+
+<body>
+
+<header class="topbar">
+  <a href="../index.html" class="back-btn">←</a>
+  <div class="brand">PikaTools</div>
+</header>
+
+
+<main class="page">
+
+  <h1 class="tool-title">
+    <span>✦</span>
+    PDF Rotate
+    <span>✦</span>
+  </h1>
+
+
+  <section class="card">
+
+    <!-- UPLOAD -->
+
+    <label class="drop-zone" id="dropZone">
+
+      <div class="upload-icon">🔄</div>
+
+      <h2>Drop your PDF here</h2>
+
+      <p>or choose a PDF from your device</p>
+
+      <span class="choose-btn">Choose PDF</span>
+
+      <small>PDF • One file at a time</small>
+
+      <input
+        id="fileInput"
+        type="file"
+        accept="application/pdf,.pdf"
+        hidden
+      >
+
+    </label>
+
+
+    <!-- WORKSPACE -->
+
+    <div id="workspace" class="workspace hidden">
+
+      <div class="workspace-top">
+
+        <div class="file-info">
+
+          <div class="file-icon">PDF</div>
+
+          <div>
+
+            <div
+              id="fileName"
+              class="file-name"
+            ></div>
+
+            <div
+              id="fileMeta"
+              class="file-meta"
+            ></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- SELECTION -->
+
+      <div class="action-bar">
+
+        <div class="selection-info">
+          <b id="selectedCount">0</b>
+          pages selected
+        </div>
+
+        <div class="action-right">
+
+          <button
+            id="selectAllBtn"
+            class="small-btn"
+            type="button"
+          >
+            Select All
+          </button>
+
+          <button
+            id="clearBtn"
+            class="small-btn"
+            type="button"
+          >
+            Clear
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- ROTATE CONTROLS -->
+
+      <div class="rotate-controls">
+
+        <button
+          id="rotateLeftBtn"
+          class="rotate-btn"
+          type="button"
+          disabled
+        >
+          ↶
+          <span>Rotate Left</span>
+        </button>
+
+        <button
+          id="rotateRightBtn"
+          class="rotate-btn"
+          type="button"
+          disabled
+        >
+          ↷
+          <span>Rotate Right</span>
+        </button>
+
+        <button
+          id="rotateAllBtn"
+          class="rotate-all-btn"
+          type="button"
+        >
+          🔄
+          <span>Rotate All 90°</span>
+        </button>
+
+      </div>
+
+
+      <!-- PREVIEW -->
+
+      <div class="preview-heading">
+
+        <div>
+          <h2>PDF Preview</h2>
+
+          <p>
+            Select pages and rotate them. The preview updates instantly.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div
+        id="pageGrid"
+        class="page-grid"
+      ></div>
+
+
+      <!-- DOWNLOAD -->
+
+      <button
+        id="downloadBtn"
+        class="download-btn"
+        type="button"
+        disabled
+      >
+        Download Rotated PDF
+      </button>
+
+
+      <button
+        id="resetBtn"
+        class="reset-btn hidden"
+        type="button"
+      >
+        Rotate Another PDF
+      </button>
+
+
+      <div
+        id="status"
+        class="status"
+      ></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- PRIVACY -->
+
+  <section class="privacy">
+
+    <span>🔒</span>
+
+    <div>
+
+      <b>Your PDF stays private.</b>
+
+      <p>
+        PDF rotation happens directly in your browser.
+        Your file is not uploaded to a server.
+      </p>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<script
+  src="pdf-rotate.js"
+  type="module"
+></script>
+
+</body>
+</html>
