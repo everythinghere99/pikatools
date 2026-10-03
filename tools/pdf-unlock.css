@@ -1,0 +1,853 @@
+:root {
+  --bg: #f7f0e6;
+  --card: #fffaf3;
+  --soft: #eee1d0;
+  --brown: #6f4e37;
+  --brown-dark: #573a27;
+  --text: #3f3025;
+  --muted: #8b7868;
+  --line: #e4d5c3;
+  --danger: #b64b3c;
+  --success: #587a4d;
+  --shadow: 0 12px 30px rgba(91, 65, 44, 0.09);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+/* =========================================
+   TOPBAR
+========================================= */
+
+.topbar {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 24px 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+}
+
+.back-btn {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  color: var(--brown);
+  background: var(--soft);
+  border-radius: 12px;
+  font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+
+.back-btn:hover {
+  background: #e6d5c1;
+  transform: translateX(-2px);
+}
+
+.brand {
+  font-family: "Comic Neue", cursive;
+  font-size: 25px;
+  font-weight: 700;
+  color: var(--brown);
+  text-align: left;
+  margin: 0;
+}
+
+
+/* =========================================
+   PAGE
+========================================= */
+
+.page {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 24px 70px;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.hero h2 {
+  margin: 0;
+  color: var(--brown-dark);
+  font-size: 38px;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.7px;
+}
+
+.hero p {
+  max-width: 560px;
+  margin: 12px auto 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+
+/* =========================================
+   CARD
+========================================= */
+
+.card {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+
+/* =========================================
+   UPLOAD CARD
+========================================= */
+
+.upload-card {
+  padding: 16px;
+}
+
+.upload-box {
+  min-height: 330px;
+  padding: 44px 24px;
+  border: 2px dashed #d8c4ae;
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #fffaf4;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.upload-box.drag-over {
+  background: #f5eadd;
+  border-color: var(--brown);
+  transform: scale(1.01);
+}
+
+.upload-icon {
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 20px;
+  border-radius: 22px;
+  background: var(--soft);
+  font-size: 34px;
+}
+
+.upload-box h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 21px;
+  line-height: 1.3;
+}
+
+.upload-box p {
+  margin: 8px 0 20px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.choose-btn {
+  min-height: 48px;
+  padding: 13px 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: var(--brown);
+  color: #fffaf5;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.choose-btn:hover {
+  background: var(--brown-dark);
+  transform: translateY(-1px);
+}
+
+.choose-btn:active {
+  transform: translateY(0);
+}
+
+.upload-hint {
+  margin-top: 13px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+
+/* =========================================
+   FILE CARD
+========================================= */
+
+.file-card {
+  min-height: 96px;
+  padding: 16px 18px;
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) 48px;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 16px;
+}
+
+.file-icon {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: var(--soft);
+  font-size: 27px;
+}
+
+.file-info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.file-info strong {
+  width: 100%;
+  display: block;
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.3;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  text-overflow: clip;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.file-info strong::-webkit-scrollbar {
+  display: none;
+}
+
+.file-info span {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.remove-file {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: #f0e3d5;
+  color: var(--brown);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.remove-file:hover {
+  background: #e8d5c2;
+  transform: scale(1.03);
+}
+
+
+/* =========================================
+   PASSWORD CARD
+========================================= */
+
+.password-card {
+  padding: 28px;
+  margin-bottom: 16px;
+}
+
+.section-heading {
+  margin-bottom: 22px;
+}
+
+.section-heading h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 21px;
+  line-height: 1.3;
+}
+
+.section-heading p {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.field {
+  width: 100%;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.field label span {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.password-wrap {
+  width: 100%;
+  position: relative;
+}
+
+.password-wrap input {
+  width: 100%;
+  height: 54px;
+  padding: 0 54px 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  outline: none;
+  background: #fffdf9;
+  color: var(--text);
+  font-size: 15px;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.password-wrap input::placeholder {
+  color: #aa998a;
+}
+
+.password-wrap input:focus {
+  border-color: #b99878;
+  box-shadow: 0 0 0 4px rgba(111, 78, 55, 0.08);
+}
+
+.eye-btn {
+  position: absolute;
+  top: 50%;
+  right: 7px;
+  width: 42px;
+  height: 42px;
+  transform: translateY(-50%);
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  color: var(--brown);
+  font-size: 19px;
+  cursor: pointer;
+}
+
+.eye-btn:hover {
+  background: var(--soft);
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.error {
+  margin: 11px 0 0;
+  color: var(--danger);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+
+/* =========================================
+   PRIMARY BUTTON
+========================================= */
+
+.primary-btn {
+  width: 100%;
+  min-height: 54px;
+  margin-top: 22px;
+  padding: 14px 20px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--brown);
+  color: #fffaf5;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.primary-btn:hover:not(:disabled) {
+  background: var(--brown-dark);
+  transform: translateY(-1px);
+}
+
+.primary-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.primary-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+
+/* =========================================
+   PROCESSING
+========================================= */
+
+.processing-card {
+  padding: 42px 28px;
+  text-align: center;
+}
+
+.loader {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 20px;
+  border: 4px solid #e4d5c3;
+  border-top-color: var(--brown);
+  border-radius: 50%;
+  animation: spin 0.85s linear infinite;
+}
+
+.processing-card h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.processing-card p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================
+   RESULT
+========================================= */
+
+.result-card {
+  padding: 38px 28px;
+  text-align: center;
+}
+
+.success-icon {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e3eadf;
+  color: var(--success);
+  font-size: 35px;
+  font-weight: 700;
+}
+
+.result-card h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 23px;
+  line-height: 1.3;
+}
+
+.result-card p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.result-card .primary-btn {
+  margin-top: 24px;
+}
+
+
+/* =========================================
+   SECONDARY BUTTON
+========================================= */
+
+.secondary-btn {
+  width: 100%;
+  min-height: 52px;
+  margin-top: 12px;
+  padding: 13px 20px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: #fffaf3;
+  color: var(--brown);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.secondary-btn:hover {
+  background: var(--soft);
+  border-color: #d8c4ae;
+  transform: translateY(-1px);
+}
+
+.secondary-btn:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================
+   PRIVACY
+========================================= */
+
+.privacy-note {
+  max-width: 620px;
+  margin: 22px auto 0;
+  padding: 0 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.privacy-note:first-letter {
+  font-size: 13px;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 700px) {
+
+  .topbar {
+    padding: 20px 18px 0;
+  }
+
+  .page {
+    padding: 38px 18px 60px;
+  }
+
+  .hero {
+    margin-bottom: 25px;
+  }
+
+  .hero h2 {
+    font-size: 34px;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 520px) {
+
+  .topbar {
+    padding: 18px 16px 0;
+  }
+
+  .back-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+  }
+
+  .brand {
+    font-size: 24px;
+  }
+
+  .page {
+    padding: 32px 14px 50px;
+  }
+
+  .hero {
+    margin-bottom: 22px;
+  }
+
+  .hero h2 {
+    font-size: 31px;
+    letter-spacing: -0.5px;
+  }
+
+  .hero p {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .card {
+    border-radius: 24px;
+  }
+
+  .upload-card {
+    padding: 12px;
+  }
+
+  .upload-box {
+    min-height: 300px;
+    padding: 34px 18px;
+    border-radius: 19px;
+  }
+
+  .upload-icon {
+    width: 66px;
+    height: 66px;
+    margin-bottom: 17px;
+    border-radius: 19px;
+    font-size: 31px;
+  }
+
+  .upload-box h3 {
+    font-size: 19px;
+  }
+
+  .upload-box p {
+    margin: 7px 0 18px;
+    font-size: 13px;
+  }
+
+  .choose-btn {
+    min-height: 47px;
+    padding: 12px 22px;
+  }
+
+  .file-card {
+    min-height: 88px;
+    padding: 13px 14px;
+    grid-template-columns: 52px minmax(0, 1fr) 46px;
+    gap: 12px;
+    border-radius: 22px;
+  }
+
+  .file-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    font-size: 24px;
+  }
+
+  .file-info strong {
+    font-size: 15px;
+  }
+
+  .file-info span {
+    font-size: 12px;
+  }
+
+  .remove-file {
+    width: 46px;
+    height: 46px;
+    border-radius: 13px;
+    font-size: 27px;
+  }
+
+  .password-card {
+    padding: 23px 18px;
+  }
+
+  .section-heading {
+    margin-bottom: 19px;
+  }
+
+  .section-heading h3 {
+    font-size: 19px;
+  }
+
+  .section-heading p {
+    font-size: 12.5px;
+  }
+
+  .password-wrap input {
+    height: 52px;
+    padding-left: 15px;
+    font-size: 14px;
+  }
+
+  .eye-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .primary-btn {
+    min-height: 52px;
+    margin-top: 20px;
+    border-radius: 15px;
+  }
+
+  .processing-card {
+    padding: 36px 20px;
+  }
+
+  .result-card {
+    padding: 34px 18px;
+  }
+
+  .success-icon {
+    width: 64px;
+    height: 64px;
+    font-size: 32px;
+  }
+
+  .result-card h3 {
+    font-size: 21px;
+  }
+
+  .privacy-note {
+    font-size: 11.5px;
+    padding: 0 8px;
+  }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 390px) {
+
+  .topbar {
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+
+  .page {
+    padding-left: 11px;
+    padding-right: 11px;
+  }
+
+  .hero h2 {
+    font-size: 29px;
+  }
+
+  .upload-box {
+    min-height: 285px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .file-card {
+    grid-template-columns: 48px minmax(0, 1fr) 43px;
+    gap: 9px;
+    padding: 11px;
+  }
+
+  .file-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 22px;
+  }
+
+  .remove-file {
+    width: 43px;
+    height: 43px;
+  }
+
+  .password-card {
+    padding: 21px 15px;
+  }
+
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+}
