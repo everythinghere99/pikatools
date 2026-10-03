@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PikaTools - PDF Compressor</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="pdf-compressor.css">
+</head>
+
+<body>
+
+<header class="topbar">
+  <a href="../index.html" class="back-btn">←</a>
+  <div class="brand">PikaTools</div>
+</header>
+
+<main class="page">
+
+  <h1 class="tool-title">
+    <span>✦</span>
+    PDF Compressor
+    <span>✦</span>
+  </h1>
+
+  <section class="card">
+
+    <label class="drop-zone" id="dropZone">
+
+      <div class="upload-icon">📄</div>
+
+      <h2>Drop your PDF files here</h2>
+
+      <p>or choose PDF files from your device</p>
+
+      <span class="choose-btn">Choose PDF Files</span>
+
+      <small>PDF • Multiple files supported</small>
+
+      <input
+        id="fileInput"
+        type="file"
+        accept="application/pdf,.pdf"
+        multiple
+        hidden
+      >
+
+    </label>
+
+
+    <div id="fileSection" class="file-section hidden">
+
+      <div class="section-title">
+        <h3>Selected PDFs</h3>
+        <button id="clearBtn" class="text-btn">Clear all</button>
+      </div>
+
+      <div id="fileList" class="file-list"></div>
+
+    </div>
+
+
+    <button id="compressBtn" class="primary-btn hidden">
+      Compress PDFs
+    </button>
+
+    <div id="engineStatus" class="engine-status"></div>
+
+    <div id="results" class="results hidden"></div>
+
+    <button id="downloadAllBtn" class="download-all hidden">
+      ↓ Download All PDFs (ZIP)
+    </button>
+
+    <button id="resetBtn" class="reset-btn hidden">
+      Compress More PDFs
+    </button>
+
+  </section>
+
+
+  <section class="privacy">
+
+    <span>🔒</span>
+
+    <div>
+      <b>Your PDFs stay private.</b>
+
+      <p>
+        Your PDF is securely processed for compression and is not stored after processing.
+      </p>
+    </div>
+
+  </section>
+
+</main>
+
+<script src="pdf-compressor.js"></script>
+
+</body>
+</html>
