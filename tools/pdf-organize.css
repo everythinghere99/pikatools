@@ -1,0 +1,1134 @@
+:root {
+  --bg: #f7f0e9;
+  --card: #fffaf5;
+  --soft: #f1e7de;
+  --line: #dfd0c3;
+  --text: #493a32;
+  --muted: #8a776b;
+  --brown: #76594b;
+  --brown-dark: #5f463b;
+  --white: #ffffff;
+  --danger: #a95f59;
+
+  --shadow:
+    0 18px 45px rgba(91, 67, 52, 0.10);
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Nunito", sans-serif;
+}
+
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 0;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.back-btn {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  text-decoration: none;
+
+  color: var(--text);
+  background: var(--card);
+
+  border: 1px solid var(--line);
+  border-radius: 13px;
+
+  font-size: 22px;
+  font-weight: 700;
+
+  box-shadow: 0 6px 18px rgba(91, 67, 52, 0.06);
+
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease;
+}
+
+.back-btn:hover {
+  transform: translateX(-2px);
+  background: var(--white);
+}
+
+.brand {
+  font-family: "Comic Neue", cursive;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.page {
+  width: min(920px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 34px 0 50px;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.tool-title {
+  margin: 0 0 22px;
+
+  text-align: center;
+
+  font-family: "Comic Neue", cursive;
+  font-size: clamp(28px, 5vw, 40px);
+  line-height: 1.1;
+
+  font-weight: 700;
+}
+
+.tool-title span {
+  margin: 0 8px;
+}
+
+
+/* =========================
+   MAIN CARD
+========================= */
+
+.card {
+  background: var(--card);
+
+  border: 1px solid var(--line);
+  border-radius: 28px;
+
+  padding: 16px;
+
+  box-shadow: var(--shadow);
+}
+
+
+/* =========================
+   UPLOAD
+========================= */
+
+.drop-zone {
+  min-height: 310px;
+
+  padding: 34px 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  border: 2px dashed var(--line);
+  border-radius: 22px;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.drop-zone:hover {
+  border-color: var(--brown);
+  background: rgba(241, 231, 222, 0.45);
+}
+
+.drop-zone.dragover {
+  border-color: var(--brown);
+  background: var(--soft);
+  transform: scale(0.995);
+}
+
+.upload-icon {
+  width: 72px;
+  height: 72px;
+
+  display: grid;
+  place-items: center;
+
+  margin-bottom: 14px;
+
+  background: var(--soft);
+  border-radius: 22px;
+
+  font-size: 35px;
+}
+
+.drop-zone h2 {
+  margin: 0 0 6px;
+
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.drop-zone p {
+  margin: 0 0 18px;
+
+  color: var(--muted);
+
+  font-size: 14px;
+}
+
+.choose-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 42px;
+  padding: 0 19px;
+
+  background: var(--brown);
+  color: var(--white);
+
+  border-radius: 12px;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.drop-zone small {
+  margin-top: 13px;
+
+  color: var(--muted);
+
+  font-size: 11px;
+}
+
+
+/* =========================
+   HELPERS
+========================= */
+
+.hidden {
+  display: none !important;
+}
+
+
+/* =========================
+   WORKSPACE
+========================= */
+
+.workspace {
+  margin-top: 24px;
+}
+
+
+/* =========================
+   LIST HEADING
+========================= */
+
+.list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  margin-bottom: 14px;
+}
+
+.list-heading h2 {
+  margin: 0 0 3px;
+
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.list-heading p {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 12px;
+}
+
+
+/* =========================
+   REMOVE ALL
+========================= */
+
+.secondary-btn {
+  flex: 0 0 auto;
+
+  min-height: 38px;
+  padding: 0 13px;
+
+  border: 1px solid var(--line);
+  border-radius: 11px;
+
+  background: var(--soft);
+  color: var(--brown-dark);
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.secondary-btn:hover {
+  background: #eadbd0;
+}
+
+.secondary-btn:active {
+  transform: scale(0.97);
+}
+
+
+/* =========================
+   PAGE LIST
+========================= */
+
+.page-list {
+  width: 100%;
+
+  height: 560px;
+  max-height: 65vh;
+  min-height: 220px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  padding: 3px 4px 5px 2px;
+
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+.page-list::-webkit-scrollbar {
+  width: 7px;
+}
+
+.page-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.page-list::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 20px;
+}
+
+
+/* =========================
+   PAGE CARD
+========================= */
+
+.page-item {
+  position: relative;
+
+  width: 100%;
+  min-height: 126px;
+
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: center;
+
+  padding: 10px;
+
+  background: var(--white);
+
+  border: 1px solid var(--line);
+  border-radius: 17px;
+
+  box-shadow: 0 5px 16px rgba(91, 67, 52, 0.055);
+
+  cursor: grab;
+
+  touch-action: pan-y;
+
+  user-select: none;
+  -webkit-user-select: none;
+
+  transition:
+    border-color 0.16s ease,
+    box-shadow 0.16s ease,
+    opacity 0.16s ease,
+    transform 0.16s ease;
+}
+
+.page-item:hover {
+  border-color: #d2c0b1;
+}
+
+.page-item:active {
+  cursor: grabbing;
+}
+
+.page-item.dragging {
+  opacity: 0.72;
+
+  border-color: var(--brown);
+
+  box-shadow:
+    0 14px 30px rgba(91, 67, 52, 0.15);
+
+  transform: scale(0.985);
+}
+
+.page-item.long-pressed {
+  border-color: var(--brown);
+
+  box-shadow:
+    0 12px 28px rgba(91, 67, 52, 0.15);
+}
+
+
+/* =========================
+   PAGE PREVIEW BOX
+========================= */
+
+.page-preview-wrap {
+  width: 76px;
+  height: 104px;
+
+  flex: 0 0 76px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background: #f3ede8;
+
+  border: 1px solid var(--line);
+  border-radius: 11px;
+
+  padding: 3px;
+}
+
+
+/*
+  Important:
+  Canvas ko fixed width/height force nahi karna.
+  Isse portrait/landscape pages box ke andar
+  properly fit honge.
+*/
+
+.page-preview {
+  display: block;
+
+  width: auto !important;
+  height: auto !important;
+
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: contain;
+
+  background: #ffffff;
+}
+
+
+/* =========================
+   PAGE INFO
+========================= */
+
+.page-info {
+  min-width: 0;
+
+  flex: 1;
+
+  align-self: stretch;
+
+  display: flex;
+  align-items: flex-start;
+
+  padding:
+    7px
+    145px
+    7px
+    14px;
+}
+
+.page-number {
+  margin-top: 4px;
+
+  color: var(--text);
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+/* =========================
+   PAGE ACTIONS
+========================= */
+
+.page-actions {
+  position: absolute;
+
+  top: 9px;
+  right: 9px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  z-index: 5;
+}
+
+.page-action {
+  width: 31px;
+  height: 31px;
+
+  padding: 0;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--line);
+  border-radius: 9px;
+
+  background: var(--soft);
+  color: var(--brown-dark);
+
+  font-family: inherit;
+
+  cursor: pointer;
+
+  line-height: 1;
+
+  transition:
+    background 0.16s ease,
+    transform 0.16s ease,
+    border-color 0.16s ease;
+}
+
+.page-action:hover {
+  background: #eadbd0;
+  border-color: #d3bfb0;
+}
+
+.page-action:active {
+  transform: scale(0.91);
+}
+
+.rotate-page {
+  font-size: 17px;
+}
+
+.remove-page {
+  font-size: 20px;
+  font-weight: 500;
+
+  color: var(--danger);
+}
+
+
+/* =========================
+   PAGE FOOTER
+========================= */
+
+/*
+  Ab ye Page 1 / Page 2 ke just niche
+  rahega — right bottom mein nahi.
+*/
+
+.page-footer {
+  position: absolute;
+
+  left: 101px;
+  right: 145px;
+  bottom: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 2px;
+
+  pointer-events: none;
+
+  text-align: left;
+}
+
+.rotation-status,
+.drag-label {
+  margin: 0;
+
+  font-size: 11px;
+  line-height: 1.25;
+  font-weight: 600;
+}
+
+.rotation-status {
+  color: var(--brown);
+}
+
+.drag-label {
+  color: var(--muted);
+}
+
+
+/* =========================
+   DRAG HANDLE
+========================= */
+
+.drag-handle {
+  position: absolute;
+
+  right: 12px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #b29f92;
+
+  font-size: 17px;
+  letter-spacing: -3px;
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   ORGANIZE BUTTON
+========================= */
+
+.primary-btn {
+  width: 100%;
+
+  min-height: 52px;
+
+  margin-top: 16px;
+
+  border: 0;
+  border-radius: 14px;
+
+  background: var(--brown);
+  color: var(--white);
+
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.primary-btn:hover {
+  background: var(--brown-dark);
+
+  box-shadow:
+    0 8px 20px rgba(91, 67, 52, 0.12);
+}
+
+.primary-btn:active {
+  transform: scale(0.985);
+}
+
+
+/* =========================
+   PROCESSING
+========================= */
+
+.processing {
+  min-height: 300px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.processing h2 {
+  margin: 18px 0 6px;
+
+  font-size: 19px;
+}
+
+.processing p {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   LOADER
+========================= */
+
+.loader {
+  width: 44px;
+  height: 44px;
+
+  border: 4px solid var(--soft);
+  border-top-color: var(--brown);
+
+  border-radius: 50%;
+
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================
+   RESULT
+========================= */
+
+.result {
+  padding: 34px 18px;
+
+  text-align: center;
+}
+
+.success-icon {
+  width: 70px;
+  height: 70px;
+
+  margin: 0 auto 15px;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--soft);
+  color: var(--brown);
+
+  border-radius: 50%;
+
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.result h2 {
+  margin: 0 0 8px;
+
+  font-size: 22px;
+}
+
+.result p {
+  margin: 0 auto 22px;
+
+  max-width: 390px;
+
+  color: var(--muted);
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+/* =========================
+   DOWNLOAD
+========================= */
+
+.download-btn {
+  width: 100%;
+
+  min-height: 50px;
+
+  border: 0;
+  border-radius: 14px;
+
+  background: var(--brown);
+  color: var(--white);
+
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.download-btn:hover {
+  background: var(--brown-dark);
+}
+
+
+/* =========================
+   ANOTHER
+========================= */
+
+.another-btn {
+  width: 100%;
+
+  min-height: 48px;
+
+  margin-top: 10px;
+
+  border: 1px solid var(--line);
+  border-radius: 14px;
+
+  background: var(--soft);
+  color: var(--brown-dark);
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.another-btn:hover {
+  background: #eadbd0;
+}
+
+
+/* =========================
+   PRIVACY BOX
+========================= */
+
+.privacy {
+  width: 100%;
+
+  margin: 18px auto 0;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 13px;
+
+  padding: 16px 18px;
+
+  background: var(--card);
+
+  border: 1px solid var(--line);
+  border-radius: 18px;
+
+  box-shadow:
+    0 7px 20px rgba(91, 67, 52, 0.06);
+
+  color: var(--muted);
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.privacy > span {
+  width: 36px;
+  height: 36px;
+
+  flex: 0 0 36px;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--soft);
+
+  border-radius: 11px;
+
+  font-size: 17px;
+}
+
+.privacy b {
+  display: block;
+
+  margin-top: 1px;
+
+  color: var(--text);
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.privacy p {
+  margin: 3px 0 0;
+
+  color: var(--muted);
+
+  font-size: 11.5px;
+  line-height: 1.45;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 640px) {
+
+  .topbar {
+    padding-top: 16px;
+  }
+
+  .back-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brand {
+    font-size: 23px;
+  }
+
+  .page {
+    width: calc(100% - 20px);
+
+    padding-top: 25px;
+  }
+
+  .tool-title {
+    margin-bottom: 17px;
+
+    font-size: 30px;
+  }
+
+  .tool-title span {
+    margin: 0 5px;
+  }
+
+  .card {
+    padding: 11px;
+
+    border-radius: 23px;
+  }
+
+  .drop-zone {
+    min-height: 280px;
+
+    padding: 28px 15px;
+
+    border-radius: 19px;
+  }
+
+  .workspace {
+    margin-top: 18px;
+  }
+
+  .list-heading {
+    margin-bottom: 11px;
+  }
+
+  .list-heading h2 {
+    font-size: 16px;
+  }
+
+  .list-heading p {
+    font-size: 11px;
+  }
+
+  .secondary-btn {
+    min-height: 35px;
+    padding: 0 11px;
+
+    font-size: 11px;
+  }
+
+  .page-list {
+    height: 58vh;
+    max-height: 58vh;
+
+    gap: 10px;
+
+    padding-right: 1px;
+
+    scrollbar-width: none;
+  }
+
+  .page-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .page-item {
+    min-height: 116px;
+
+    padding: 8px;
+
+    border-radius: 15px;
+  }
+
+  .page-preview-wrap {
+    width: 62px;
+    height: 88px;
+
+    flex-basis: 62px;
+
+    padding: 3px;
+
+    border-radius: 9px;
+  }
+
+  .page-preview {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .page-info {
+    padding:
+      6px
+      122px
+      6px
+      11px;
+  }
+
+  .page-number {
+    font-size: 13px;
+  }
+
+  .page-actions {
+    top: 8px;
+    right: 8px;
+
+    gap: 5px;
+  }
+
+  .page-action {
+    width: 28px;
+    height: 28px;
+
+    border-radius: 8px;
+  }
+
+  .rotate-page {
+    font-size: 16px;
+  }
+
+  .remove-page {
+    font-size: 18px;
+  }
+
+
+  /* Page 1 ke niche */
+  .page-footer {
+    left: 81px;
+    right: 122px;
+    bottom: 8px;
+
+    gap: 2px;
+  }
+
+  .rotation-status,
+  .drag-label {
+    font-size: 10px;
+  }
+
+  .drag-handle {
+    right: 9px;
+
+    font-size: 15px;
+  }
+
+  .primary-btn {
+    min-height: 50px;
+
+    margin-top: 14px;
+  }
+
+
+  /* Privacy box mobile */
+  .privacy {
+    margin-top: 14px;
+
+    padding: 14px;
+
+    gap: 10px;
+
+    border-radius: 16px;
+  }
+
+  .privacy > span {
+    width: 33px;
+    height: 33px;
+
+    flex-basis: 33px;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+  }
+
+  .privacy b {
+    font-size: 12px;
+  }
+
+  .privacy p {
+    font-size: 10.5px;
+  }
+}
+
+
+/* =========================
+   VERY SMALL PHONES
+========================= */
+
+@media (max-width: 380px) {
+
+  .page-item {
+    min-height: 108px;
+  }
+
+  .page-preview-wrap {
+    width: 56px;
+    height: 82px;
+
+    flex-basis: 56px;
+  }
+
+  .page-info {
+    padding-right: 112px;
+  }
+
+  .page-footer {
+    left: 73px;
+    right: 112px;
+  }
+
+  .rotation-status,
+  .drag-label {
+    font-size: 9.5px;
+  }
+
+  .privacy {
+    padding: 13px;
+  }
+}
