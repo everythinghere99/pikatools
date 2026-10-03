@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PikaTools — Simple tools. Zero confusion.</title>
+    <meta name="description" content="Simple online tools for images, PDFs, signatures and documents. Fast, private and easy to use.">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="index.html" class="brand">
+            <span class="brand-mark">P</span>
+            <span class="brand-name">PikaTools</span>
+        </a>
+
+        <nav class="desktop-nav">
+            <a href="#tools">Tools</a>
+            <a href="#categories">Categories</a>
+            <a href="#about">About</a>
+        </nav>
+
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#tools">Tools</a>
+        <a href="#categories">Categories</a>
+        <a href="#about">About</a>
+    </div>
+</header>
+
+<main>
+
+<section class="hero">
+    <div class="container hero-inner">
+        <div class="hero-copy">
+            <div class="eyebrow">✦ Simple tools. Zero confusion.</div>
+            <p>
+                Compress images, resize photos, fix signatures,
+                work with PDFs and more — all in one cozy little place.
+            </p>
+        </div>
+
+        <div class="search-area">
+            <div class="search-box">
+                <span class="search-icon">⌕</span>
+                <input type="text" id="toolSearch" placeholder="What do you need to do?" autocomplete="off">
+                <button class="clear-search" id="clearSearch" aria-label="Clear search">×</button>
+            </div>
+
+            <div class="search-results" id="searchResults"></div>
+
+            <div class="search-hints-wrap">
+                <div class="search-hints" id="searchHints">
+                    <button data-query="image compressor">Image Compressor</button>
+                    <button data-query="image resize">Image Resize</button>
+                    <button data-query="image crop">Image Crop</button>
+                    <button data-query="image converter">Image Converter</button>
+                    <button data-query="pdf compressor">PDF Compressor</button>
+                    <button data-query="pdf merge">PDF Merge</button>
+                    <button data-query="pdf organize">PDF Organize</button>
+                    <button data-query="pdf split">PDF Splitter</button>
+                    <button data-query="pdf rotate">PDF Rotate</button>
+                    <button data-query="pdf watermark">PDF Watermark</button>
+                    <button data-query="pdf page numbers">PDF Page Numbers</button>
+                    <button data-query="pdf password">PDF Password</button>
+                    <button data-query="pdf unlock">PDF Unlock</button>
+                    <button data-query="pdf signature">PDF Signature</button>
+                    <button data-query="pdf to jpg">PDF → JPG</button>
+                    <button data-query="jpg to pdf">JPG → PDF</button>
+                    <button data-query="signature resize">Signature Resize</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="ad-placeholder">
+        <span>Advertisement</span>
+    </div>
+</div>
+
+<section class="tools-section" id="tools">
+<div class="container">
+
+    <div class="section-heading">
+        <div>
+            <span class="section-kicker">ALL TOOLS</span>
+            <h2>Find the right tools</h2>
+        </div>
+        <span class="section-note">Simple. Useful. Fast.</span>
+    </div>
+
+    <!-- IMAGE TOOLS -->
+    <div class="tool-group">
+        <div class="group-title">
+            <span class="group-icon">🖼️</span>
+            <h3>Image Tools</h3>
+        </div>
+
+        <div class="tools-grid">
+            <a class="tool-card" href="tools/image-compressor.html">
+                <div class="tool-icon">📦</div>
+                <div class="tool-content">
+                    <h3>Image Compressor</h3>
+                    <p>Make images smaller.</p>
+                </div>
+                <span class="tool-arrow">›</span>
+            </a>
+
+            <a class="tool-card" href="tools/image-resizer.html">
+                <div class="tool-icon">↔️</div>
+                <div class="tool-content">
+                    <h3>Image Resizer</h3>
+                    <p>Change image dimensions.</p>
+                </div>
+                <span class="tool-arrow">›</span>
+            </a>
+
+            <a class="tool-card" href="tools/image-cropper.html">
+                <div class="tool-icon">✂️</div>
+                <div class="tool-content">
+                    <h3>Image Cropper</h3>
+                    <p>Crop photos easily.</p>
+                </div>
+                <span class="tool-arrow">›</span>
+            </a>
+
+            <a class="tool-card" href="tools/image-converter.html">
+                <div class="tool-icon">🔄</div>
+                <div class="tool-content">
+                    <h3>Image Converter</h3>
+                    <p>JPG, PNG & WebP.</p>
+                </div>
+                <span class="tool-arrow">›</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- PDF TOOLS -->
+    <div class="tool-group">
+        <div class="group-title">
+            <span class="group-icon">📄</span>
+            <h3>PDF Tools</h3>
+        </div>
+
+        <div class="tools-grid">
+
+            <a class="tool-card" href="tools/pdf-compressor.html">
+                <div class="tool-icon">📉</div>
+                <div class="tool-content">
+                    <h3>PDF Compressor</h3>
+                    <p>Reduce PDF file size.</p>
+                </div>
+                <span class="tool-arrow">›</span>
+            </a>
+
+            <a class="tool-card" href="tools/pdf-merger.html">
+                <div class="tool-icon">📚</div>
+                <div class="tool-content">
+                    <h3>PDF Merger</h3>
+                    <p>Combine PDFs together.</p>
+                </div>
+                <span class="tool-arrow">›</span>
+            </a>
+
+            <a class="tool-card" href="tools/pdf-organize.html">
+                <div class="tool-icon">🗂️</div>
+                <div class="tool-content">
+                    <h3>PDF Organize</h3>
+                    <p>Reorder, rotate and organize pages.</p>
+                </div>
+                <span class="tool-arrow">›</span>
+            </a>
+
+            <a class="tool-card" href="tools/pdf-splitter.html">
+                <div class="tool-icon">✂️</div>
+                <div class="tool-content">
+                    <h3>PDF Splitter</h3>
+                    <p>Split a PDF into separate files.</p>
+                </div>
+                <span class="tool-arrow">›</span>
+            </a>
+
+            <a class="tool-card" href="tools/pdf-rotate.html">
+                <div class="tool-icon">🔄</div>
+                <div class="tool-content">
+                    <h3>PDF Rotate</h3>
+                    <p>Rotate PDF pages.</p>
+                </div>
+                <span class="tool-arrow">›</span>
+            </a>
+
+            <a class="tool-card" href="tools/pdf-page-numbers.html">
+                <div class="tool-icon">🔢</div>
+                <div class="tool-content">
+                    <h3>PDF Page Numbers</h3>
+                    <p>Add page numbers to PDFs.</p>
+                </div>
+                <span class="tool-arrow">›</span>
+            </a>
+
+            <a class="tool-card" href="tools/pdf-password.html">
+                <div class="tool-icon">🔐</div>
+                <div class="tool-content">
+                    <h3>PDF Password</h3>
+                    <p>Protect a PDF with a password.</p>
+                </div>
+                <span class="tool-arrow">›</span>
+            </a>
+
+            <a class="tool-card" href="tools/pdf-unlock.html">
+                <div class="tool-icon">🔓</div>
+                <div class="tool-content">
+                    <h3>PDF Unlock</h3>
+                    <p>Remove PDF restrictions.</p>
+                </div>
+                <span class="tool-arrow">›</span>
+            </a>
+
+            <a class="tool-card" href="tools/pdf-watermark.html">
+                <div class="tool-icon">💧</div>
+                <div class="tool-content">
+                    <h3>PDF Watermark</h3>
+                    <p>Add a watermark to PDF pages.</p>
+                </div>
+                <span class="tool-arrow">›</span>
+            </a>
+
+            <a class="tool-card" href="tools/pdf-signature.html">
+                <div class="tool-icon">✍️</div>
+                <div class="tool-content">
+                    <h3>PDF Signature</h3>
+                    <p>Add a signature to a PDF.</p>
+                </div>
+                <span class="tool-arrow">›</span>
+            </a>
+
+            <a class="tool-card" href="tools/pdf-to-jpg.html">
+                <div class="tool-icon">🖼️</div>
+                <div class="tool-content">
+                    <h3>PDF to JPG</h3>
+                    <p>Turn PDF pages into images.</p>
+                </div>
+                <span class="tool-arrow">›</span>
+            </a>
+
+            <a class="tool-card" href="tools/jpg-to-pdf.html">
+                <div class="tool-icon">📑</div>
+                <div class="tool-content">
+                    <h3>JPG to PDF</h3>
+                    <p>Make a PDF from images.</p>
+                </div>
+                <span class="tool-arrow">›</span>
+            </a>
+
+        </div>
+    </div>
+
+    <!-- SIGNATURE TOOLS -->
+    <div class="tool-group">
+        <div class="group-title">
+            <span class="group-icon">✍️</span>
+            <h3>Signature Tools</h3>
+        </div>
+
+        <div class="tools-grid">
+            <a class="tool-card" href="tools/signature-resizer.html">
+                <div class="tool-icon">✍️</div>
+                <div class="tool-content">
+                    <h3>Signature Resizer</h3>
+                    <p>Resize your signature.</p>
+                </div>
+                <span class="tool-arrow">›</span>
+            </a>
+
+        </div>
+    </div>
+
+</div>
+</section>
+
+<section class="categories-section" id="categories">
+<div class="container">
+
+    <div class="section-heading centered">
+        <span class="section-kicker">EXPLORE</span>
+        <h2>Tools for every little task</h2>
+        <p>Pick a category and find what you need.</p>
+    </div>
+
+    <div class="categories-grid">
+        <a class="category-card" href="#tools">
+            <div class="category-icon">🖼️</div>
+            <h3>Images</h3>
+            <p>Compress, resize, crop & convert.</p>
+            <span>Explore →</span>
+        </a>
+
+        <a class="category-card" href="#tools">
+            <div class="category-icon">📄</div>
+            <h3>PDF</h3>
+            <p>Compress, merge, organize, split & convert PDFs.</p>
+            <span>Explore →</span>
+        </a>
+
+        <a class="category-card" href="#tools">
+            <div class="category-icon">✍️</div>
+            <h3>Signatures</h3>
+            <p>Resize signatures and work with PDF signatures.</p>
+            <span>Explore →</span>
+        </a>
+
+    </div>
+</div>
+</section>
+
+<div class="container">
+    <div class="ad-placeholder">
+        <span>Advertisement</span>
+    </div>
+</div>
+
+<section class="why-section" id="about">
+<div class="container why-inner">
+
+    <div class="why-text">
+        <span class="section-kicker light">WHY PIKATOOLS</span>
+        <h2>Made to feel simple.</h2>
+        <p>
+            No confusing menus. No unnecessary steps.
+            Just useful little tools that get the job done.
+        </p>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature">
+            <div class="feature-icon">⚡</div>
+            <strong>Quick</strong>
+            <small>Get things done without the wait.</small>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">🔒</div>
+            <strong>Private</strong>
+            <small>Your files stay in your browser where possible.</small>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">🎯</div>
+            <strong>Simple</strong>
+            <small>No complicated settings to figure out.</small>
+        </div>
+    </div>
+
+</div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+<div class="container footer-inner">
+
+    <div class="footer-brand">
+        <div class="footer-logo">
+            <span class="brand-mark">P</span>
+            <span>PikaTools</span>
+        </div>
+        <p>Little tools for everyday tasks.</p>
+    </div>
+
+    <div class="footer-links">
+        <div>
+            <strong>Tools</strong>
+            <a href="#tools">Image Tools</a>
+            <a href="#tools">PDF Tools</a>
+            <a href="#tools">Signature Tools</a>
+        </div>
+
+        <div>
+            <strong>Explore</strong>
+            <a href="#categories">Categories</a>
+            <a href="#about">About</a>
+        </div>
+
+        <div>
+            <strong>Legal</strong>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer-bottom">
+    © 2026 PikaTools. All rights reserved.
+</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
