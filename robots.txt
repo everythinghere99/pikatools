@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://everythinghere99.github.io/pikatools/sitemap.xml
