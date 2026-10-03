@@ -1,0 +1,924 @@
+:root {
+  --bg: #f7f0e9;
+  --card: #fffaf5;
+  --soft: #f1e7de;
+  --line: #dfd0c3;
+  --text: #493a32;
+  --muted: #8a776b;
+  --brown: #76594b;
+  --shadow: 0 14px 35px rgba(86,63,49,.09);
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Nunito", sans-serif;
+}
+
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.topbar {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 24px 24px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+}
+
+.back-btn {
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+  place-items: center;
+
+  text-decoration: none;
+
+  color: var(--brown);
+
+  background: var(--soft);
+
+  border-radius: 12px;
+
+  font-size: 22px;
+
+  flex-shrink: 0;
+}
+
+.brand {
+  font-family: "Comic Neue", cursive;
+
+  font-size: 25px;
+
+  font-weight: 700;
+
+  color: var(--brown);
+
+  text-align: left;
+
+  margin: 0;
+}
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.page {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 34px 20px 60px;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.tool-title {
+  margin: 20px 0 34px;
+
+  text-align: center;
+
+  font-family: "Comic Neue", cursive;
+  font-size: 46px;
+  line-height: 1.1;
+  color: var(--brown);
+  font-weight: 700;
+}
+
+.tool-title span {
+  font-size: 28px;
+  vertical-align: middle;
+  margin: 0 8px;
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+
+/* =========================================================
+   UPLOAD
+   ========================================================= */
+
+.drop-zone {
+  min-height: 320px;
+  padding: 42px 25px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  cursor: pointer;
+
+  border-radius: 28px;
+
+  transition:
+    background .2s ease,
+    transform .2s ease;
+}
+
+.drop-zone:hover {
+  background: #fff8f2;
+}
+
+.drop-zone.dragging {
+  background: var(--soft);
+  transform: scale(.995);
+}
+
+.upload-icon {
+  font-size: 54px;
+  margin-bottom: 12px;
+}
+
+.drop-zone h2 {
+  margin: 0 0 8px;
+  font-size: 25px;
+}
+
+.drop-zone p {
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.choose-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 48px;
+  padding: 0 24px;
+
+  border-radius: 14px;
+
+  background: var(--brown);
+  color: white;
+
+  font-weight: 700;
+}
+
+.drop-zone small {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   WORKSPACE
+   ========================================================= */
+
+.workspace {
+  width: 100%;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+/* =========================================================
+   FILE HEAD
+   ========================================================= */
+
+.file-head {
+  background: var(--card);
+
+  border: 1px solid var(--line);
+  border-radius: 26px;
+
+  padding: 26px 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  box-shadow: var(--shadow);
+
+  margin-bottom: 28px;
+}
+
+.file-head h2 {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.1;
+}
+
+.file-head p {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.secondary-btn,
+.primary-btn,
+.download-btn,
+.another-btn {
+  border: 0;
+
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  border-radius: 16px;
+
+  transition:
+    transform .15s ease,
+    opacity .15s ease;
+}
+
+.secondary-btn {
+  min-height: 52px;
+  padding: 0 24px;
+
+  background: var(--soft);
+  color: var(--brown);
+
+  white-space: nowrap;
+}
+
+.primary-btn {
+  width: 100%;
+  min-height: 58px;
+  margin-top: 26px;
+
+  background: var(--brown);
+  color: white;
+}
+
+.download-btn {
+  width: 100%;
+  min-height: 58px;
+  margin-top: 14px;
+
+  background: #76594b;
+  color: white;
+}
+
+.another-btn {
+  width: 100%;
+  min-height: 52px;
+  margin-top: 12px;
+
+  background: var(--soft);
+  color: var(--brown);
+}
+
+.secondary-btn:active,
+.primary-btn:active,
+.download-btn:active,
+.another-btn:active {
+  transform: scale(.98);
+}
+
+button:disabled {
+  opacity: .6;
+  cursor: default;
+}
+
+
+/* =========================================================
+   IMAGE LIST
+   ========================================================= */
+
+.image-list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+
+/* =========================================================
+   IMAGE CARD
+   ========================================================= */
+
+.image-item {
+  position: relative;
+
+  width: 100%;
+  min-height: 142px;
+
+  padding: 16px 18px 16px 20px;
+
+  display: grid;
+
+  grid-template-columns:
+    116px
+    minmax(0, 1fr)
+    54px;
+
+  align-items: center;
+
+  gap: 18px;
+
+  background: var(--card);
+
+  border: 1px solid var(--line);
+  border-radius: 25px;
+
+  box-shadow: var(--shadow);
+
+  user-select: none;
+
+  transition:
+    transform .15s ease,
+    opacity .15s ease,
+    box-shadow .15s ease;
+}
+
+
+/* =========================================================
+   IMAGE PREVIEW
+   ========================================================= */
+
+.image-preview {
+  width: 116px;
+  height: 116px;
+
+  border-radius: 14px;
+  overflow: hidden;
+
+  background: var(--soft);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+.image-preview img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  pointer-events: none;
+
+  -webkit-user-drag: none;
+}
+
+
+/* =========================================================
+   IMAGE INFO
+   ========================================================= */
+
+.image-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: flex-start;
+
+  gap: 5px;
+
+  overflow: hidden;
+}
+
+
+/* Filename:
+   one line only + horizontal scrolling
+*/
+
+.image-info strong {
+  width: 100%;
+
+  display: block;
+
+  font-size: 17px;
+  line-height: 1.25;
+
+  font-weight: 700;
+
+  color: var(--text);
+
+  white-space: nowrap;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  text-overflow: clip;
+
+  scrollbar-width: none;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.image-info strong::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* Dimensions */
+
+.image-info span {
+  display: block;
+
+  color: var(--muted);
+
+  font-size: 14px;
+  line-height: 1.3;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   REMOVE BUTTON
+   ========================================================= */
+
+.remove-btn {
+  grid-column: 3;
+
+  width: 54px;
+  height: 54px;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: var(--soft);
+  color: var(--brown);
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 30px;
+  font-weight: 400;
+
+  line-height: 1;
+
+  display: grid;
+  place-items: center;
+
+  cursor: pointer;
+
+  flex-shrink: 0;
+}
+
+.remove-btn:active {
+  transform: scale(.94);
+}
+
+
+/* =========================================================
+   NO VISIBLE DRAG ICON
+   Drag / reorder functionality remains active
+   ========================================================= */
+
+.image-item::before {
+  display: none !important;
+  content: none !important;
+}
+
+
+/* =========================================================
+   DRAGGING
+   ========================================================= */
+
+.image-item.dragging {
+  opacity: .72;
+
+  transform: scale(.985);
+
+  box-shadow:
+    0 18px 40px rgba(86,63,49,.16);
+
+  z-index: 5;
+}
+
+
+/* =========================================================
+   PDF OPTIONS
+   ========================================================= */
+
+.options-card {
+  margin-top: 28px;
+  padding: 26px;
+
+  background: var(--card);
+
+  border: 1px solid var(--line);
+  border-radius: 26px;
+
+  box-shadow: var(--shadow);
+}
+
+.options-card h2 {
+  margin: 0 0 20px;
+  font-size: 25px;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.option-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.option-group label {
+  font-size: 14px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.option-group select {
+  width: 100%;
+  height: 48px;
+
+  padding: 0 12px;
+
+  border: 1px solid var(--line);
+  border-radius: 13px;
+
+  background: #fffaf5;
+
+  color: var(--text);
+
+  font-family: "Nunito", sans-serif;
+  font-size: 15px;
+
+  outline: none;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status {
+  min-height: 24px;
+
+  margin-top: 14px;
+
+  text-align: center;
+
+  font-size: 15px;
+
+  color: var(--muted);
+}
+
+.status.error {
+  color: #a34f45;
+}
+
+.status.success {
+  color: #56705a;
+}
+
+.status.info {
+  color: var(--brown);
+}
+
+
+/* =========================================================
+   PRIVACY
+   ========================================================= */
+
+.privacy {
+  margin-top: 30px;
+
+  padding: 20px 22px;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 14px;
+
+  background: var(--soft);
+
+  border-radius: 20px;
+
+  color: var(--text);
+}
+
+.privacy > span {
+  font-size: 22px;
+}
+
+.privacy b {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.privacy p {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .topbar {
+    padding: 18px 18px 0;
+  }
+
+  .page {
+    padding: 26px 18px 45px;
+  }
+
+  .tool-title {
+    font-size: 38px;
+    margin: 18px 0 28px;
+  }
+
+  .file-head {
+    padding: 24px 26px;
+  }
+
+  .file-head h2 {
+    font-size: 27px;
+  }
+
+
+  .image-item {
+    grid-template-columns:
+      108px
+      minmax(0, 1fr)
+      52px;
+
+    gap: 15px;
+
+    min-height: 134px;
+
+    padding:
+      14px 16px 14px 16px;
+  }
+
+  .image-preview {
+    width: 108px;
+    height: 108px;
+  }
+
+  .image-info strong {
+    font-size: 16px;
+  }
+
+  .image-info span {
+    font-size: 14px;
+  }
+
+  .remove-btn {
+    width: 52px;
+    height: 52px;
+    font-size: 29px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 520px) {
+
+  .topbar {
+    padding: 18px 18px 0;
+  }
+
+  .brand {
+    font-size: 24px;
+  }
+
+  .page {
+    padding: 24px 18px 40px;
+  }
+
+  .tool-title {
+    font-size: 34px;
+    margin: 16px 0 27px;
+  }
+
+  .tool-title span {
+    font-size: 22px;
+    margin: 0 4px;
+  }
+
+
+  .file-head {
+    min-height: 125px;
+
+    padding:
+      24px 26px;
+
+    border-radius: 24px;
+  }
+
+  .file-head h2 {
+    font-size: 26px;
+  }
+
+  .file-head p {
+    font-size: 17px;
+  }
+
+  .secondary-btn {
+    min-height: 50px;
+    padding: 0 18px;
+    font-size: 15px;
+  }
+
+
+  .image-list {
+    gap: 20px;
+  }
+
+
+  /* Final mobile card */
+
+  .image-item {
+    min-height: 126px;
+
+    padding:
+      12px 14px 12px 16px;
+
+    grid-template-columns:
+      100px
+      minmax(0, 1fr)
+      50px;
+
+    gap: 12px;
+
+    border-radius: 24px;
+  }
+
+
+  .image-preview {
+    width: 100px;
+    height: 100px;
+
+    border-radius: 13px;
+  }
+
+
+  .image-info {
+    gap: 4px;
+  }
+
+
+  /* Smaller filename */
+
+  .image-info strong {
+    font-size: 16px;
+    line-height: 1.25;
+
+    white-space: nowrap;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    text-overflow: clip;
+  }
+
+
+  /* Smaller dimensions */
+
+  .image-info span {
+    font-size: 13px;
+    line-height: 1.25;
+  }
+
+
+  .remove-btn {
+    width: 50px;
+    height: 50px;
+
+    font-size: 28px;
+  }
+
+
+  .options-card {
+    padding: 22px;
+    border-radius: 24px;
+  }
+
+  .options-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .primary-btn,
+  .download-btn {
+    min-height: 56px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 390px) {
+
+  .page {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+
+  .image-item {
+    grid-template-columns:
+      86px
+      minmax(0, 1fr)
+      46px;
+
+    gap: 9px;
+
+    min-height: 116px;
+
+    padding: 10px;
+  }
+
+
+  .image-preview {
+    width: 86px;
+    height: 96px;
+  }
+
+
+  .image-info strong {
+    font-size: 15px;
+  }
+
+
+  .image-info span {
+    font-size: 12px;
+  }
+
+
+  .remove-btn {
+    width: 46px;
+    height: 46px;
+
+    font-size: 26px;
+  }
+
+
+  .secondary-btn {
+    padding: 0 13px;
+    font-size: 14px;
+  }
+
+}
