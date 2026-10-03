@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>PikaTools - PDF to JPG</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="pdf-to-jpg.css">
+</head>
+
+<body>
+
+<header class="topbar">
+  <a href="../index.html" class="back-btn">←</a>
+  <div class="brand">PikaTools</div>
+</header>
+
+<main class="page">
+
+  <h1 class="tool-title">
+    <span>✦</span>PDF to JPG<span>✦</span>
+  </h1>
+
+  <!-- Upload -->
+  <section class="card" id="uploadCard">
+
+    <label class="drop-zone" id="dropZone">
+
+      <div class="upload-icon">📄</div>
+
+      <h2>Drop your PDF here</h2>
+
+      <p>or choose a PDF from your device</p>
+
+      <span class="choose-btn">Choose PDF</span>
+
+      <small>PDF • One PDF at a time</small>
+
+      <input
+        id="fileInput"
+        type="file"
+        accept="application/pdf,.pdf"
+        hidden
+      >
+
+    </label>
+
+  </section>
+
+
+  <!-- Workspace -->
+  <section id="workspace" class="workspace hidden">
+
+    <div class="file-head">
+
+      <div>
+        <h2 id="fileName">Your PDF</h2>
+        <p id="pageCount">0 pages</p>
+      </div>
+
+      <button
+        id="changePdfBtn"
+        class="secondary-btn"
+        type="button"
+      >
+        Change PDF
+      </button>
+
+    </div>
+
+
+    <!-- Selection -->
+    <div class="selection-bar">
+
+      <div>
+        <strong>Select Pages</strong>
+        <span id="selectedInfo">0 selected</span>
+      </div>
+
+      <div class="selection-actions">
+
+        <button
+          id="selectAllBtn"
+          type="button"
+        >
+          Select All
+        </button>
+
+        <button
+          id="clearBtn"
+          type="button"
+        >
+          Clear
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- Pages -->
+    <div class="preview-title">
+
+      <div>
+        <h2>PDF Preview</h2>
+        <p>Choose the pages you want to convert</p>
+      </div>
+
+    </div>
+
+    <div id="pageGrid" class="page-grid"></div>
+
+
+    <!-- Options -->
+    <div class="options-card">
+
+      <h2>JPG Options</h2>
+
+      <div class="options-grid">
+
+        <div class="option-group">
+
+          <label for="quality">
+            JPG Quality
+          </label>
+
+          <select id="quality">
+
+            <option value="0.65">Low</option>
+
+            <option value="0.8" selected>
+              Medium
+            </option>
+
+            <option value="0.9">
+              High
+            </option>
+
+            <option value="0.98">
+              Very High
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="option-group">
+
+          <label for="scale">
+            Image Quality
+          </label>
+
+          <select id="scale">
+
+            <option value="1">
+              Standard
+            </option>
+
+            <option value="1.5" selected>
+              High Resolution
+            </option>
+
+            <option value="2">
+              Very High Resolution
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Convert -->
+    <button
+      id="convertBtn"
+      class="primary-btn"
+      type="button"
+    >
+      Convert to JPG
+    </button>
+
+
+    <div id="status" class="status"></div>
+
+
+    <!-- Results -->
+    <section
+      id="results"
+      class="results hidden"
+    >
+
+      <div class="results-head">
+
+        <div>
+          <h2>Converted JPGs</h2>
+          <p id="resultCount">0 images ready</p>
+        </div>
+
+      </div>
+
+      <div
+        id="resultList"
+        class="result-list"
+      ></div>
+
+
+      <button
+        id="downloadAllBtn"
+        class="download-btn"
+        type="button"
+      >
+        Download All JPGs
+      </button>
+
+    </section>
+
+
+    <button
+      id="anotherBtn"
+      class="another-btn hidden"
+      type="button"
+    >
+      Convert Another PDF
+    </button>
+
+  </section>
+
+
+  <section class="privacy">
+
+    <span>🔒</span>
+
+    <div>
+      <b>Your PDF stays private.</b>
+
+      <p>
+        PDF to JPG conversion happens directly in your browser.
+        Your PDF is not uploaded to a server.
+      </p>
+    </div>
+
+  </section>
+
+</main>
+
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs"
+  type="module"
+></script>
+
+<script
+  src="pdf-to-jpg.js"
+  type="module"
+></script>
+
+</body>
+</html>
