@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>PikaTools - PDF Watermark</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="pdf-watermark.css">
+</head>
+
+<body>
+
+<header class="topbar">
+  <a href="../index.html" class="back-btn" aria-label="Back">←</a>
+  <div class="brand">PikaTools</div>
+</header>
+
+<main class="page">
+
+  <h1 class="tool-title">
+    <span>✦</span>PDF Watermark<span>✦</span>
+  </h1>
+
+
+  <section class="card" id="uploadCard">
+
+    <label class="drop-zone" id="dropZone">
+
+      <div class="upload-icon">💧</div>
+
+      <h2>Drop your PDF here</h2>
+
+      <p>or choose a PDF from your device</p>
+
+      <span class="choose-btn">Choose PDF</span>
+
+      <small>PDF • One PDF at a time</small>
+
+      <input
+        id="fileInput"
+        type="file"
+        accept="application/pdf,.pdf"
+        hidden
+      >
+
+    </label>
+
+  </section>
+
+
+  <section id="workspace" class="workspace hidden">
+
+    <div class="file-head">
+
+      <div class="file-meta">
+        <h2 id="fileName">Your PDF</h2>
+        <p id="pageCount">0 pages</p>
+      </div>
+
+      <button
+        id="changePdfBtn"
+        class="secondary-btn"
+        type="button"
+      >
+        Change PDF
+      </button>
+
+    </div>
+
+
+    <div class="watermark-card">
+
+      <h2>Watermark</h2>
+
+      <div class="field">
+
+        <label for="watermarkText">
+          Watermark Text
+        </label>
+
+        <input
+          id="watermarkText"
+          type="text"
+          maxlength="100"
+          placeholder="Enter watermark text"
+          value="PikaTools"
+        >
+
+      </div>
+
+
+      <div class="options-grid">
+
+        <div class="field">
+
+          <label for="fontSize">
+            Font Size
+          </label>
+
+          <select id="fontSize">
+
+            <option value="24">Small</option>
+
+            <option value="36" selected>
+              Medium
+            </option>
+
+            <option value="52">Large</option>
+
+            <option value="72">
+              Extra Large
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="position">
+            Position
+          </label>
+
+          <select id="position">
+
+            <option value="center" selected>
+              Center
+            </option>
+
+            <option value="top-left">
+              Top Left
+            </option>
+
+            <option value="top-right">
+              Top Right
+            </option>
+
+            <option value="bottom-left">
+              Bottom Left
+            </option>
+
+            <option value="bottom-right">
+              Bottom Right
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="rotation">
+            Rotation
+          </label>
+
+          <select id="rotation">
+
+            <option value="0">0°</option>
+            <option value="-45">-45°</option>
+            <option value="-30">-30°</option>
+            <option value="45">45°</option>
+            <option value="30">30°</option>
+            <option value="90">90°</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="opacity">
+            Opacity
+          </label>
+
+          <select id="opacity">
+
+            <option value="0.2">20%</option>
+
+            <option value="0.35">35%</option>
+
+            <option value="0.5" selected>
+              50%
+            </option>
+
+            <option value="0.65">65%</option>
+
+            <option value="0.8">80%</option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <div class="color-row">
+
+        <label for="watermarkColor">
+          Watermark Color
+        </label>
+
+        <div class="color-control">
+
+          <input
+            id="watermarkColor"
+            type="color"
+            value="#76594b"
+          >
+
+          <span id="colorValue">
+            #76594B
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="selection-bar">
+
+      <div>
+
+        <strong>
+          Apply Watermark To
+        </strong>
+
+        <span id="selectedInfo">
+          Current page
+        </span>
+
+      </div>
+
+
+      <div class="selection-actions">
+
+        <button
+          id="allPagesBtn"
+          type="button"
+        >
+          All Pages
+        </button>
+
+        <button
+          id="selectPagesBtn"
+          type="button"
+        >
+          Select Pages
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="pageSelection"
+      class="page-selection hidden"
+    >
+
+      <div class="selection-head">
+
+        <div>
+
+          <h2>Select Pages</h2>
+
+          <p>
+            Choose the pages that should contain the watermark.
+          </p>
+
+        </div>
+
+
+        <div class="small-actions">
+
+          <button
+            id="selectAllBtn"
+            type="button"
+          >
+            Select All
+          </button>
+
+          <button
+            id="clearBtn"
+            type="button"
+          >
+            Clear
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="pageGrid"
+        class="page-grid"
+      ></div>
+
+    </div>
+
+
+    <div class="preview-card">
+
+      <div class="preview-head">
+
+        <div>
+
+          <h2>Watermark Preview</h2>
+
+          <p>
+            Tap watermark to resize or move it.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="preview-carousel">
+
+        <button
+          id="previewPrev"
+          class="preview-nav"
+          type="button"
+          aria-label="Previous page"
+        >
+          ‹
+        </button>
+
+
+        <div class="preview-stage">
+
+          <div
+            id="previewPaper"
+            class="preview-paper"
+          >
+
+            <canvas id="previewCanvas"></canvas>
+
+
+            <div
+              id="previewWatermark"
+              class="preview-watermark"
+              tabindex="0"
+            >
+
+              <span id="previewWatermarkText">
+                PikaTools
+              </span>
+
+              <button
+                id="resizeHandle"
+                class="resize-handle"
+                type="button"
+                aria-label="Resize watermark"
+              ></button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <button
+          id="previewNext"
+          class="preview-nav"
+          type="button"
+          aria-label="Next page"
+        >
+          ›
+        </button>
+
+      </div>
+
+
+      <div
+        id="previewPageInfo"
+        class="preview-page-info"
+      >
+        Page 1 of 1
+      </div>
+
+
+      <div class="preview-hint">
+        Tap watermark to resize • Drag to move • Pinch to resize
+      </div>
+
+    </div>
+
+
+    <button
+      id="applyBtn"
+      class="primary-btn"
+      type="button"
+    >
+      Apply Watermark
+    </button>
+
+
+    <div
+      id="status"
+      class="status"
+    ></div>
+
+
+    <button
+      id="downloadBtn"
+      class="download-btn hidden"
+      type="button"
+    >
+      Download Watermarked PDF
+    </button>
+
+
+    <button
+      id="anotherBtn"
+      class="another-btn hidden"
+      type="button"
+    >
+      Watermark Another PDF
+    </button>
+
+  </section>
+
+
+  <section class="privacy">
+
+    <span>🔒</span>
+
+    <div>
+
+      <b>Your PDF stays private.</b>
+
+      <p>
+        Watermarking happens directly in your browser.
+        Your PDF is not uploaded to a server.
+      </p>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<script
+  src="pdf-watermark.js"
+  type="module"
+></script>
+
+</body>
+</html>
