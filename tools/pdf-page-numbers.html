@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>PikaTools - PDF Page Numbers</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="pdf-page-numbers.css"
+  >
+
+</head>
+
+
+<body>
+
+
+<header class="topbar">
+
+  <a
+    href="../index.html"
+    class="back-btn"
+    aria-label="Back"
+  >
+    ←
+  </a>
+
+  <div class="brand">
+    PikaTools
+  </div>
+
+</header>
+
+
+
+<main class="page">
+
+
+  <h1 class="tool-title">
+    <span>✦</span>PDF Page Numbers<span>✦</span>
+  </h1>
+
+
+
+  <!-- UPLOAD -->
+
+  <section
+    class="card"
+    id="uploadCard"
+  >
+
+    <label
+      class="drop-zone"
+      id="dropZone"
+    >
+
+      <div class="upload-icon">
+        🔢
+      </div>
+
+      <h2>
+        Drop your PDF here
+      </h2>
+
+      <p>
+        or choose a PDF from your device
+      </p>
+
+      <span class="choose-btn">
+        Choose PDF
+      </span>
+
+      <small>
+        PDF • One PDF at a time
+      </small>
+
+      <input
+        id="fileInput"
+        type="file"
+        accept="application/pdf,.pdf"
+        hidden
+      >
+
+    </label>
+
+  </section>
+
+
+
+  <!-- WORKSPACE -->
+
+  <section
+    id="workspace"
+    class="workspace hidden"
+  >
+
+
+    <!-- FILE HEADER -->
+
+    <div class="file-head">
+
+      <div class="file-meta">
+
+        <h2 id="fileName">
+          Your PDF
+        </h2>
+
+        <p id="pageCount">
+          0 pages
+        </p>
+
+      </div>
+
+
+      <button
+        id="changePdfBtn"
+        class="secondary-btn"
+        type="button"
+      >
+        Change PDF
+      </button>
+
+    </div>
+
+
+
+    <!-- SETTINGS -->
+
+    <div class="settings-card">
+
+      <h2>
+        Page Numbers
+      </h2>
+
+
+      <div class="field">
+
+        <label for="startNumber">
+          Starting Number
+        </label>
+
+        <input
+          id="startNumber"
+          type="number"
+          min="1"
+          max="999999"
+          value="1"
+          inputmode="numeric"
+        >
+
+      </div>
+
+
+
+      <div class="options-grid">
+
+
+        <div class="field">
+
+          <label for="fontSize">
+            Font Size
+          </label>
+
+          <select id="fontSize">
+
+            <option value="12">
+              Small
+            </option>
+
+            <option
+              value="18"
+              selected
+            >
+              Medium
+            </option>
+
+            <option value="24">
+              Large
+            </option>
+
+            <option value="32">
+              Extra Large
+            </option>
+
+          </select>
+
+        </div>
+
+
+
+        <div class="field">
+
+          <label for="position">
+            Position
+          </label>
+
+          <select id="position">
+
+            <option
+              value="bottom-center"
+              selected
+            >
+              Bottom Center
+            </option>
+
+            <option value="bottom-left">
+              Bottom Left
+            </option>
+
+            <option value="bottom-right">
+              Bottom Right
+            </option>
+
+            <option value="top-center">
+              Top Center
+            </option>
+
+            <option value="top-left">
+              Top Left
+            </option>
+
+            <option value="top-right">
+              Top Right
+            </option>
+
+          </select>
+
+        </div>
+
+
+
+        <div class="field">
+
+          <label for="margin">
+            Margin
+          </label>
+
+          <select id="margin">
+
+            <option value="12">
+              Small
+            </option>
+
+            <option
+              value="24"
+              selected
+            >
+              Medium
+            </option>
+
+            <option value="36">
+              Large
+            </option>
+
+            <option value="54">
+              Extra Large
+            </option>
+
+          </select>
+
+        </div>
+
+
+
+        <div class="field">
+
+          <label for="numberColor">
+            Number Color
+          </label>
+
+          <div class="color-control">
+
+            <input
+              id="numberColor"
+              type="color"
+              value="#76594b"
+            >
+
+            <span id="colorValue">
+              #76594B
+            </span>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+
+    <!-- TARGET -->
+
+    <div class="selection-bar">
+
+      <div>
+
+        <strong>
+          Add Page Numbers To
+        </strong>
+
+        <span id="selectedInfo">
+          Current page
+        </span>
+
+      </div>
+
+
+      <div class="selection-actions">
+
+        <button
+          id="allPagesBtn"
+          type="button"
+        >
+          Select All
+        </button>
+
+        <button
+          id="selectPagesBtn"
+          type="button"
+        >
+          Select Pages
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- PAGE SELECTION -->
+
+    <div
+      id="pageSelection"
+      class="page-selection hidden"
+    >
+
+      <div class="selection-head">
+
+        <div>
+
+          <h2>
+            Select Pages
+          </h2>
+
+          <p>
+            Choose the pages that should contain page numbers.
+          </p>
+
+        </div>
+
+
+        <div class="small-actions">
+
+          <button
+            id="selectAllBtn"
+            type="button"
+          >
+            Select All
+          </button>
+
+          <button
+            id="clearBtn"
+            type="button"
+          >
+            Clear
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="pageGrid"
+        class="page-grid"
+      ></div>
+
+    </div>
+
+
+
+    <!-- PREVIEW -->
+
+    <div class="preview-card">
+
+      <div class="preview-head">
+
+        <div>
+
+          <h2>
+            Page Numbers Preview
+          </h2>
+
+          <p>
+            Preview the page number on your actual PDF page.
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="preview-carousel">
+
+
+        <button
+          id="previewPrev"
+          class="preview-nav"
+          type="button"
+          aria-label="Previous page"
+        >
+          ‹
+        </button>
+
+
+
+        <div class="preview-stage">
+
+          <div
+            id="previewPaper"
+            class="preview-paper"
+          >
+
+            <canvas
+              id="previewCanvas"
+            ></canvas>
+
+
+            <div
+              id="previewPageNumber"
+              class="preview-page-number"
+            >
+              1
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <button
+          id="previewNext"
+          class="preview-nav"
+          type="button"
+          aria-label="Next page"
+        >
+          ›
+        </button>
+
+
+      </div>
+
+
+
+      <div
+        id="previewPageInfo"
+        class="preview-page-info"
+      >
+        Page 1 of 1
+      </div>
+
+
+      <div class="preview-hint">
+        Use the controls above to change page number style and position.
+      </div>
+
+    </div>
+
+
+
+    <!-- APPLY -->
+
+    <button
+      id="applyBtn"
+      class="primary-btn"
+      type="button"
+    >
+      Add Page Numbers
+    </button>
+
+
+
+    <div
+      id="status"
+      class="status"
+    ></div>
+
+
+
+    <!-- DOWNLOAD -->
+
+    <button
+      id="downloadBtn"
+      class="download-btn hidden"
+      type="button"
+    >
+      Download Numbered PDF
+    </button>
+
+
+
+    <!-- ANOTHER -->
+
+    <button
+      id="anotherBtn"
+      class="another-btn hidden"
+      type="button"
+    >
+      Page Numbers Another PDF
+    </button>
+
+
+  </section>
+
+
+
+  <!-- PRIVACY -->
+
+  <section class="privacy">
+
+    <span>
+      🔒
+    </span>
+
+    <div>
+
+      <b>
+        Your PDF stays private.
+      </b>
+
+      <p>
+        Adding page numbers happens directly in your browser.
+        Your PDF is not uploaded to a server.
+      </p>
+
+    </div>
+
+  </section>
+
+
+</main>
+
+
+
+<script
+  src="pdf-page-numbers.js"
+  type="module"
+></script>
+
+
+</body>
+
+</html>
