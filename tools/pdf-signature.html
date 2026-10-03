@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PikaTools - PDF Signature</title>
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pdf-signature.css">
+</head>
+<body>
+<header class="topbar"><a href="../index.html" class="back-btn">←</a><div class="brand">PikaTools</div></header>
+<main class="page">
+<h1 class="tool-title"><span>✦</span> PDF Signature <span>✦</span></h1>
+<section class="card">
+<label class="drop-zone" id="dropZone">
+<div class="upload-icon">✍</div><h2>Drop your PDF here</h2><p>or choose a PDF from your device</p><span class="choose-btn">Choose PDF</span><small>PDF • One file at a time</small>
+<input id="fileInput" type="file" accept="application/pdf,.pdf" hidden>
+</label>
+<div id="workspace" class="workspace hidden">
+<div class="toolbar"><div class="toolbar-left"><button id="prevPageBtn" class="tool-btn" type="button">←</button><span class="page-label">Page <b id="pageNumber">1</b> of <b id="pageCount">1</b></span><button id="nextPageBtn" class="tool-btn" type="button">→</button></div><button id="changePdfBtn" class="text-btn" type="button">Change PDF</button></div>
+<div class="pdf-stage-wrap"><div id="pdfStage" class="pdf-stage"><canvas id="pdfCanvas"></canvas><div id="signatureOverlay" class="signature-overlay hidden"><img id="signatureImage" alt="Signature"><button id="rotateBtn" class="overlay-btn rotate-btn" type="button">↻</button><button id="removeSignatureBtn" class="overlay-btn remove-btn" type="button">×</button><span class="resize-handle"></span></div></div></div>
+<div class="signature-panel">
+<div class="panel-heading"><h3>Add your signature</h3><p>Create, upload and place your signature on the PDF.</p></div>
+<div class="signature-tabs"><button class="signature-tab active" data-tab="draw" type="button">Draw</button><button class="signature-tab" data-tab="type" type="button">Type</button><button class="signature-tab" data-tab="upload" type="button">Upload</button></div>
+<div id="drawPanel" class="tab-panel active"><div class="draw-box"><canvas id="drawCanvas" width="700" height="260"></canvas><span class="draw-placeholder" id="drawPlaceholder">Sign here</span></div><div class="panel-actions"><button id="clearDrawBtn" class="secondary-btn" type="button">Clear</button><button id="useDrawBtn" class="primary-btn" type="button">Use Signature</button></div></div>
+<div id="typePanel" class="tab-panel"><input id="typedName" class="signature-input" type="text" maxlength="60" placeholder="Type your name" autocomplete="off"><div class="typed-preview" id="typedPreview">Your signature</div><div class="panel-actions"><button id="useTypedBtn" class="primary-btn" type="button">Use Signature</button></div></div>
+<div id="uploadPanel" class="tab-panel"><label class="upload-signature-box"><div class="upload-small-icon">🖼</div><b>Choose signature image</b><span>PNG or JPG with a transparent background works best</span><input id="signatureFileInput" type="file" accept="image/png,image/jpeg,.png,.jpg,.jpeg" hidden></label><div id="uploadedName" class="uploaded-name hidden"></div><div class="panel-actions"><button id="useUploadedBtn" class="primary-btn" type="button" disabled>Use Signature</button></div></div>
+<div id="placementHint" class="placement-hint hidden"><span>✦</span>Drag the signature to place it. Use the corner handle to resize.</div>
+<button id="applyBtn" class="apply-btn hidden" type="button">Apply Signature &amp; Download</button><button id="resetBtn" class="reset-btn hidden" type="button">Sign Another PDF</button><div id="status" class="status"></div>
+</div></div>
+</section>
+<section class="privacy"><span>🔒</span><div><b>Your PDF stays private.</b><p>Signing happens directly in your browser. Your PDF is not uploaded to a server.</p></div></section>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs" type="module"></script>
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="pdf-signature.js" type="module"></script>
+</body>
+</html>
+
