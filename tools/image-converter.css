@@ -1,0 +1,782 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family: "Nunito", sans-serif;
+    background: #f8f3ed;
+    color: #3d3028;
+}
+
+button,
+input,
+select {
+    font-family: inherit;
+}
+
+
+/* PAGE */
+
+.page {
+    width: 100%;
+    max-width: 760px;
+    margin: auto;
+    padding: 20px 16px 40px;
+}
+
+
+/* HEADER */
+
+.tool-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.back-btn {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fffaf5;
+    border: 1px solid #eaded2;
+    border-radius: 13px;
+
+    text-decoration: none;
+    color: #4b3b31;
+
+    font-size: 22px;
+
+    box-shadow: 0 4px 15px rgba(75, 55, 40, 0.06);
+}
+
+.brand {
+    font-family: "Comic Neue", cursive;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.tool-name {
+    font-size: 12px;
+    color: #927d6e;
+    margin-top: 1px;
+}
+
+
+/* INTRO */
+
+.intro {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.intro-icon {
+    font-size: 42px;
+    margin-bottom: 8px;
+}
+
+.intro h1 {
+    font-family: "Comic Neue", cursive;
+    font-size: 34px;
+    margin: 0 0 8px;
+    color: #352820;
+}
+
+.intro p {
+    max-width: 560px;
+    margin: auto;
+
+    color: #79695e;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+
+/* CARD */
+
+.converter-card {
+    background: #fffdfb;
+    border: 1px solid #eadfd5;
+
+    border-radius: 25px;
+
+    padding: 20px;
+
+    box-shadow:
+        0 15px 45px rgba(69, 48, 35, 0.08);
+}
+
+
+/* DROP ZONE */
+
+.drop-zone {
+    border: 2px dashed #d9c7b7;
+    background: #fcf8f3;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    padding: 38px 18px;
+
+    transition: 0.2s ease;
+}
+
+.drop-zone.dragover {
+    border-color: #9a7559;
+    background: #f6ede4;
+}
+
+.upload-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.drop-zone h2 {
+    font-family: "Comic Neue", cursive;
+    font-size: 23px;
+    margin: 0 0 5px;
+}
+
+.drop-zone p {
+    margin: 0 0 18px;
+    color: #8b796c;
+}
+
+.choose-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #4d392e;
+    color: white;
+
+    padding: 12px 22px;
+
+    border-radius: 13px;
+
+    font-weight: 700;
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.choose-btn:hover {
+    transform: translateY(-1px);
+}
+
+.drop-zone small {
+    display: block;
+
+    margin-top: 14px;
+
+    color: #a18f81;
+    font-size: 12px;
+}
+
+
+/* HIDDEN */
+
+.hidden {
+    display: none !important;
+}
+
+
+/* FILE SECTION */
+
+.files-section {
+    margin-top: 22px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+}
+
+.section-heading h3,
+.setting-block h3 {
+    font-family: "Comic Neue", cursive;
+    font-size: 19px;
+
+    margin: 0;
+}
+
+.clear-btn {
+    border: 0;
+    background: transparent;
+
+    color: #a05f51;
+
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+/* FILE LIST */
+
+.file-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    background: #faf5ef;
+    border: 1px solid #eee1d5;
+
+    padding: 9px 11px;
+
+    border-radius: 13px;
+}
+
+.file-thumb {
+    width: 45px;
+    height: 45px;
+
+    object-fit: cover;
+
+    border-radius: 9px;
+
+    background: #eee;
+}
+
+.file-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.file-name {
+    font-weight: 700;
+    font-size: 13px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-size {
+    font-size: 11px;
+    color: #97867a;
+
+    margin-top: 2px;
+}
+
+.file-number {
+    font-size: 11px;
+    color: #a18f82;
+}
+
+
+/* SETTINGS */
+
+.settings {
+    margin-top: 24px;
+}
+
+.setting-block {
+    background: #faf6f1;
+
+    border: 1px solid #eee1d5;
+
+    border-radius: 17px;
+
+    padding: 16px;
+
+    margin-bottom: 13px;
+}
+
+
+/* FORMAT */
+
+.format-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 9px;
+
+    margin-top: 12px;
+}
+
+.format-btn {
+    border: 1px solid #e3d5c9;
+    background: #fffdfb;
+
+    border-radius: 13px;
+
+    padding: 13px 7px;
+
+    cursor: pointer;
+
+    color: #4b3a30;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 2px;
+
+    transition: 0.2s;
+}
+
+.format-btn span {
+    font-size: 23px;
+}
+
+.format-btn strong {
+    font-size: 14px;
+}
+
+.format-btn small {
+    color: #9b897b;
+    font-size: 10px;
+}
+
+.format-btn.active {
+    background: #4d392e;
+    border-color: #4d392e;
+    color: white;
+}
+
+.format-btn.active small {
+    color: #dfd2c8;
+}
+
+
+/* OPTIONS */
+
+.option-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 11px;
+
+    margin-top: 13px;
+}
+
+.option-field label {
+    display: block;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    margin-bottom: 6px;
+
+    color: #77665a;
+}
+
+select {
+    width: 100%;
+
+    padding: 11px 12px;
+
+    border-radius: 11px;
+
+    border: 1px solid #ddcfc3;
+
+    background: white;
+
+    color: #45352c;
+
+    outline: none;
+}
+
+.pdf-note {
+    margin-top: 12px;
+
+    background: #f3ebe3;
+
+    border-radius: 11px;
+
+    padding: 10px 12px;
+
+    font-size: 12px;
+    color: #7e6c60;
+
+    line-height: 1.5;
+}
+
+
+/* QUALITY */
+
+.quality-heading {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quality-heading span {
+    background: #eee3d9;
+
+    padding: 4px 8px;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+input[type="range"] {
+    width: 100%;
+
+    margin-top: 15px;
+
+    accent-color: #4d392e;
+}
+
+.quality-labels {
+    display: flex;
+    justify-content: space-between;
+
+    color: #a08e80;
+
+    font-size: 10px;
+}
+
+
+/* CONVERT */
+
+.convert-btn {
+    width: 100%;
+
+    border: 0;
+
+    background: #4d392e;
+    color: white;
+
+    padding: 15px;
+
+    border-radius: 14px;
+
+    font-size: 16px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow: 0 8px 20px rgba(77, 57, 46, 0.15);
+
+    transition: 0.2s;
+}
+
+.convert-btn:hover {
+    transform: translateY(-1px);
+}
+
+.convert-btn:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+
+/* RESULT */
+
+.result-section {
+    text-align: center;
+
+    margin-top: 24px;
+
+    padding-top: 24px;
+
+    border-top: 1px solid #eee2d7;
+}
+
+.success-icon {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: auto;
+
+    background: #e7f2e8;
+
+    border-radius: 50%;
+
+    color: #397447;
+
+    font-size: 27px;
+    font-weight: 800;
+}
+
+.result-section h2 {
+    font-family: "Comic Neue", cursive;
+
+    margin: 10px 0 4px;
+
+    font-size: 23px;
+}
+
+.result-section > p {
+    margin: 0 0 15px;
+
+    color: #89776a;
+
+    font-size: 13px;
+}
+
+
+/* RESULT LIST */
+
+.result-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-bottom: 14px;
+}
+
+.result-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    text-align: left;
+
+    padding: 10px;
+
+    border: 1px solid #e8ddd3;
+
+    border-radius: 12px;
+
+    background: #faf6f1;
+}
+
+.result-icon {
+    font-size: 24px;
+}
+
+.result-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.result-name {
+    font-size: 13px;
+    font-weight: 800;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.result-size {
+    color: #938174;
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+
+/* DOWNLOAD */
+
+.download-btn {
+    width: 100%;
+
+    border: 0;
+
+    background: #5b8060;
+
+    color: white;
+
+    padding: 14px;
+
+    border-radius: 13px;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.secondary-btn {
+    width: 100%;
+
+    margin-top: 9px;
+
+    border: 1px solid #dfd2c7;
+
+    background: white;
+
+    color: #5d4b3e;
+
+    padding: 12px;
+
+    border-radius: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* STATUS */
+
+.status {
+    text-align: center;
+
+    margin-top: 16px;
+
+    color: #806e61;
+
+    font-size: 13px;
+
+    min-height: 20px;
+}
+
+
+/* PRIVACY */
+
+.privacy {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 18px;
+
+    padding: 13px;
+
+    background: #f5eee7;
+
+    border-radius: 13px;
+
+    color: #76655a;
+}
+
+.privacy span {
+    font-size: 20px;
+}
+
+.privacy strong {
+    font-size: 12px;
+}
+
+.privacy p {
+    margin: 3px 0 0;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+
+    margin-top: 25px;
+}
+
+footer a {
+    color: #8a7566;
+
+    text-decoration: none;
+
+    font-size: 13px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .page {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    .converter-card {
+        width: 100%;
+        max-width: 100%;
+        padding: 14px;
+        border-radius: 20px;
+    }
+
+    .intro h1 {
+        font-size: 30px;
+    }
+
+    .intro p {
+        font-size: 14px;
+    }
+
+    .drop-zone {
+        width: 100%;
+        padding: 32px 12px;
+    }
+
+    .format-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .option-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .file-name {
+        max-width: 190px;
+    }
+}
+
+/* SELECTED IMAGES - SCROLLABLE */
+.file-list {
+    max-height: 265px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+/* Smooth scrollbar */
+.file-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.file-list::-webkit-scrollbar-track {
+    background: #eee5dc;
+    border-radius: 10px;
+}
+
+.file-list::-webkit-scrollbar-thumb {
+    background: #c5b2a2;
+    border-radius: 10px;
+}
+
+/* Firefox */
+.file-list {
+    scrollbar-width: thin;
+    scrollbar-color: #c5b2a2 #eee5dc;
+}
