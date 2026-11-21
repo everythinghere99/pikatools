@@ -1293,3 +1293,26 @@ font-size: 10px;
 }
 
 }
+/* Fix PikaTools logo text turning blue on click/tap */
+header a,
+.logo,
+.logo:link,
+.logo:visited,
+.logo:hover,
+.logo:active,
+.logo:focus,
+.brand,
+.brand:visited,
+.brand:active {
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+/* Remove blue tap flash on all mobile buttons/links */
+a, button {
+  -webkit-tap-highlight-color: transparent;
+}
+
