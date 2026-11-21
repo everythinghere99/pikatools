@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
 
     <title>PDF Merger Online - Merge PDF Files Free | PikaTools</title>
-
     <meta name="description" content="Merge PDF files online for free with PikaTools. Combine multiple PDF files into one document quickly, easily and securely.">
-
     <meta name="keywords" content="PDF merger, merge PDF online, combine PDF files, merge PDF files, PDF combiner, join PDF, free PDF merger, online PDF merger">
-
     <meta name="robots" content="index, follow">
 
     <link rel="canonical" href="https://everythinghere99.github.io/pikatools/tools/pdf-merger.html">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" type="image/png" href="../icon-192.png">
 
     <meta property="og:title" content="PDF Merger Online - PikaTools">
     <meta property="og:description" content="Merge multiple PDF files into one document online for free with PikaTools.">
@@ -20,49 +21,29 @@
     <meta property="og:url" content="https://everythinghere99.github.io/pikatools/tools/pdf-merger.html">
 
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="pdf-merger.css">
 </head>
-
 <body>
 
 <header class="topbar">
   <a href="../index.html" class="back-btn">←</a>
-  <div class="brand">PikaTools</div>
+  <a href="../index.html" class="brand">PikaTools</a>
 </header>
 
 <main class="page">
-
-  <h1 class="tool-title">
-    <span>✦</span>PDF Merger<span>✦</span>
-  </h1>
+  <h1 class="tool-title"><span>✦</span>PDF Merger<span>✦</span></h1>
 
   <section class="card">
-
-    <!-- INITIAL UPLOAD -->
     <label class="drop-zone" id="dropZone">
       <div class="upload-icon">🔗</div>
-
       <h2>Drop your PDFs here</h2>
       <p>or choose multiple PDFs from your device</p>
-
       <span class="choose-btn">Choose PDFs</span>
-
       <small>PDF • Multiple files supported</small>
-
-      <input
-        id="fileInput"
-        type="file"
-        accept="application/pdf,.pdf"
-        multiple
-        hidden
-      >
+      <input id="fileInput" type="file" accept="application/pdf,.pdf" multiple hidden>
     </label>
 
-
-    <!-- WORKSPACE -->
     <div id="workspace" class="workspace hidden">
-
       <div class="list-heading">
         <div>
           <h2>Your PDFs</h2>
@@ -70,63 +51,30 @@
         </div>
       </div>
 
-
-      <!-- PDF LIST -->
       <div id="pdfList" class="pdf-list"></div>
 
-
-      <!-- ADD MORE -->
       <label class="add-more-btn">
         <span>＋</span>
         <span>Add More PDFs</span>
-
-        <input
-          id="addMoreInput"
-          type="file"
-          accept="application/pdf,.pdf"
-          multiple
-          hidden
-        >
+        <input id="addMoreInput" type="file" accept="application/pdf,.pdf" multiple hidden>
       </label>
 
-
-      <!-- MERGE -->
-      <button id="mergeBtn" class="merge-btn" type="button">
-        Merge PDFs
-      </button>
-
-
-      <!-- DOWNLOAD -->
-      <button id="downloadBtn" class="download-btn hidden" type="button">
-        Download Merged PDF
-      </button>
-
-
-      <!-- RESET -->
-      <button id="resetBtn" class="reset-btn hidden" type="button">
-        Merge Another PDFs
-      </button>
-
-
+      <button id="mergeBtn" class="merge-btn" type="button">Merge PDFs</button>
+      <button id="downloadBtn" class="download-btn hidden" type="button">Download Merged PDF</button>
+      <button id="resetBtn" class="reset-btn hidden" type="button">Merge Another PDFs</button>
       <div id="status" class="status"></div>
-
     </div>
-
   </section>
-
 
   <section class="privacy">
     <span>🔒</span>
-
     <div>
       <b>Your PDFs stay private.</b>
       <p>PDF merging happens directly in your browser. Your files are not uploaded to a server.</p>
     </div>
   </section>
-
 </main>
 
 <script src="pdf-merger.js" type="module"></script>
-
 </body>
 </html>

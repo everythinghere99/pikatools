@@ -12,9 +12,7 @@
     --success: #53795d;
 }
 
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
     margin: 0;
@@ -41,9 +39,7 @@ body {
     font-weight: 700;
 }
 
-.brand span {
-    color: var(--accent);
-}
+.brand span { color: var(--accent); }
 
 .back-btn {
     color: var(--accent-dark);
@@ -85,7 +81,6 @@ h1 {
     line-height: 1.6;
 }
 
-
 .compressor-card {
     background: var(--card);
     border: 1px solid var(--border);
@@ -93,7 +88,6 @@ h1 {
     padding: 18px;
     box-shadow: 0 12px 35px rgba(82, 59, 45, .07);
 }
-
 
 .drop-zone {
     min-height: 300px;
@@ -144,7 +138,6 @@ h1 {
     font-size: 11px;
 }
 
-
 .primary-btn,
 .download-btn {
     border: 0;
@@ -159,20 +152,14 @@ h1 {
 }
 
 .primary-btn:hover,
-.download-btn:hover {
-    background: var(--accent-dark);
-}
+.download-btn:hover { background: var(--accent-dark); }
 
 .full {
     width: 100%;
     margin-top: 18px;
 }
 
-
-.hidden {
-    display: none !important;
-}
-
+.hidden { display: none !important; }
 
 .workspace {
     display: grid;
@@ -209,10 +196,7 @@ h1 {
     color: var(--muted);
 }
 
-
-.settings {
-    padding: 4px 2px;
-}
+.settings { padding: 4px 2px; }
 
 .settings label {
     display: block;
@@ -246,7 +230,6 @@ h1 {
     font-weight: 700;
 }
 
-
 .quick-sizes {
     display: flex;
     gap: 7px;
@@ -267,7 +250,6 @@ h1 {
     cursor: pointer;
 }
 
-
 select {
     width: 100%;
     border: 1px solid var(--border);
@@ -278,7 +260,6 @@ select {
     font-family: inherit;
     color: var(--text);
 }
-
 
 .result {
     padding: 15px;
@@ -294,13 +275,8 @@ select {
     font-size: 12px;
 }
 
-.result-row span {
-    color: var(--muted);
-}
-
-.result-row strong {
-    color: var(--text);
-}
+.result-row span { color: var(--muted); }
+.result-row strong { color: var(--text); }
 
 .download-btn {
     width: 100%;
@@ -326,7 +302,6 @@ select {
     cursor: pointer;
 }
 
-
 .privacy {
     margin-top: 17px;
     padding: 15px;
@@ -337,15 +312,11 @@ select {
     border-radius: 15px;
 }
 
-.privacy > span {
-    font-size: 18px;
-}
-
+.privacy > span { font-size: 18px; }
 .privacy strong {
     font-family: "Comic Neue", cursive;
     font-size: 15px;
 }
-
 .privacy p {
     margin: 3px 0 0;
     color: var(--muted);
@@ -353,36 +324,29 @@ select {
     line-height: 1.45;
 }
 
-
 @media (max-width: 600px) {
+    .topbar { height: 62px; padding: 0 15px; }
+    .brand { font-size: 21px; }
+    .page { width: calc(100% - 22px); }
+    .intro { padding: 28px 0 22px; }
+    .compressor-card { padding: 12px; border-radius: 18px; }
+    .drop-zone { min-height: 275px; }
+    h1 { font-size: 38px; }
+}
 
-    .topbar {
-        height: 62px;
-        padding: 0 15px;
-    }
-
-    .brand {
-        font-size: 21px;
-    }
-
-    .page {
-        width: calc(100% - 22px);
-    }
-
-    .intro {
-        padding: 28px 0 22px;
-    }
-
-    .compressor-card {
-        padding: 12px;
-        border-radius: 18px;
-    }
-
-    .drop-zone {
-        min-height: 275px;
-    }
-
-    h1 {
-        font-size: 38px;
-    }
+/* Brand & tap-highlight fix */
+.brand,
+.brand:link,
+.brand:visited,
+.brand:hover,
+.brand:active,
+.brand:focus {
+    color: inherit;
+    text-decoration: none;
+    outline: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+a, button, label, select, input {
+    -webkit-tap-highlight-color: transparent;
 }

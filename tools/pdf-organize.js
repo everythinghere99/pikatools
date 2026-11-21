@@ -14,24 +14,16 @@ const resultCard = document.getElementById("resultCard");
 const downloadBtn = document.getElementById("downloadBtn");
 const anotherBtn = document.getElementById("anotherBtn");
 
-
-/* =========================
-   STATE
-========================= */
-
 let selectedFile = null;
 let sourcePdfBytes = null;
 let sourcePdfDocument = null;
 let organizedPdfBlob = null;
-
 let pages = [];
 
 let draggedPageId = null;
-
 let touchPageId = null;
 let touchTimer = null;
 let touchDragging = false;
-
 let touchStartX = 0;
 let touchStartY = 0;
 let touchCurrentX = 0;
@@ -40,324 +32,137 @@ let touchCurrentY = 0;
 const LONG_PRESS_TIME = 450;
 const MOVE_CANCEL_DISTANCE = 10;
 
-
-/* =========================
-   HELPERS
-========================= */
-
 function createId() {
-  return (
-    Date.now().toString(36) +
-    Math.random().toString(36).slice(2, 8)
-  );
+  return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 }
 
-
-function show(element) {
-  element.classList.remove("hidden");
-}
-
-
-function hide(element) {
-  element.classList.add("hidden");
-}
-
+function show(element) { element.classList.remove("hidden"); }
+function hide(element) { element.classList.add("hidden"); }
 
 function updatePageCount() {
   const count = pages.length;
-
-  pageCount.textContent =
-    `${count} ${count === 1 ? "page" : "pages"}`;
+  pageCount.textContent = `${count} ${count === 1 ? "page" : "pages"}`;
 }
-
-
-/* =========================
-   FILE VALIDATION
-========================= */
 
 function isPdf(file) {
   if (!file) return false;
-
-  return (
-    file.type === "application/pdf" ||
-    file.name.toLowerCase().endsWith(".pdf")
-  );
+  return file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
 }
 
-
 function validateFile(file) {
-
   if (!isPdf(file)) {
     alert("Please choose a PDF file.");
     return false;
   }
-
   if (file.size > 25 * 1024 * 1024) {
     alert("PDF size must be 25 MB or less.");
     return false;
   }
-
   return true;
 }
 
-
-/* =========================
-   LOAD PDF
-========================= */
-
 async function loadPdf(file) {
-
-  if (!validateFile(file)) {
-    return;
-  }
+  if (!validateFile(file)) return;
 
   try {
+    if (sourcePdfDocument && typeof sourcePdfDocument.destroy === "function") {
+      await sourcePdfDocument.destroy().catch(() => {});
+    }
 
     selectedFile = file;
+    const originalBuffer = await file.arrayBuffer();
+    sourcePdfBytes = new Uint8Array(originalBuffer.slice(0));
+    const pdfJsBytes = new Uint8Array(originalBuffer.slice(0));
 
-    const originalBuffer =
-      await file.arrayBuffer();
-
-    /*
-      Keep separate byte copies because
-      pdf.js and pdf-lib both work with ArrayBuffers.
-    */
-
-    sourcePdfBytes =
-      new Uint8Array(originalBuffer.slice(0));
-
-    const pdfJsBytes =
-      new Uint8Array(originalBuffer.slice(0));
-
-    sourcePdfDocument =
-      await window.pdfjsLib.getDocument({
-        data: pdfJsBytes
-      }).promise;
-
-
+    sourcePdfDocument = await window.pdfjsLib.getDocument({ data: pdfJsBytes }).promise;
     pages = [];
 
-    for (
-      let i = 1;
-      i <= sourcePdfDocument.numPages;
-      i++
-    ) {
-
+    for (let i = 1; i <= sourcePdfDocument.numPages; i++) {
       pages.push({
         id: createId(),
-
         originalIndex: i - 1,
-
         pageNumber: i,
-
-        /*
-          User-added rotation.
-          Original PDF rotation remains separate.
-        */
         rotation: 0
       });
     }
 
-
     renderPages();
-
     hide(uploadBox);
     hide(processingCard);
     hide(resultCard);
-
     show(editorCard);
 
   } catch (error) {
-
     console.error(error);
-
-    alert(
-      "This PDF could not be opened. Please try another PDF."
-    );
-
+    alert("This PDF could not be opened. Please try another PDF.");
     resetAll();
   }
 }
 
-
-/* =========================
-   RENDER PAGE LIST
-========================= */
-
 function renderPages() {
-
   pagesGrid.innerHTML = "";
-
   updatePageCount();
-
   pages.forEach((pageData) => {
-
-    const pageElement =
-      createPageElement(pageData);
-
+    const pageElement = createPageElement(pageData);
     pagesGrid.appendChild(pageElement);
-
   });
 }
 
-
-/* =========================
-   CREATE PAGE CARD
-========================= */
-
 function createPageElement(pageData) {
-
-  const item =
-    document.createElement("div");
-
+  const item = document.createElement("div");
   item.className = "page-item";
-
   item.dataset.id = pageData.id;
-
   item.draggable = true;
 
+  const previewWrap = document.createElement("div");
+  previewWrap.className = "page-preview-wrap";
 
-  /* =====================
-     PREVIEW
-  ===================== */
-
-  const previewWrap =
-    document.createElement("div");
-
-  previewWrap.className =
-    "page-preview-wrap";
-
-
-  const canvas =
-    document.createElement("canvas");
-
-  canvas.className =
-    "page-preview";
-
-
+  const canvas = document.createElement("canvas");
+  canvas.className = "page-preview";
   previewWrap.appendChild(canvas);
 
+  const info = document.createElement("div");
+  info.className = "page-info";
 
-  /* =====================
-     PAGE INFO
-  ===================== */
-
-  const info =
-    document.createElement("div");
-
-  info.className =
-    "page-info";
-
-
-  const pageNumber =
-    document.createElement("div");
-
-  pageNumber.className =
-    "page-number";
-
-  pageNumber.textContent =
-    `Page ${pageData.pageNumber}`;
-
-
+  const pageNumber = document.createElement("div");
+  pageNumber.className = "page-number";
+  pageNumber.textContent = `Page ${pageData.pageNumber}`;
   info.appendChild(pageNumber);
 
+  const actions = document.createElement("div");
+  actions.className = "page-actions";
 
-  /* =====================
-     ACTION BUTTONS
-  ===================== */
-
-  const actions =
-    document.createElement("div");
-
-  actions.className =
-    "page-actions";
-
-
-  const rotateButton =
-    document.createElement("button");
-
+  const rotateButton = document.createElement("button");
   rotateButton.type = "button";
-
-  rotateButton.className =
-    "page-action rotate-page";
-
+  rotateButton.className = "page-action rotate-page";
   rotateButton.textContent = "🔄";
+  rotateButton.setAttribute("aria-label", `Rotate page ${pageData.pageNumber}`);
 
-  rotateButton.setAttribute(
-    "aria-label",
-    `Rotate page ${pageData.pageNumber}`
-  );
-
-
-  const removeButton =
-    document.createElement("button");
-
+  const removeButton = document.createElement("button");
   removeButton.type = "button";
-
-  removeButton.className =
-    "page-action remove-page";
-
+  removeButton.className = "page-action remove-page";
   removeButton.textContent = "×";
-
-  removeButton.setAttribute(
-    "aria-label",
-    `Remove page ${pageData.pageNumber}`
-  );
-
+  removeButton.setAttribute("aria-label", `Remove page ${pageData.pageNumber}`);
 
   actions.appendChild(rotateButton);
   actions.appendChild(removeButton);
 
+  const footer = document.createElement("div");
+  footer.className = "page-footer";
 
-  /* =====================
-     FOOTER
-  ===================== */
+  const rotationStatus = document.createElement("div");
+  rotationStatus.className = "rotation-status";
 
-  const footer =
-    document.createElement("div");
-
-  footer.className =
-    "page-footer";
-
-
-  const rotationStatus =
-    document.createElement("div");
-
-  rotationStatus.className =
-    "rotation-status";
-
-
-  const dragLabel =
-    document.createElement("div");
-
-  dragLabel.className =
-    "drag-label";
-
-  dragLabel.textContent =
-    "Hold and drag to reorder";
-
+  const dragLabel = document.createElement("div");
+  dragLabel.className = "drag-label";
+  dragLabel.textContent = "Hold and drag to reorder";
 
   footer.appendChild(rotationStatus);
   footer.appendChild(dragLabel);
 
-
-  /* =====================
-     DRAG HANDLE
-  ===================== */
-
-  const dragHandle =
-    document.createElement("div");
-
-  dragHandle.className =
-    "drag-handle";
-
-  dragHandle.textContent =
-    "⋮⋮";
-
-
-  /* =====================
-     APPEND
-  ===================== */
+  const dragHandle = document.createElement("div");
+  dragHandle.className = "drag-handle";
+  dragHandle.textContent = "⋮⋮";
 
   item.appendChild(previewWrap);
   item.appendChild(info);
@@ -365,984 +170,284 @@ function createPageElement(pageData) {
   item.appendChild(footer);
   item.appendChild(dragHandle);
 
+  updateRotationUI(item, pageData);
 
-  /* =====================
-     ROTATION UI
-  ===================== */
+  rotateButton.addEventListener("click", async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    pageData.rotation = (pageData.rotation + 90) % 360;
+    updateRotationUI(item, pageData);
+    await renderPagePreview(pageData, canvas);
+  });
 
-  updateRotationUI(
-    item,
-    pageData
-  );
+  rotateButton.addEventListener("touchstart", (event) => event.stopPropagation(), { passive: true });
 
+  removeButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    removePage(pageData.id);
+  });
 
-  /* =====================
-     ROTATE
-  ===================== */
+  removeButton.addEventListener("touchstart", (event) => event.stopPropagation(), { passive: true });
 
-  rotateButton.addEventListener(
-    "click",
-    async (event) => {
+  item.addEventListener("dragstart", (event) => {
+    draggedPageId = pageData.id;
+    item.classList.add("dragging");
+    event.dataTransfer.effectAllowed = "move";
+    event.dataTransfer.setData("text/plain", pageData.id);
+  });
 
-      event.preventDefault();
-      event.stopPropagation();
+  item.addEventListener("dragover", (event) => {
+    event.preventDefault();
+    if (!draggedPageId) return;
+    const draggedElement = pagesGrid.querySelector(`[data-id="${draggedPageId}"]`);
+    if (!draggedElement || draggedElement === item) return;
 
-      pageData.rotation =
-        (pageData.rotation + 90) % 360;
-
-      updateRotationUI(
-        item,
-        pageData
-      );
-
-      await renderPagePreview(
-        pageData,
-        canvas
-      );
+    const rect = item.getBoundingClientRect();
+    const middle = rect.top + rect.height / 2;
+    if (event.clientY < middle) {
+      pagesGrid.insertBefore(draggedElement, item);
+    } else {
+      pagesGrid.insertBefore(draggedElement, item.nextSibling);
     }
-  );
+  });
 
-
-  /*
-    Prevent rotate button from
-    starting mobile long-press drag.
-  */
-
-  rotateButton.addEventListener(
-    "touchstart",
-    (event) => {
-      event.stopPropagation();
-    },
-    { passive: true }
-  );
-
-
-  /* =====================
-     REMOVE
-  ===================== */
-
-  removeButton.addEventListener(
-    "click",
-    (event) => {
-
-      event.preventDefault();
-      event.stopPropagation();
-
-      removePage(pageData.id);
-    }
-  );
-
-
-  removeButton.addEventListener(
-    "touchstart",
-    (event) => {
-      event.stopPropagation();
-    },
-    { passive: true }
-  );
-
-
-  /* =====================
-     DESKTOP DRAG
-  ===================== */
-
-  item.addEventListener(
-    "dragstart",
-    (event) => {
-
-      draggedPageId =
-        pageData.id;
-
-      item.classList.add("dragging");
-
-      event.dataTransfer.effectAllowed =
-        "move";
-
-      event.dataTransfer.setData(
-        "text/plain",
-        pageData.id
-      );
-    }
-  );
-
-
-  item.addEventListener(
-    "dragover",
-    (event) => {
-
-      event.preventDefault();
-
-      if (!draggedPageId) {
-        return;
-      }
-
-      const draggedElement =
-        pagesGrid.querySelector(
-          `[data-id="${draggedPageId}"]`
-        );
-
-      if (!draggedElement ||
-          draggedElement === item) {
-        return;
-      }
-
-
-      const rect =
-        item.getBoundingClientRect();
-
-      const middle =
-        rect.top + rect.height / 2;
-
-
-      if (event.clientY < middle) {
-
-        pagesGrid.insertBefore(
-          draggedElement,
-          item
-        );
-
-      } else {
-
-        pagesGrid.insertBefore(
-          draggedElement,
-          item.nextSibling
-        );
-      }
-    }
-  );
-
-
-  item.addEventListener(
-    "dragend",
-    () => {
-
-      item.classList.remove("dragging");
-
-      draggedPageId = null;
-
-      syncPagesFromDOM();
-    }
-  );
-
-
-  /* =====================
-     MOBILE LONG PRESS
-  ===================== */
+  item.addEventListener("dragend", () => {
+    item.classList.remove("dragging");
+    draggedPageId = null;
+    syncPagesFromDOM();
+  });
 
   setupTouchDrag(item, pageData);
-
-
-  /* =====================
-     THUMBNAIL
-  ===================== */
-
-  renderPagePreview(
-    pageData,
-    canvas
-  );
-
+  renderPagePreview(pageData, canvas);
 
   return item;
 }
 
-
-/* =========================
-   ROTATION UI
-========================= */
-
-function updateRotationUI(
-  item,
-  pageData
-) {
-
-  const status =
-    item.querySelector(
-      ".rotation-status"
-    );
-
-  if (!status) {
-    return;
-  }
-
+function updateRotationUI(item, pageData) {
+  const status = item.querySelector(".rotation-status");
+  if (!status) return;
   if (pageData.rotation === 0) {
-
     status.textContent = "";
-
     status.hidden = true;
-
   } else {
-
-    status.textContent =
-      `Rotated ${pageData.rotation}°`;
-
+    status.textContent = `Rotated ${pageData.rotation}°`;
     status.hidden = false;
   }
 }
 
-
-/* =========================
-   RENDER THUMBNAIL
-========================= */
-
-async function renderPagePreview(
-  pageData,
-  canvas
-) {
-
-  if (!sourcePdfDocument) {
-    return;
-  }
-
+async function renderPagePreview(pageData, canvas) {
+  if (!sourcePdfDocument) return;
   try {
+    const pdfPage = await sourcePdfDocument.getPage(pageData.pageNumber);
+    const originalRotation = Number(pdfPage.rotate || 0);
+    const totalRotation = (originalRotation + pageData.rotation) % 360;
 
-    const pdfPage =
-      await sourcePdfDocument.getPage(
-        pageData.pageNumber
-      );
-
-
-    /*
-      Preserve the PDF's own rotation
-      and add the user's rotation.
-    */
-
-    const originalRotation =
-      Number(pdfPage.rotate || 0);
-
-    const totalRotation =
-      (
-        originalRotation +
-        pageData.rotation
-      ) % 360;
-
-
-    const baseViewport =
-      pdfPage.getViewport({
-        scale: 1,
-        rotation: totalRotation
-      });
-
-
+    const baseViewport = pdfPage.getViewport({ scale: 1, rotation: totalRotation });
     const targetWidth = 150;
+    const scale = targetWidth / baseViewport.width;
+    const viewport = pdfPage.getViewport({ scale, rotation: totalRotation });
 
-    const scale =
-      targetWidth /
-      baseViewport.width;
+    canvas.width = Math.ceil(viewport.width);
+    canvas.height = Math.ceil(viewport.height);
+    canvas.style.width = `${Math.ceil(viewport.width)}px`;
+    canvas.style.height = `${Math.ceil(viewport.height)}px`;
 
-
-    const viewport =
-      pdfPage.getViewport({
-        scale,
-        rotation: totalRotation
-      });
-
-
-    canvas.width =
-      Math.ceil(viewport.width);
-
-    canvas.height =
-      Math.ceil(viewport.height);
-
-
-    canvas.style.width =
-      `${Math.ceil(viewport.width)}px`;
-
-    canvas.style.height =
-      `${Math.ceil(viewport.height)}px`;
-
-
-    const context =
-      canvas.getContext("2d");
-
-
-    await pdfPage.render({
-      canvasContext: context,
-      viewport
-    }).promise;
-
-
+    const context = canvas.getContext("2d");
+    await pdfPage.render({ canvasContext: context, viewport }).promise;
   } catch (error) {
-
-    console.error(
-      "Preview render error:",
-      error
-    );
+    console.error("Preview render error:", error);
   }
 }
 
+function setupTouchDrag(item, pageData) {
+  item.addEventListener("touchstart", (event) => {
+    if (event.target.closest(".page-action") || event.touches.length !== 1) return;
+    const touch = event.touches[0];
+    touchPageId = pageData.id;
+    touchDragging = false;
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+    touchCurrentX = touch.clientX;
+    touchCurrentY = touch.clientY;
 
-/* =========================
-   MOBILE TOUCH DRAG
-========================= */
+    clearTimeout(touchTimer);
+    touchTimer = setTimeout(() => {
+      touchDragging = true;
+      item.classList.add("dragging", "long-pressed");
+      if (navigator.vibrate) navigator.vibrate(35);
+    }, LONG_PRESS_TIME);
+  }, { passive: true });
 
-function setupTouchDrag(
-  item,
-  pageData
-) {
+  item.addEventListener("touchmove", (event) => {
+    if (!touchPageId || event.touches.length !== 1) return;
+    const touch = event.touches[0];
+    touchCurrentX = touch.clientX;
+    touchCurrentY = touch.clientY;
 
-  item.addEventListener(
-    "touchstart",
-    (event) => {
-
-      /*
-        Buttons should never start
-        the long-press drag.
-      */
-
-      if (
-        event.target.closest(
-          ".page-action"
-        )
-      ) {
-        return;
+    const distance = Math.hypot(touchCurrentX - touchStartX, touchCurrentY - touchStartY);
+    if (!touchDragging) {
+      if (distance > MOVE_CANCEL_DISTANCE) {
+        clearTimeout(touchTimer);
+        touchPageId = null;
       }
-
-
-      if (event.touches.length !== 1) {
-        return;
-      }
-
-
-      const touch =
-        event.touches[0];
-
-
-      touchPageId =
-        pageData.id;
-
-      touchDragging = false;
-
-
-      touchStartX =
-        touch.clientX;
-
-      touchStartY =
-        touch.clientY;
-
-      touchCurrentX =
-        touch.clientX;
-
-      touchCurrentY =
-        touch.clientY;
-
-
-      clearTimeout(touchTimer);
-
-
-      touchTimer =
-        setTimeout(() => {
-
-          touchDragging = true;
-
-          item.classList.add(
-            "dragging"
-          );
-
-          item.classList.add(
-            "long-pressed"
-          );
-
-
-          if (
-            navigator.vibrate
-          ) {
-            navigator.vibrate(35);
-          }
-
-        }, LONG_PRESS_TIME);
-
-    },
-    {
-      passive: true
+      return;
     }
-  );
 
+    event.preventDefault();
+    moveTouchPage(touchCurrentY);
+  }, { passive: false });
 
-  item.addEventListener(
-    "touchmove",
-    (event) => {
-
-      if (
-        !touchPageId ||
-        event.touches.length !== 1
-      ) {
-        return;
-      }
-
-
-      const touch =
-        event.touches[0];
-
-
-      touchCurrentX =
-        touch.clientX;
-
-      touchCurrentY =
-        touch.clientY;
-
-
-      const deltaX =
-        touchCurrentX -
-        touchStartX;
-
-      const deltaY =
-        touchCurrentY -
-        touchStartY;
-
-
-      const distance =
-        Math.sqrt(
-          deltaX * deltaX +
-          deltaY * deltaY
-        );
-
-
-      /*
-        Before long press:
-        allow normal page-list scrolling.
-      */
-
-      if (!touchDragging) {
-
-        if (
-          distance >
-          MOVE_CANCEL_DISTANCE
-        ) {
-
-          clearTimeout(touchTimer);
-
-          touchPageId = null;
-        }
-
-        return;
-      }
-
-
-      /*
-        After long press:
-        page is being dragged.
-      */
-
-      event.preventDefault();
-
-
-      moveTouchPage(
-        touchCurrentY
-      );
-
-    },
-    {
-      passive: false
+  item.addEventListener("touchend", () => {
+    clearTimeout(touchTimer);
+    if (touchDragging) {
+      item.classList.remove("dragging", "long-pressed");
+      syncPagesFromDOM();
     }
-  );
+    touchDragging = false;
+    touchPageId = null;
+  }, { passive: true });
 
-
-  item.addEventListener(
-    "touchend",
-    () => {
-
-      clearTimeout(touchTimer);
-
-
-      if (touchDragging) {
-
-        item.classList.remove(
-          "dragging"
-        );
-
-        item.classList.remove(
-          "long-pressed"
-        );
-
-
-        syncPagesFromDOM();
-      }
-
-
-      touchDragging = false;
-      touchPageId = null;
-
-    },
-    {
-      passive: true
-    }
-  );
-
-
-  item.addEventListener(
-    "touchcancel",
-    () => {
-
-      clearTimeout(touchTimer);
-
-
-      item.classList.remove(
-        "dragging"
-      );
-
-      item.classList.remove(
-        "long-pressed"
-      );
-
-
-      touchDragging = false;
-      touchPageId = null;
-
-    },
-    {
-      passive: true
-    }
-  );
+  item.addEventListener("touchcancel", () => {
+    clearTimeout(touchTimer);
+    item.classList.remove("dragging", "long-pressed");
+    touchDragging = false;
+    touchPageId = null;
+  }, { passive: true });
 }
 
+function moveTouchPage(clientY) {
+  if (!touchPageId) return;
+  const draggedElement = pagesGrid.querySelector(`[data-id="${touchPageId}"]`);
+  if (!draggedElement) return;
 
-/* =========================
-   MOVE TOUCH PAGE
-========================= */
-
-function moveTouchPage(
-  clientY
-) {
-
-  if (!touchPageId) {
-    return;
-  }
-
-
-  const draggedElement =
-    pagesGrid.querySelector(
-      `[data-id="${touchPageId}"]`
-    );
-
-
-  if (!draggedElement) {
-    return;
-  }
-
-
-  const items =
-    Array.from(
-      pagesGrid.children
-    ).filter(
-      (element) =>
-        element !== draggedElement
-    );
-
-
+  const items = Array.from(pagesGrid.children).filter((element) => element !== draggedElement);
   let inserted = false;
 
-
   for (const item of items) {
-
-    const rect =
-      item.getBoundingClientRect();
-
-
-    const middle =
-      rect.top +
-      rect.height / 2;
-
-
+    const rect = item.getBoundingClientRect();
+    const middle = rect.top + rect.height / 2;
     if (clientY < middle) {
-
-      pagesGrid.insertBefore(
-        draggedElement,
-        item
-      );
-
+      pagesGrid.insertBefore(draggedElement, item);
       inserted = true;
-
       break;
     }
   }
 
-
   if (!inserted) {
-
-    pagesGrid.appendChild(
-      draggedElement
-    );
+    pagesGrid.appendChild(draggedElement);
   }
 }
-
-
-/* =========================
-   SYNC ARRAY FROM DOM
-========================= */
 
 function syncPagesFromDOM() {
-
-  const orderedIds =
-    Array.from(
-      pagesGrid.children
-    ).map(
-      (element) =>
-        element.dataset.id
-    );
-
-
-  pages =
-    orderedIds
-      .map(
-        (id) =>
-          pages.find(
-            (page) =>
-              page.id === id
-          )
-      )
-      .filter(Boolean);
-
-
+  const orderedIds = Array.from(pagesGrid.children).map((element) => element.dataset.id);
+  pages = orderedIds.map((id) => pages.find((page) => page.id === id)).filter(Boolean);
   updatePageCount();
 }
 
-
-/* =========================
-   REMOVE PAGE
-========================= */
-
-function removePage(
-  pageId
-) {
-
-  pages =
-    pages.filter(
-      (page) =>
-        page.id !== pageId
-    );
-
-
+function removePage(pageId) {
+  pages = pages.filter((page) => page.id !== pageId);
   renderPages();
-
-
   if (pages.length === 0) {
-
     show(uploadBox);
     hide(editorCard);
   }
 }
 
+removeAllBtn.addEventListener("click", () => {
+  if (pages.length === 0) return;
+  if (!confirm("Remove all pages?")) return;
+  resetAll();
+});
 
-/* =========================
-   REMOVE ALL
-========================= */
+pdfInput.addEventListener("change", () => {
+  const file = pdfInput.files?.[0];
+  if (file) loadPdf(file);
+  pdfInput.value = "";
+});
 
-removeAllBtn.addEventListener(
-  "click",
-  () => {
+uploadBox.addEventListener("dragover", (event) => {
+  event.preventDefault();
+  uploadBox.classList.add("dragover");
+});
 
-    if (pages.length === 0) {
-      return;
-    }
+uploadBox.addEventListener("dragleave", () => uploadBox.classList.remove("dragover"));
 
+uploadBox.addEventListener("drop", (event) => {
+  event.preventDefault();
+  uploadBox.classList.remove("dragover");
+  const file = event.dataTransfer.files?.[0];
+  if (file) loadPdf(file);
+});
 
-    const confirmed =
-      confirm(
-        "Remove all pages?"
-      );
+organizeBtn.addEventListener("click", async () => {
+  if (!sourcePdfBytes || pages.length === 0) return;
 
-
-    if (!confirmed) {
-      return;
-    }
-
-
-    pages = [];
-
-    pagesGrid.innerHTML = "";
-
-    updatePageCount();
-
-
+  try {
     hide(editorCard);
-    show(uploadBox);
-  }
-);
+    hide(resultCard);
+    show(processingCard);
 
+    const sourcePdf = await window.PDFDocument.load(sourcePdfBytes);
+    const outputPdf = await window.PDFDocument.create();
 
-/* =========================
-   UPLOAD INPUT
-========================= */
-
-pdfInput.addEventListener(
-  "change",
-  () => {
-
-    const file =
-      pdfInput.files?.[0];
-
-    if (file) {
-      loadPdf(file);
-    }
-  }
-);
-
-
-/* =========================
-   DROP ZONE
-========================= */
-
-uploadBox.addEventListener(
-  "dragover",
-  (event) => {
-
-    event.preventDefault();
-
-    uploadBox.classList.add(
-      "dragover"
-    );
-  }
-);
-
-
-uploadBox.addEventListener(
-  "dragleave",
-  () => {
-
-    uploadBox.classList.remove(
-      "dragover"
-    );
-  }
-);
-
-
-uploadBox.addEventListener(
-  "drop",
-  (event) => {
-
-    event.preventDefault();
-
-    uploadBox.classList.remove(
-      "dragover"
-    );
-
-
-    const file =
-      event.dataTransfer.files?.[0];
-
-
-    if (file) {
-      loadPdf(file);
-    }
-  }
-);
-
-
-/* =========================
-   ORGANIZE PDF
-========================= */
-
-organizeBtn.addEventListener(
-  "click",
-  async () => {
-
-    if (
-      !sourcePdfBytes ||
-      pages.length === 0
-    ) {
-      return;
+    for (const pageData of pages) {
+      const [copiedPage] = await outputPdf.copyPages(sourcePdf, [pageData.originalIndex]);
+      const existingRotation = copiedPage.getRotation().angle || 0;
+      const finalRotation = (existingRotation + pageData.rotation) % 360;
+      copiedPage.setRotation(window.pdfDegrees(finalRotation));
+      outputPdf.addPage(copiedPage);
     }
 
+    const outputBytes = await outputPdf.save();
+    organizedPdfBlob = new Blob([outputBytes], { type: "application/pdf" });
 
-    try {
+    hide(processingCard);
+    show(resultCard);
 
-      hide(editorCard);
-      hide(resultCard);
-
-      show(processingCard);
-
-
-      /*
-        Fresh PDFDocument instance.
-      */
-
-      const sourcePdf =
-        await window.PDFDocument.load(
-          sourcePdfBytes
-        );
-
-
-      const outputPdf =
-        await window.PDFDocument.create();
-
-
-      /*
-        Copy pages in current DOM order.
-      */
-
-      for (
-        const pageData of pages
-      ) {
-
-        const [
-          copiedPage
-        ] =
-          await outputPdf.copyPages(
-            sourcePdf,
-            [pageData.originalIndex]
-          );
-
-
-        /*
-          Preserve existing rotation
-          and add user's rotation.
-        */
-
-        const existingRotation =
-          copiedPage
-            .getRotation()
-            .angle || 0;
-
-
-        const finalRotation =
-          (
-            existingRotation +
-            pageData.rotation
-          ) % 360;
-
-
-        copiedPage.setRotation(
-          window.pdfDegrees(
-            finalRotation
-          )
-        );
-
-
-        outputPdf.addPage(
-          copiedPage
-        );
-      }
-
-
-      const outputBytes =
-        await outputPdf.save();
-
-
-      organizedPdfBlob =
-        new Blob(
-          [outputBytes],
-          {
-            type: "application/pdf"
-          }
-        );
-
-
-      hide(processingCard);
-
-      show(resultCard);
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      hide(processingCard);
-      show(editorCard);
-
-      alert(
-        "Something went wrong while creating the PDF."
-      );
-    }
+  } catch (error) {
+    console.error(error);
+    hide(processingCard);
+    show(editorCard);
+    alert("Something went wrong while creating the PDF.");
   }
-);
+});
 
+downloadBtn.addEventListener("click", () => {
+  if (!organizedPdfBlob) return;
+  const url = URL.createObjectURL(organizedPdfBlob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "pikatools-organized.pdf";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
 
-/* =========================
-   DOWNLOAD
-========================= */
-
-downloadBtn.addEventListener(
-  "click",
-  () => {
-
-    if (!organizedPdfBlob) {
-      return;
-    }
-
-
-    const url =
-      URL.createObjectURL(
-        organizedPdfBlob
-      );
-
-
-    const link =
-      document.createElement("a");
-
-
-    link.href = url;
-
-    link.download =
-      "pikautools-organized.pdf";
-
-
-    document.body.appendChild(
-      link
-    );
-
-    link.click();
-
-    link.remove();
-
-
-    setTimeout(
-      () => {
-        URL.revokeObjectURL(url);
-      },
-      1000
-    );
-  }
-);
-
-
-/* =========================
-   ORGANIZE ANOTHER
-========================= */
-
-anotherBtn.addEventListener(
-  "click",
-  () => {
-
-    resetAll();
-
-    show(uploadBox);
-  }
-);
-
-
-/* =========================
-   RESET
-========================= */
+anotherBtn.addEventListener("click", () => {
+  resetAll();
+  show(uploadBox);
+});
 
 function resetAll() {
-
+  if (sourcePdfDocument && typeof sourcePdfDocument.destroy === "function") {
+    sourcePdfDocument.destroy().catch(() => {});
+  }
   selectedFile = null;
-
   sourcePdfBytes = null;
-
   sourcePdfDocument = null;
-
   organizedPdfBlob = null;
-
   pages = [];
-
   draggedPageId = null;
-
   touchPageId = null;
-
   touchDragging = false;
-
   clearTimeout(touchTimer);
-
   pagesGrid.innerHTML = "";
-
   pdfInput.value = "";
-
   updatePageCount();
-
   hide(editorCard);
   hide(processingCard);
   hide(resultCard);
-
   show(uploadBox);
 }

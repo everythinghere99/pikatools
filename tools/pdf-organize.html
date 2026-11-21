@@ -3,205 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
 
     <title>PDF Organizer Online - Organize PDF Pages Free | PikaTools</title>
-
     <meta name="description" content="Organize PDF pages online for free with PikaTools. Reorder, rearrange and manage PDF pages easily before downloading your organized PDF.">
-
     <meta name="keywords" content="PDF organizer, organize PDF online, rearrange PDF pages, reorder PDF pages, PDF page organizer, manage PDF pages, free PDF organizer, online PDF organizer">
-
     <meta name="robots" content="index, follow">
 
     <link rel="canonical" href="https://everythinghere99.github.io/pikatools/tools/pdf-organize.html">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" type="image/png" href="../icon-192.png">
 
     <meta property="og:title" content="PDF Organizer Online - PikaTools">
     <meta property="og:description" content="Organize, reorder and rearrange PDF pages online for free with PikaTools.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://everythinghere99.github.io/pikatools/tools/pdf-organize.html">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
-
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="pdf-organize.css">
 </head>
-
 <body>
 
 <header class="topbar">
   <a href="../index.html" class="back-btn">←</a>
-  <div class="brand">PikaTools</div>
+  <a href="../index.html" class="brand">PikaTools</a>
 </header>
 
-
 <main class="page">
-
-  <h1 class="tool-title">
-    <span>✦</span>Organize PDF<span>✦</span>
-  </h1>
-
+  <h1 class="tool-title"><span>✦</span>Organize PDF<span>✦</span></h1>
 
   <section class="card">
-
-    <!-- UPLOAD -->
     <label class="drop-zone" id="uploadBox">
-
       <div class="upload-icon">📑</div>
-
       <h2>Drop your PDF here</h2>
-
       <p>or choose a PDF from your device</p>
-
       <span class="choose-btn">Choose PDF</span>
-
       <small>PDF • Max 25 MB</small>
-
-      <input
-        id="pdfInput"
-        type="file"
-        accept="application/pdf,.pdf"
-        hidden
-      >
-
+      <input id="pdfInput" type="file" accept="application/pdf,.pdf" hidden>
     </label>
 
-
-    <!-- WORKSPACE -->
     <div id="editorCard" class="workspace hidden">
-
       <div class="list-heading">
-
         <div>
           <h2>Your Pages</h2>
           <p id="pageCount">0 pages</p>
         </div>
-
-        <button
-          id="removeAllBtn"
-          class="secondary-btn"
-          type="button"
-        >
-          Remove All
-        </button>
-
+        <button id="removeAllBtn" class="secondary-btn" type="button">Remove All</button>
       </div>
 
+      <div id="pagesGrid" class="page-list"></div>
 
-      <!-- PAGE LIST -->
-      <div
-        id="pagesGrid"
-        class="page-list"
-      ></div>
-
-
-      <!-- ORGANIZE -->
-      <button
-        id="organizeBtn"
-        class="primary-btn"
-        type="button"
-      >
-        Organize PDF
-      </button>
-
+      <button id="organizeBtn" class="primary-btn" type="button">Organize PDF</button>
     </div>
 
-
-    <!-- PROCESSING -->
-    <div
-      id="processingCard"
-      class="processing hidden"
-    >
-
+    <div id="processingCard" class="processing hidden">
       <div class="loader"></div>
-
       <h2>Creating your PDF...</h2>
-
       <p>Please wait while we arrange your pages.</p>
-
     </div>
 
-
-    <!-- RESULT -->
-    <div
-      id="resultCard"
-      class="result hidden"
-    >
-
+    <div id="resultCard" class="result hidden">
       <div class="success-icon">✓</div>
-
       <h2>PDF Organized!</h2>
-
       <p>Your rearranged PDF is ready to download.</p>
-
-      <button
-        id="downloadBtn"
-        class="download-btn"
-        type="button"
-      >
-        Download PDF
-      </button>
-
-      <button
-        id="anotherBtn"
-        class="another-btn"
-        type="button"
-      >
-        Organize Another PDF
-      </button>
-
+      <button id="downloadBtn" class="download-btn" type="button">Download PDF</button>
+      <button id="anotherBtn" class="another-btn" type="button">Organize Another PDF</button>
     </div>
-
   </section>
 
-
-  <!-- PRIVACY -->
   <section class="privacy">
-
     <span>🔒</span>
-
     <div>
       <b>Your PDF stays private.</b>
-
-      <p>
-        PDF organizing happens directly in your browser.
-        Your file is not uploaded to a server.
-      </p>
+      <p>PDF organizing happens directly in your browser. Your file is not uploaded to a server.</p>
     </div>
-
   </section>
-
 </main>
 
-
 <script type="module">
+  import * as pdfjsLib from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs";
+  import { PDFDocument, degrees } from "https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/+esm";
 
-  import * as pdfjsLib from
-    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs";
-
-  import {
-    PDFDocument,
-    degrees
-  } from
-    "https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/+esm";
-
-
-  pdfjsLib.GlobalWorkerOptions.workerSrc =
-    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs";
-
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs";
 
   window.pdfjsLib = pdfjsLib;
   window.PDFDocument = PDFDocument;
   window.pdfDegrees = degrees;
 
-
   const script = document.createElement("script");
-
   script.src = "pdf-organize.js";
-
   document.body.appendChild(script);
-
 </script>
-
 </body>
 </html>

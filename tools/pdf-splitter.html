@@ -3,186 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
 
     <title>PDF Splitter Online - Split PDF Files Free | PikaTools</title>
-
     <meta name="description" content="Split PDF files online for free with PikaTools. Easily split PDF pages into separate files or extract specific pages quickly and easily.">
-
     <meta name="keywords" content="PDF splitter, split PDF online, split PDF pages, PDF page extractor, extract pages from PDF, separate PDF pages, free PDF splitter, online PDF splitter">
-
     <meta name="robots" content="index, follow">
 
     <link rel="canonical" href="https://everythinghere99.github.io/pikatools/tools/pdf-splitter.html">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" type="image/png" href="../icon-192.png">
 
     <meta property="og:title" content="PDF Splitter Online - PikaTools">
     <meta property="og:description" content="Split PDF files and extract specific pages online for free with PikaTools.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://everythinghere99.github.io/pikatools/tools/pdf-splitter.html">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
-
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="pdf-splitter.css">
 </head>
-
 <body>
 
 <header class="topbar">
   <a href="../index.html" class="back-btn">←</a>
-  <div class="brand">PikaTools</div>
+  <a href="../index.html" class="brand">PikaTools</a>
 </header>
 
 <main class="page">
-
-  <h1 class="tool-title">
-    <span>✦</span>PDF Splitter<span>✦</span>
-  </h1>
+  <h1 class="tool-title"><span>✦</span>PDF Splitter<span>✦</span></h1>
 
   <section class="card">
-
-    <!-- UPLOAD -->
     <label class="drop-zone" id="dropZone">
-
       <div class="upload-icon">✂</div>
-
       <h2>Drop your PDF here</h2>
-
       <p>or choose a PDF from your device</p>
-
       <span class="choose-btn">Choose PDF</span>
-
       <small>PDF • One file at a time</small>
-
-      <input
-        id="fileInput"
-        type="file"
-        accept="application/pdf,.pdf"
-        hidden
-      >
-
+      <input id="fileInput" type="file" accept="application/pdf,.pdf" hidden>
     </label>
 
-
-    <!-- WORKSPACE -->
     <div id="workspace" class="workspace hidden">
-
       <div class="workspace-top">
-
         <div class="file-info">
-
           <div class="file-icon">PDF</div>
-
           <div>
             <div id="fileName" class="file-name"></div>
             <div id="fileMeta" class="file-meta"></div>
           </div>
-
         </div>
-
-        <button
-          id="resetTopBtn"
-          class="text-btn"
-          type="button"
-        >
-          Change PDF
-        </button>
-
+        <button id="resetTopBtn" class="text-btn" type="button">Change PDF</button>
       </div>
 
-
-      <!-- SELECTION BAR -->
       <div class="selection-bar">
-
         <div>
           <b id="selectedCount">0</b>
           <span> pages selected</span>
         </div>
-
         <div class="selection-actions">
-
-          <button
-            id="selectAllBtn"
-            type="button"
-            class="small-btn"
-          >
-            Select All
-          </button>
-
-          <button
-            id="clearBtn"
-            type="button"
-            class="small-btn"
-          >
-            Clear
-          </button>
-
+          <button id="selectAllBtn" type="button" class="small-btn">Select All</button>
+          <button id="clearBtn" type="button" class="small-btn">Clear</button>
         </div>
-
       </div>
 
-
-      <!-- PAGE GRID -->
       <div id="pageGrid" class="page-grid"></div>
 
-
-      <!-- SPLIT -->
-      <button
-        id="splitBtn"
-        class="split-btn"
-        type="button"
-        disabled
-      >
-        Split PDF
-      </button>
-
-
-      <!-- DOWNLOAD -->
-      <button
-        id="downloadBtn"
-        class="download-btn hidden"
-        type="button"
-      >
-        Download Split PDF
-      </button>
-
-
-      <!-- RESET -->
-      <button
-        id="resetBtn"
-        class="reset-btn hidden"
-        type="button"
-      >
-        Split Another PDF
-      </button>
-
-
+      <button id="splitBtn" class="split-btn" type="button" disabled>Split PDF</button>
+      <button id="downloadBtn" class="download-btn hidden" type="button">Download Split PDF</button>
+      <button id="resetBtn" class="reset-btn hidden" type="button">Split Another PDF</button>
       <div id="status" class="status"></div>
-
     </div>
-
   </section>
-
 
   <section class="privacy">
-
     <span>🔒</span>
-
     <div>
       <b>Your PDF stays private.</b>
-
-      <p>
-        PDF splitting happens directly in your browser.
-        Your file is not uploaded to a server.
-      </p>
+      <p>PDF splitting happens directly in your browser. Your file is not uploaded to a server.</p>
     </div>
-
   </section>
-
 </main>
 
 <script src="pdf-splitter.js" type="module"></script>
-
 </body>
 </html>

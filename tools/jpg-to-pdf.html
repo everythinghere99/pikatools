@@ -1,319 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
 
     <title>JPG to PDF Converter Online - Convert JPG to PDF Free | PikaTools</title>
-
     <meta name="description" content="Convert JPG images to PDF online for free with PikaTools. Easily turn one or multiple JPG images into a PDF quickly and easily.">
-
     <meta name="keywords" content="JPG to PDF, JPG to PDF converter, convert JPG to PDF, image to PDF, JPG PDF converter, online JPG to PDF, free JPG to PDF converter">
-
     <meta name="robots" content="index, follow">
 
     <link rel="canonical" href="https://everythinghere99.github.io/pikatools/tools/jpg-to-pdf.html">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" type="image/png" href="../icon-192.png">
 
     <meta property="og:title" content="JPG to PDF Converter Online - PikaTools">
     <meta property="og:description" content="Convert one or multiple JPG images to PDF online for free with PikaTools.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://everythinghere99.github.io/pikatools/tools/jpg-to-pdf.html">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
-
-    <link
-        rel="stylesheet"
-        href="jpg-to-pdf.css"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="jpg-to-pdf.css">
 </head>
-
-
 <body>
 
-
 <header class="topbar">
-
-  <a
-    href="../index.html"
-    class="back-btn"
-  >
-    ←
-  </a>
-
-  <div class="brand">
-    PikaTools
-  </div>
-
+  <a href="../index.html" class="back-btn">←</a>
+  <a href="../index.html" class="brand">PikaTools</a>
 </header>
 
-
 <main class="page">
+  <h1 class="tool-title"><span>✦</span>JPG to PDF<span>✦</span></h1>
 
-  <h1 class="tool-title">
-    <span>✦</span>
-    JPG to PDF
-    <span>✦</span>
-  </h1>
-
-
-  <!-- UPLOAD -->
-
-  <section
-    class="card"
-    id="uploadCard"
-  >
-
-    <label
-      class="drop-zone"
-      id="dropZone"
-    >
-
-      <div class="upload-icon">
-        🖼️
-      </div>
-
-      <h2>
-        Drop your JPG images here
-      </h2>
-
-      <p>
-        or choose images from your device
-      </p>
-
-      <span class="choose-btn">
-        Choose Images
-      </span>
-
-      <small>
-        JPG / JPEG • Multiple images supported
-      </small>
-
-      <input
-        id="fileInput"
-        type="file"
-        accept="image/jpeg,.jpg,.jpeg"
-        multiple
-        hidden
-      >
-
+  <section class="card" id="uploadCard">
+    <label class="drop-zone" id="dropZone">
+      <div class="upload-icon">🖼️</div>
+      <h2>Drop your JPG images here</h2>
+      <p>or choose images from your device</p>
+      <span class="choose-btn">Choose Images</span>
+      <small>JPG / JPEG • Multiple images supported</small>
+      <input id="fileInput" type="file" accept="image/jpeg,.jpg,.jpeg" multiple hidden>
     </label>
-
   </section>
 
-
-  <!-- WORKSPACE -->
-
-  <section
-    id="workspace"
-    class="workspace hidden"
-  >
-
+  <section id="workspace" class="workspace hidden">
     <div class="file-head">
-
       <div>
-
-        <h2>
-          Your Images
-        </h2>
-
-        <p id="imageCount">
-          0 images
-        </p>
-
+        <h2>Your Images</h2>
+        <p id="imageCount">0 images</p>
       </div>
-
-
-      <button
-        id="addMoreBtn"
-        class="secondary-btn"
-        type="button"
-      >
-        + Add More
-      </button>
-
+      <button id="addMoreBtn" class="secondary-btn" type="button">+ Add More</button>
     </div>
 
-
-    <div
-      id="imageList"
-      class="image-list"
-    ></div>
-
+    <div id="imageList" class="image-list"></div>
 
     <div class="options-card">
-
-      <h2>
-        PDF Options
-      </h2>
-
-
+      <h2>PDF Options</h2>
       <div class="options-grid">
-
-
         <div class="option-group">
-
-          <label for="pageSize">
-            Page Size
-          </label>
-
+          <label for="pageSize">Page Size</label>
           <select id="pageSize">
-
-            <option value="image">
-              Image Size
-            </option>
-
-            <option
-              value="a4"
-              selected
-            >
-              A4
-            </option>
-
-            <option value="letter">
-              Letter
-            </option>
-
+            <option value="image">Image Size</option>
+            <option value="a4" selected>A4</option>
+            <option value="letter">Letter</option>
           </select>
-
         </div>
 
-
         <div class="option-group">
-
-          <label for="orientation">
-            Orientation
-          </label>
-
+          <label for="orientation">Orientation</label>
           <select id="orientation">
-
-            <option
-              value="auto"
-              selected
-            >
-              Auto
-            </option>
-
-            <option value="portrait">
-              Portrait
-            </option>
-
-            <option value="landscape">
-              Landscape
-            </option>
-
+            <option value="auto" selected>Auto</option>
+            <option value="portrait">Portrait</option>
+            <option value="landscape">Landscape</option>
           </select>
-
         </div>
-
 
         <div class="option-group">
-
-          <label for="margin">
-            Margin
-          </label>
-
+          <label for="margin">Margin</label>
           <select id="margin">
-
-            <option value="0">
-              No Margin
-            </option>
-
-            <option
-              value="18"
-              selected
-            >
-              Small
-            </option>
-
-            <option value="36">
-              Medium
-            </option>
-
-            <option value="54">
-              Large
-            </option>
-
+            <option value="0">No Margin</option>
+            <option value="18" selected>Small</option>
+            <option value="36">Medium</option>
+            <option value="54">Large</option>
           </select>
-
         </div>
-
-
       </div>
-
     </div>
 
-
-    <button
-      id="convertBtn"
-      class="primary-btn"
-      type="button"
-    >
-      Create PDF
-    </button>
-
-
-    <div
-      id="status"
-      class="status"
-    ></div>
-
-
-    <button
-      id="downloadBtn"
-      class="download-btn hidden"
-      type="button"
-    >
-      Download PDF
-    </button>
-
-
-    <button
-      id="anotherBtn"
-      class="another-btn hidden"
-      type="button"
-    >
-      Convert Another
-    </button>
-
+    <button id="convertBtn" class="primary-btn" type="button">Create PDF</button>
+    <div id="status" class="status"></div>
+    <button id="downloadBtn" class="download-btn hidden" type="button">Download PDF</button>
+    <button id="anotherBtn" class="another-btn hidden" type="button">Convert Another</button>
   </section>
-
-
-  <!-- PRIVACY -->
 
   <section class="privacy">
-
     <span>🔒</span>
-
     <div>
-
-      <b>
-        Your images stay private.
-      </b>
-
-      <p>
-        JPG to PDF conversion happens directly
-        in your browser. Your images are not
-        uploaded to a server.
-      </p>
-
+      <b>Your images stay private.</b>
+      <p>JPG to PDF conversion happens directly in your browser. Your images are not uploaded to a server.</p>
     </div>
-
   </section>
-
-
 </main>
 
-
-<script
-  src="jpg-to-pdf.js"
-  type="module"
-></script>
-
-
+<script src="jpg-to-pdf.js" type="module"></script>
 </body>
-
 </html>
