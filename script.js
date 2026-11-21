@@ -15,13 +15,13 @@
             name: "Image Compressor",
             description: "Make images smaller.",
             url: "tools/image-compressor.html",
-            keywords: "image compress compressor smaller reduce size 200kb 100kb 50kb"
+            keywords: "image compress compressor smaller reduce size 200kb 100kb 50kb 20kb"
         },
         {
             name: "Image Resizer",
             description: "Change image dimensions.",
             url: "tools/image-resizer.html",
-            keywords: "image resize resizer dimensions size"
+            keywords: "image resize resizer dimensions size signature resizer"
         },
         {
             name: "Image Cropper",
@@ -106,12 +106,6 @@
             description: "Make a PDF from images.",
             url: "tools/jpg-to-pdf.html",
             keywords: "jpg pdf convert image to pdf"
-        },
-        {
-            name: "Signature Resizer",
-            description: "Resize your signature.",
-            url: "tools/signature-resizer.html",
-            keywords: "signature resize resizer dimensions"
         }
     ];
 
@@ -124,10 +118,14 @@
 
     if (!searchInput || !searchResults) return;
 
-    /**
-     * @param {string} value
-     * @returns {string}
-     */
+    const escapeHtml = value =>
+        String(value || "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
     const normalize = value =>
         String(value || "")
             .toLowerCase()
@@ -136,31 +134,22 @@
             .replace(/[^\w\s]/g, " ")
             .replace(/\s+/g, " ");
 
-    /**
-     * @param {Tool} tool
-     * @param {string} query
-     * @returns {number}
-     */
     function scoreTool(tool, query) {
         const q = normalize(query);
-
         if (!q) return 0;
 
         const name = normalize(tool.name);
-
         const haystack = normalize(
             `${tool.name} ${tool.description} ${tool.keywords}`
         );
 
         let score = 0;
-
         if (name === q) score += 100;
         if (name.includes(q)) score += 50;
         if (haystack.includes(q)) score += 25;
 
         for (const word of q.split(" ")) {
             if (word.length < 2) continue;
-
             if (name.includes(word)) {
                 score += 10;
             } else if (haystack.includes(word)) {
@@ -171,21 +160,13 @@
         return score;
     }
 
-    /**
-     * @param {boolean} visible
-     */
     function setClearButton(visible) {
         if (!clearSearch) return;
-
         clearSearch.style.display = visible ? "grid" : "none";
     }
 
-    /**
-     * @param {string} query
-     */
     function renderResults(query) {
         const q = normalize(query);
-
         searchResults.innerHTML = "";
 
         if (!q) {
@@ -204,32 +185,26 @@
 
         if (!results.length) {
             const empty = document.createElement("div");
-
             empty.className = "search-result-item";
-
             empty.innerHTML = `
                 <div>
                     <strong class="result-name">No tool found</strong>
                     <span class="result-desc">Try another search.</span>
                 </div>
             `;
-
             searchResults.appendChild(empty);
         } else {
             results.forEach(({ tool }) => {
                 const item = document.createElement("a");
-
                 item.className = "search-result-item";
                 item.href = tool.url;
-
                 item.innerHTML = `
                     <div class="result-icon">🛠️</div>
                     <div>
-                        <strong class="result-name">${tool.name}</strong>
-                        <span class="result-desc">${tool.description}</span>
+                        <strong class="result-name">${escapeHtml(tool.name)}</strong>
+                        <span class="result-desc">${escapeHtml(tool.description)}</span>
                     </div>
                 `;
-
                 searchResults.appendChild(item);
             });
         }
@@ -263,11 +238,8 @@
             .forEach(button => {
                 button.addEventListener("click", () => {
                     const query = button.dataset.query || "";
-
                     searchInput.value = query;
-
                     renderResults(query);
-
                     searchInput.focus();
                 });
             });
@@ -276,11 +248,7 @@
     if (menuBtn && mobileMenu) {
         menuBtn.addEventListener("click", () => {
             const isOpen = mobileMenu.classList.toggle("open");
-
-            menuBtn.setAttribute(
-                "aria-expanded",
-                String(isOpen)
-            );
+            menuBtn.setAttribute("aria-expanded", String(isOpen));
         });
 
         mobileMenu
@@ -288,30 +256,23 @@
             .forEach(link => {
                 link.addEventListener("click", () => {
                     mobileMenu.classList.remove("open");
-
-                    menuBtn.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
+                    menuBtn.setAttribute("aria-expanded", "false");
                 });
             });
     }
 
     document.addEventListener("click", event => {
         const searchArea = document.querySelector(".search-area");
-
-        if (
-            searchArea &&
-            !searchArea.contains(event.target)
-        ) {
+        if (searchArea && !searchArea.contains(event.target)) {
             searchResults.innerHTML = "";
         }
     });
 })();
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch((err) => {
-      console.error('SW error:', err);
+
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js").catch((err) => {
+            console.error("SW error:", err);
+        });
     });
-  });
 }

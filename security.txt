@@ -1,0 +1,4 @@
+Contact: mailto:everythinghere99@gmail.com
+Expires: 2027-11-21T23:59:59.000Z
+Preferred-Languages: en, hi
+Canonical: https://everythinghere99.github.io/pikatools/.well-known/security.txt
