@@ -507,3 +507,10 @@ resetBtn.addEventListener("click", () => {
     downloadBtn.disabled = false;
     setStatus("");
 });
+
+
+if ("serviceWorker" in navigator && navigator.onLine) {
+    navigator.serviceWorker.getRegistrations().then(regs => {
+        regs.forEach(reg => reg.update());
+    }).catch(() => {});
+}

@@ -20,7 +20,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://everythinghere99.github.io/pikatools/tools/image-resizer.html">
 
-    <link rel="stylesheet" href="image-resizer.css?v=5">
+    <link rel="stylesheet" href="image-resizer.css?v=6">
 </head>
 <body>
 
@@ -37,14 +37,16 @@
     </section>
 
     <section class="resizer-card">
-        <label id="dropZone" class="drop-zone" for="fileInput">
+        <div id="dropZone" class="drop-zone">
             <div class="upload-icon">↔</div>
             <h2>Choose images</h2>
             <p>JPG, PNG or WebP • Multiple images supported</p>
-            <span id="chooseBtn" class="primary-btn">Choose Images</span>
-            <input type="file" id="fileInput" accept="image/*" multiple hidden>
+            <label class="primary-btn" id="chooseBtn">
+                Choose Images
+                <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" multiple hidden>
+            </label>
             <span class="drop-hint">or drag &amp; drop images here</span>
-        </label>
+        </div>
 
         <div id="workspace" class="workspace hidden">
             <div class="selection-topbar">
@@ -153,6 +155,6 @@
     </section>
 </main>
 
-<script src="image-resizer.js?v=5"></script>
+<script src="image-resizer.js?v=6"></script>
 </body>
 </html>
