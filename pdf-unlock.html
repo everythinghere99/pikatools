@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+    <title>PDF Unlocker Online - Unlock PDF Free | PikaTools</title>
+    <meta name="description" content="Unlock PDF files online with PikaTools. Remove password restrictions from PDF files you are authorized to access and download the unlocked PDF easily.">
+    <meta name="keywords" content="PDF unlocker, unlock PDF online, remove PDF password, PDF password remover, unlock protected PDF, remove PDF restrictions, free PDF unlocker, online PDF unlocker">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://everythinghere99.github.io/pikatools/tools/pdf-unlock.html">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" type="image/png" href="../icon-192.png">
+
+    <meta property="og:title" content="PDF Unlocker Online - PikaTools">
+    <meta property="og:description" content="Unlock PDF files online with PikaTools and remove restrictions from PDFs you are authorized to access.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://everythinghere99.github.io/pikatools/tools/pdf-unlock.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="pdf-unlock.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <a href="../index.html" class="back-btn" aria-label="Go back">←</a>
+    <a href="../index.html" class="brand">PikaTools</a>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <h2>Unlock PDF</h2>
+      <p>Remove password and permission restrictions from your PDF.</p>
+    </section>
+
+    <section id="uploadCard" class="card upload-card">
+      <div id="uploadBox" class="upload-box">
+        <input id="pdfInput" type="file" accept=".pdf,application/pdf" hidden />
+        <div class="upload-icon">🔓</div>
+        <h3>Drop your PDF here</h3>
+        <p>or choose a PDF from your device</p>
+        <label for="pdfInput" class="choose-btn">Choose PDF</label>
+        <span class="upload-hint">PDF only • Max 25 MB</span>
+      </div>
+    </section>
+
+    <section id="fileSection" class="card file-card hidden">
+      <div class="file-icon">📄</div>
+      <div class="file-info">
+        <strong id="fileName">document.pdf</strong>
+        <span id="fileSize">0 KB</span>
+      </div>
+      <button id="removeFile" class="remove-file" type="button" aria-label="Remove PDF">×</button>
+    </section>
+
+    <section id="passwordCard" class="card password-card hidden">
+      <div class="section-heading">
+        <h3>PDF Password</h3>
+        <p>Leave blank if your PDF opens without a password.</p>
+      </div>
+
+      <div class="field">
+        <label for="passwordInput">Password <span>(Optional)</span></label>
+        <div class="password-wrap">
+          <input id="passwordInput" type="password" autocomplete="off" placeholder="Enter PDF password" maxlength="128" />
+          <button id="togglePassword" class="eye-btn" type="button" aria-label="Show password">👁</button>
+        </div>
+      </div>
+
+      <p id="passwordError" class="error hidden" role="alert"></p>
+      <button id="unlockBtn" class="primary-btn" type="button">🔓 Unlock PDF</button>
+    </section>
+
+    <section id="processingCard" class="card processing-card hidden">
+      <div class="loader"></div>
+      <h3>Unlocking your PDF...</h3>
+      <p>Please wait while we process your file.</p>
+    </section>
+
+    <section id="resultCard" class="card result-card hidden">
+      <div class="success-icon">✓</div>
+      <h3>PDF Unlocked!</h3>
+      <p>Your unlocked PDF is ready to download.</p>
+      <button id="downloadBtn" class="primary-btn" type="button">↓ Download PDF</button>
+      <button id="anotherBtn" class="secondary-btn" type="button">Unlock Another PDF</button>
+    </section>
+
+    <div class="privacy-note">
+      🔒
+      <span>Your files are processed securely and are not stored permanently.</span>
+    </div>
+  </main>
+
+  <script src="pdf-unlock.js"></script>
+</body>
+</html>

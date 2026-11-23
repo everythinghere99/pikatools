@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+    <title>Image Resizer Online - Resize Images Free | PikaTools</title>
+    <meta name="description" content="Resize single or multiple images online for free with PikaTools. Easily change image width and height for JPG, PNG and WebP images. Fast, simple and easy to use.">
+    <meta name="keywords" content="image resizer, bulk image resizer, resize multiple images online, image size changer, resize JPG, resize PNG, resize WebP, change image dimensions, free image resizer">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://everythinghere99.github.io/pikatools/tools/image-resizer.html">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" type="image/png" href="../icon-192.png">
+
+    <meta property="og:title" content="Image Resizer Online - PikaTools">
+    <meta property="og:description" content="Resize single or multiple JPG, PNG and WebP images online for free with PikaTools.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://everythinghere99.github.io/pikatools/tools/image-resizer.html">
+
+    <link rel="stylesheet" href="image-resizer.css">
+</head>
+<body>
+
+<header class="topbar">
+    <a href="../index.html" class="brand"><span>✦</span> PikaTools</a>
+    <a href="../index.html" class="back-btn">← All Tools</a>
+</header>
+
+<main class="page">
+    <section class="intro">
+        <div class="eyebrow">✦ Image Tool</div>
+        <h1>Image Resizer</h1>
+        <p>Resize one or multiple images to the exact width and height you need.</p>
+    </section>
+
+    <section class="resizer-card">
+        <div id="dropZone" class="drop-zone">
+            <div class="upload-icon">↔</div>
+            <h2>Choose images</h2>
+            <p>JPG, PNG or WebP • Multiple images supported</p>
+            <button id="chooseBtn" class="primary-btn" type="button">Choose Images</button>
+            <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" multiple hidden>
+            <span class="drop-hint">or drag &amp; drop images here</span>
+        </div>
+
+        <div id="workspace" class="workspace hidden">
+            <div class="selection-topbar">
+                <span id="selectionCount" class="selection-count">1 image selected</span>
+                <div class="selection-actions">
+                    <button id="addMoreBtn" class="mini-btn" type="button">+ Add More</button>
+                    <button id="clearAllBtn" class="mini-btn danger" type="button">Clear</button>
+                </div>
+            </div>
+
+            <div id="singlePreviewBox" class="preview-box">
+                <img id="previewImage" alt="Image preview">
+                <div class="image-info">
+                    <span id="originalName">image.jpg</span>
+                    <span id="originalDimensions">0 × 0 px</span>
+                </div>
+            </div>
+
+            <div id="multiListBox" class="multi-list-box hidden">
+                <div id="fileList" class="file-list"></div>
+            </div>
+
+            <div class="settings">
+                <div class="dimensions-title">Resize dimensions</div>
+
+                <div class="dimension-grid">
+                    <div class="dimension-field">
+                        <label for="widthInput">Width</label>
+                        <div class="input-wrap">
+                            <input type="number" id="widthInput" min="1" max="10000">
+                            <span>px</span>
+                        </div>
+                    </div>
+
+                    <div class="dimension-field">
+                        <label for="heightInput">Height</label>
+                        <div class="input-wrap">
+                            <input type="number" id="heightInput" min="1" max="10000">
+                            <span>px</span>
+                        </div>
+                    </div>
+                </div>
+
+                <label class="lock-option">
+                    <input type="checkbox" id="lockRatio" checked>
+                    <span>🔒 Keep aspect ratio (scales height by width for multiple images)</span>
+                </label>
+
+                <label class="quick-label">Quick sizes</label>
+                <div class="quick-sizes">
+                    <button type="button" data-width="1920" data-height="1080">1920×1080</button>
+                    <button type="button" data-width="1280" data-height="720">1280×720</button>
+                    <button type="button" data-width="1080" data-height="1080">1080×1080</button>
+                    <button type="button" data-width="1080" data-height="1350">1080×1350</button>
+                    <button type="button" data-width="1080" data-height="1920">1080×1920</button>
+                </div>
+
+                <label for="format" class="format-label">Output format</label>
+                <select id="format">
+                    <option value="image/jpeg">JPG</option>
+                    <option value="image/webp">WebP</option>
+                    <option value="image/png">PNG</option>
+                </select>
+
+                <label for="quality" class="format-label">Quality</label>
+                <div class="quality-row">
+                    <input type="range" id="quality" min="40" max="100" value="90">
+                    <span id="qualityValue">90%</span>
+                </div>
+
+                <button id="resizeBtn" class="primary-btn full" type="button">Resize Image</button>
+            </div>
+
+            <div id="result" class="result hidden">
+                <div id="singleSummary" class="result-summary">
+                    <div class="result-row">
+                        <span>Original</span>
+                        <strong id="resultOriginal">—</strong>
+                    </div>
+                    <div class="result-row">
+                        <span>New size</span>
+                        <strong id="resultNewSize">—</strong>
+                    </div>
+                    <div class="result-row">
+                        <span>File size</span>
+                        <strong id="resultFileSize">—</strong>
+                    </div>
+                </div>
+
+                <div id="resultList" class="result-list"></div>
+
+                <button id="downloadBtn" class="download-btn" type="button">↓ Download Resized Image</button>
+            </div>
+
+            <p id="status" class="status"></p>
+            <button id="resetBtn" class="reset-btn" type="button">Resize more images</button>
+        </div>
+    </section>
+
+    <section class="privacy">
+        <span>🔒</span>
+        <div>
+            <strong>Your images stay on your device</strong>
+            <p>Resizing happens directly in your browser. Your images are not uploaded to a server.</p>
+        </div>
+    </section>
+</main>
+
+<script src="image-resizer.js"></script>
+</body>
+</html>

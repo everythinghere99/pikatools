@@ -1,0 +1,340 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg: #faf6f1;
+    --card: #ffffff;
+    --text: #3f342e;
+    --muted: #8b7c72;
+    --accent: #a76d4d;
+    --accent-dark: #805039;
+    --accent-soft: #f3e3d8;
+    --border: #eaded5;
+    --success: #53795d;
+    --danger: #a54d42;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: "Nunito", sans-serif; }
+
+.topbar {
+    height: 70px; padding: 0 20px; display: flex; align-items: center;
+    justify-content: space-between; max-width: 920px; margin: auto;
+}
+.brand { color: var(--text); text-decoration: none; font-family: "Comic Neue", cursive; font-size: 24px; font-weight: 700; }
+.brand span { color: var(--accent); }
+.back-btn { color: var(--accent-dark); text-decoration: none; font-size: 13px; font-weight: 700; }
+
+.page { width: min(700px, calc(100% - 28px)); margin: auto; padding-bottom: 50px; }
+.intro { text-align: center; padding: 35px 0 28px; }
+.eyebrow { color: var(--accent-dark); font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+h1 { margin: 0; font-family: "Comic Neue", cursive; font-size: clamp(34px, 7vw, 48px); line-height: 1; }
+.intro p { margin: 12px auto 0; max-width: 500px; color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+.resizer-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 22px; padding: 18px; box-shadow: 0 12px 35px rgba(82, 59, 45, .07);
+}
+.drop-zone {
+    min-height: 300px; padding: 35px 20px; border: 1.5px dashed #d8c5b7;
+    border-radius: 17px; background: #fdfaf7; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center; transition: .2s; cursor: pointer;
+}
+.drop-zone.dragging { border-color: var(--accent); background: var(--accent-soft); }
+.upload-icon {
+    width: 58px; height: 58px; border-radius: 18px; display: grid; place-items: center;
+    background: var(--accent-soft); color: var(--accent-dark); font-size: 27px; margin-bottom: 15px;
+}
+.drop-zone h2 { margin: 0; font-family: "Comic Neue", cursive; font-size: 22px; }
+.drop-zone p { margin: 5px 0 18px; color: var(--muted); font-size: 12px; }
+.drop-hint { margin-top: 13px; color: #a5968c; font-size: 11px; }
+
+.primary-btn, .download-btn {
+    border: 0; border-radius: 12px; padding: 12px 19px; background: var(--accent);
+    color: white; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+}
+.primary-btn:hover, .download-btn:hover { background: var(--accent-dark); }
+.primary-btn:disabled, .download-btn:disabled { opacity: .65; cursor: wait; }
+.full { width: 100%; margin-top: 18px; }
+.hidden { display: none !important; }
+
+.workspace { display: grid; gap: 16px; }
+
+.selection-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 8px 12px;
+    background: #fdfaf7;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.selection-count {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent-dark);
+}
+
+.selection-actions {
+    display: flex;
+    gap: 7px;
+}
+
+.mini-btn {
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--accent-dark);
+    border-radius: 9px;
+    padding: 6px 11px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.mini-btn:hover { background: var(--accent-soft); }
+.mini-btn.danger { color: var(--danger); }
+
+.preview-box { overflow: hidden; border-radius: 17px; background: #f6f1ed; border: 1px solid var(--border); }
+.preview-box img {
+    display: block; width: 100%; max-height: 340px; object-fit: contain;
+    background:
+        linear-gradient(45deg, #eee 25%, transparent 25%),
+        linear-gradient(-45deg, #eee 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #eee 75%),
+        linear-gradient(-45deg, transparent 75%, #eee 75%);
+    background-size: 22px 22px;
+    background-position: 0 0, 0 11px, 11px -11px, -11px 0;
+}
+.image-info { padding: 10px 13px; display: flex; justify-content: space-between; gap: 10px; font-size: 11px; color: var(--muted); }
+.image-info span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.multi-list-box {
+    background: #fdfaf7;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.file-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 260px;
+    overflow-y: auto;
+    padding-right: 3px;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    padding: 8px 10px;
+}
+
+.file-thumb {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: #f2ebe5;
+    flex-shrink: 0;
+}
+
+.file-meta {
+    min-width: 0;
+    flex: 1;
+}
+
+.file-meta strong {
+    display: block;
+    font-size: 12.5px;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file-meta span {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.remove-item-btn {
+    width: 28px;
+    height: 28px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    font-size: 17px;
+    line-height: 1;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.settings { padding: 4px 2px; }
+.dimensions-title { font-family: "Comic Neue", cursive; font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+.dimension-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.dimension-field label, .format-label, .quick-label { display: block; margin: 12px 0 7px; font-size: 12px; font-weight: 700; }
+
+.input-wrap {
+    display: flex; align-items: center; border: 1px solid var(--border);
+    border-radius: 11px; overflow: hidden; background: white;
+}
+.input-wrap input { width: 100%; border: 0; outline: 0; padding: 12px; font: inherit; color: var(--text); }
+.input-wrap span { padding-right: 12px; color: var(--muted); font-size: 12px; font-weight: 700; }
+
+.lock-option { display: flex; align-items: center; gap: 8px; margin-top: 11px; color: var(--muted); font-size: 11px; cursor: pointer; }
+.lock-option input { accent-color: var(--accent); }
+
+.quick-sizes { display: flex; gap: 7px; overflow-x: auto; padding-bottom: 2px; }
+.quick-sizes button {
+    flex: 0 0 auto; border: 1px solid var(--border); background: #fffaf6;
+    color: var(--accent-dark); border-radius: 9px; padding: 7px 10px; font-family: inherit; font-size: 10px; cursor: pointer;
+}
+
+select {
+    width: 100%; border: 1px solid var(--border); border-radius: 11px;
+    background: white; padding: 12px; outline: 0; font-family: inherit; color: var(--text);
+}
+
+.quality-row { display: flex; align-items: center; gap: 12px; }
+.quality-row input { flex: 1; accent-color: var(--accent); }
+.quality-row span { min-width: 40px; color: var(--accent-dark); font-size: 12px; font-weight: 700; }
+
+.result { padding: 15px; border-radius: 15px; background: #f7f1eb; border: 1px solid var(--border); }
+.result-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 12px; }
+.result-row span { color: var(--muted); }
+.result-row strong { color: var(--text); }
+
+.result-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 6px;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.result-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    padding: 8px 10px;
+}
+
+.result-item-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.result-item-info strong {
+    display: block;
+    font-size: 12px;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.result-item-info span {
+    font-size: 10.5px;
+    color: var(--muted);
+}
+
+.result-one-btn {
+    border: 0;
+    border-radius: 8px;
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    padding: 7px 10px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.result-one-btn:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+.download-btn { width: 100%; margin-top: 12px; background: var(--success); }
+
+.status { min-height: 18px; margin: 0; text-align: center; color: var(--muted); font-size: 11px; }
+.reset-btn { border: 0; background: transparent; color: var(--accent-dark); font-family: inherit; font-size: 12px; font-weight: 700; cursor: pointer; }
+
+.privacy { margin-top: 17px; padding: 15px; display: flex; gap: 12px; align-items: flex-start; background: #f4ece5; border-radius: 15px; }
+.privacy > span { font-size: 18px; }
+.privacy strong { font-family: "Comic Neue", cursive; font-size: 15px; }
+.privacy p { margin: 3px 0 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
+
+@media (max-width: 600px) {
+    html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+    .topbar { height: 64px; padding: 0 16px; }
+    .brand { font-size: 22px; }
+    .page { width: 100% !important; max-width: 100% !important; padding-left: 14px; padding-right: 14px; margin: 0; }
+    .resizer-card { width: 100% !important; max-width: 100% !important; padding: 14px; border-radius: 20px; }
+    .dimension-field { min-width: 0; }
+    .input-wrap input { min-width: 0; }
+    .quick-sizes { flex-wrap: wrap; }
+    .quick-sizes button { flex: 1 1 auto; white-space: nowrap; }
+}
+
+/* Brand & tap-highlight fix */
+.brand,
+.brand:link,
+.brand:visited,
+.brand:hover,
+.brand:active,
+.brand:focus {
+    color: inherit;
+    text-decoration: none;
+    outline: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+a, button, label, select, input {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* Smooth custom scrollbar */
+.file-list::-webkit-scrollbar,
+.result-list::-webkit-scrollbar,
+.results::-webkit-scrollbar,
+.image-list::-webkit-scrollbar,
+.pdf-list::-webkit-scrollbar,
+.page-grid::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+.file-list::-webkit-scrollbar-track,
+.result-list::-webkit-scrollbar-track,
+.results::-webkit-scrollbar-track,
+.image-list::-webkit-scrollbar-track,
+.pdf-list::-webkit-scrollbar-track,
+.page-grid::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 10px;
+}
+.file-list::-webkit-scrollbar-thumb,
+.result-list::-webkit-scrollbar-thumb,
+.results::-webkit-scrollbar-thumb,
+.image-list::-webkit-scrollbar-thumb,
+.pdf-list::-webkit-scrollbar-thumb,
+.page-grid::-webkit-scrollbar-thumb {
+    background: rgba(118, 89, 75, 0.35);
+    border-radius: 10px;
+}
