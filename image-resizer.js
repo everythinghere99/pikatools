@@ -1,4 +1,5 @@
 const fileInput = document.getElementById("fileInput");
+if (fileInput) { fileInput.multiple = true; fileInput.setAttribute("multiple", "multiple"); }
 const chooseBtn = document.getElementById("chooseBtn");
 const dropZone = document.getElementById("dropZone");
 

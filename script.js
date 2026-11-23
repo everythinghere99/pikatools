@@ -271,8 +271,17 @@
 
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./sw.js").catch((err) => {
-            console.error("SW error:", err);
-        });
+        navigator.serviceWorker.register("./sw.js", { updateViaCache: "none" })
+            .then((reg) => reg.update())
+            .catch((err) => {
+                console.error("SW error:", err);
+            });
+    });
+
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+        if (refreshing) return;
+        refreshing = true;
+        window.location.reload();
     });
 }

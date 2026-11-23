@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pikatools-v5';
+const CACHE_NAME = 'pikatools-v6';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -84,19 +84,18 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
   if (url.hostname.includes('blitz.cloud')) return;
 
+  /* Network-First: Always fetch latest update when online, fallback to cache offline */
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      const fetchPromise = fetch(event.request)
-        .then((response) => {
-          if (response && (response.status === 200 || response.type === 'opaque')) {
-            const copy = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
-          }
-          return response;
-        })
-        .catch(() => cached || caches.match('./index.html'));
-
-      return cached || fetchPromise;
-    })
+    fetch(event.request)
+      .then((response) => {
+        if (response && (response.status === 200 || response.type === 'opaque')) {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+        }
+        return response;
+      })
+      .catch(() =>
+        caches.match(event.request).then((cached) => cached || caches.match('./index.html'))
+      )
   );
 });
