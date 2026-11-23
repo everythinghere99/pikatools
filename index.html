@@ -27,7 +27,7 @@
     <link rel="apple-touch-icon" href="icon-192.png">
     <meta name="theme-color" content="#fffaf5">
 
-    <link rel="stylesheet" href="style.css?v=6">
+    <link rel="stylesheet" href="style.css?v=8">
 
 <style id="cozy-guide-faq">
 /* Cozy editorial + FAQ refresh — keeps the existing PikaTools palette/UI intact */
@@ -246,6 +246,45 @@
     .faq-answer{padding:0 14px 16px;}
     .faq-answer p{padding:15px 16px;font-size:.94rem;}
     .faq-icon{width:31px;height:31px;font-size:1.2rem;}
+}
+
+.section-toggle-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    margin-top:18px;
+    padding:10px 20px;
+    border:1px solid rgba(111,77,62,.18);
+    border-radius:999px;
+    background:linear-gradient(145deg,#fffdf9 0%,#fff3e8 100%);
+    color:#76594b;
+    font-family:"Nunito",sans-serif;
+    font-size:.9rem;
+    font-weight:800;
+    cursor:pointer;
+    box-shadow:0 6px 18px rgba(91,62,49,.07);
+    transition:transform .18s ease,background .18s ease,box-shadow .18s ease;
+    -webkit-tap-highlight-color:transparent;
+}
+.section-toggle-btn:hover{
+    background:#fbe4d6;
+    transform:translateY(-1px);
+    box-shadow:0 9px 22px rgba(91,62,49,.11);
+}
+.section-toggle-btn .toggle-arrow{
+    display:inline-block;
+    transition:transform .22s ease;
+    font-size:.85rem;
+}
+.section-toggle-btn[aria-expanded="true"] .toggle-arrow{
+    transform:rotate(180deg);
+}
+.collapsible-content.is-collapsed{
+    display:none !important;
+}
+.section-heading.is-collapsed-heading{
+    margin-bottom:0 !important;
 }
 </style>
 
@@ -522,13 +561,17 @@
 <!-- EDITORIAL / HOW-IT-WORKS SECTION (ESSENTIAL FOR ADSENSE APPROVAL) -->
 <section class="guide-section" id="guide">
 <div class="container">
-    <div class="section-heading centered">
+    <div class="section-heading centered is-collapsed-heading" id="guideHeading">
         <span class="section-kicker">EDITORIAL GUIDE</span>
         <h2>How PikaTools Makes File Optimization Effortless</h2>
         <p>A fast, free, and privacy-respecting toolkit engineered directly for your browser.</p>
+        <button type="button" class="section-toggle-btn" id="guideToggleBtn" aria-expanded="false" aria-controls="guideContent">
+            <span class="toggle-label">Show Guide</span>
+            <span class="toggle-arrow">▾</span>
+        </button>
     </div>
 
-    <div class="guide-grid">
+    <div class="guide-grid collapsible-content is-collapsed" id="guideContent">
         <article class="guide-card">
             <div class="guide-step">01</div>
             <h3>Privacy-Focused Processing</h3>
@@ -559,13 +602,17 @@
 <!-- FREQUENTLY ASKED QUESTIONS SECTION (BOOSTS SEO & VALUE SCORE) -->
 <section class="faq-section" id="faq">
 <div class="container">
-    <div class="section-heading centered">
+    <div class="section-heading centered is-collapsed-heading" id="faqHeading">
         <span class="section-kicker">QUESTIONS ANSWERED</span>
         <h2>Frequently Asked Questions</h2>
         <p>Everything you need to know about safety, formats, and file limits.</p>
+        <button type="button" class="section-toggle-btn" id="faqToggleBtn" aria-expanded="false" aria-controls="faqContent">
+            <span class="toggle-label">Show FAQ</span>
+            <span class="toggle-arrow">▾</span>
+        </button>
     </div>
 
-    <div class="faq-accordion">
+    <div class="faq-accordion collapsible-content is-collapsed" id="faqContent">
         <details class="faq-item">
             <summary class="faq-question">
                 <span>Are my uploaded files or signatures stored on any server?</span>
@@ -693,6 +740,42 @@
 </div>
 </footer>
 
-<script src="script.js?v=6"></script>
+<script src="script.js?v=8"></script>
+<script>
+(function () {
+    function setupSectionToggle(btnId, contentId, headingId, showText, hideText) {
+        const btn = document.getElementById(btnId);
+        const content = document.getElementById(contentId);
+        const heading = document.getElementById(headingId);
+        if (!btn || !content) return;
+
+        const label = btn.querySelector(".toggle-label");
+
+        function setOpen(open) {
+            content.classList.toggle("is-collapsed", !open);
+            if (heading) heading.classList.toggle("is-collapsed-heading", !open);
+            btn.setAttribute("aria-expanded", String(open));
+            if (label) label.textContent = open ? hideText : showText;
+        }
+
+        btn.addEventListener("click", () => {
+            const isCurrentlyOpen = btn.getAttribute("aria-expanded") === "true";
+            setOpen(!isCurrentlyOpen);
+        });
+
+        return setOpen;
+    }
+
+    const setGuideOpen = setupSectionToggle("guideToggleBtn", "guideContent", "guideHeading", "Show Guide", "Hide Guide");
+    const setFaqOpen = setupSectionToggle("faqToggleBtn", "faqContent", "faqHeading", "Show FAQ", "Hide FAQ");
+
+    document.querySelectorAll('a[href="#guide"]').forEach(link => {
+        link.addEventListener("click", () => { if (setGuideOpen) setGuideOpen(true); });
+    });
+    document.querySelectorAll('a[href="#faq"]').forEach(link => {
+        link.addEventListener("click", () => { if (setFaqOpen) setFaqOpen(true); });
+    });
+})();
+</script>
 </body>
 </html>

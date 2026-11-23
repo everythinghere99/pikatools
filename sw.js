@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pikatools-v8';
+const CACHE_NAME = 'pikatools-v10';
 const CORE_ASSETS = [
   './',
   './index.html',
