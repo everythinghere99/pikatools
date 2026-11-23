@@ -7,8 +7,8 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
 
     <title>Image Compressor Online - Compress Images Free | PikaTools</title>
-    <meta name="description" content="Compress images online for free with PikaTools. Reduce JPG, PNG and WebP image file size while keeping good quality. Fast, simple and easy to use.">
-    <meta name="keywords" content="image compressor, compress image online, image size reducer, reduce image size, JPG compressor, PNG compressor, WebP compressor, free image compressor">
+    <meta name="description" content="Compress single or multiple images online for free with PikaTools. Reduce JPG, PNG and WebP image file size while keeping good quality. Fast, simple and easy to use.">
+    <meta name="keywords" content="image compressor, bulk image compressor, compress multiple images online, image size reducer, reduce image size, JPG compressor, PNG compressor, WebP compressor, free image compressor">
     <meta name="robots" content="index, follow">
 
     <link rel="canonical" href="https://everythinghere99.github.io/pikatools/tools/image-compressor.html">
@@ -16,11 +16,11 @@
     <link rel="icon" type="image/png" href="../icon-192.png">
 
     <meta property="og:title" content="Image Compressor Online - PikaTools">
-    <meta property="og:description" content="Compress JPG, PNG and WebP images online for free with PikaTools.">
+    <meta property="og:description" content="Compress single or multiple JPG, PNG and WebP images online for free with PikaTools.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://everythinghere99.github.io/pikatools/tools/image-compressor.html">
 
-    <link rel="stylesheet" href="image-compressor.css">
+    <link rel="stylesheet" href="image-compressor.css?v=6">
 </head>
 <body>
 
@@ -35,21 +35,31 @@
     <section class="intro">
         <div class="eyebrow">✦ Image Tool</div>
         <h1>Image Compressor</h1>
-        <p>Compress your image to a smaller size without unnecessary quality loss.</p>
+        <p>Compress one or multiple images to a smaller size without unnecessary quality loss.</p>
     </section>
 
     <section class="compressor-card">
         <div id="dropZone" class="drop-zone">
             <div class="upload-icon">↑</div>
-            <h2>Choose an image</h2>
-            <p>JPG, PNG or WebP</p>
-            <button id="chooseBtn" class="primary-btn" type="button">Choose Image</button>
-            <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" hidden>
-            <span class="drop-hint">or drag & drop here</span>
+            <h2>Choose images</h2>
+            <p>JPG, PNG or WebP • Multiple images supported</p>
+            <label class="primary-btn" id="chooseBtn">
+                Choose Images
+                <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" multiple hidden>
+            </label>
+            <span class="drop-hint">or drag &amp; drop images here</span>
         </div>
 
         <div id="workspace" class="workspace hidden">
-            <div class="preview-box">
+            <div class="selection-topbar">
+                <span id="selectionCount" class="selection-count">1 image selected</span>
+                <div class="selection-actions">
+                    <label id="addMoreBtn" class="mini-btn" for="fileInput">+ Add More</label>
+                    <button id="clearAllBtn" class="mini-btn danger" type="button">Clear</button>
+                </div>
+            </div>
+
+            <div id="singlePreviewBox" class="preview-box">
                 <img id="previewImage" alt="Image preview">
                 <div class="image-info">
                     <span id="originalName">image.jpg</span>
@@ -57,8 +67,12 @@
                 </div>
             </div>
 
+            <div id="multiListBox" class="multi-list-box hidden">
+                <div id="fileList" class="file-list"></div>
+            </div>
+
             <div class="settings">
-                <label for="targetSize">Target size</label>
+                <label for="targetSize">Target size (per image)</label>
                 <div class="size-input">
                     <input type="number" id="targetSize" value="200" min="10" max="50000">
                     <span>KB</span>
@@ -82,23 +96,28 @@
             </div>
 
             <div id="result" class="result hidden">
-                <div class="result-row">
-                    <span>Original</span>
-                    <strong id="resultOriginal">—</strong>
+                <div class="result-summary">
+                    <div class="result-row">
+                        <span>Total Original</span>
+                        <strong id="resultOriginal">—</strong>
+                    </div>
+                    <div class="result-row">
+                        <span>Total Compressed</span>
+                        <strong id="resultCompressed">—</strong>
+                    </div>
+                    <div class="result-row">
+                        <span>Total Saved</span>
+                        <strong id="resultReduction">—</strong>
+                    </div>
                 </div>
-                <div class="result-row">
-                    <span>Compressed</span>
-                    <strong id="resultCompressed">—</strong>
-                </div>
-                <div class="result-row">
-                    <span>Reduction</span>
-                    <strong id="resultReduction">—</strong>
-                </div>
+
+                <div id="resultList" class="result-list"></div>
+
                 <button id="downloadBtn" class="download-btn" type="button">↓ Download Compressed Image</button>
             </div>
 
             <p id="status" class="status"></p>
-            <button id="resetBtn" class="reset-btn" type="button">Compress another image</button>
+            <button id="resetBtn" class="reset-btn" type="button">Compress more images</button>
         </div>
     </section>
 
@@ -106,11 +125,11 @@
         <span>🔒</span>
         <div>
             <strong>Your images stay on your device</strong>
-            <p>Compression happens directly in your browser. Your image is not uploaded to a server.</p>
+            <p>Compression happens directly in your browser. Your images are not uploaded to a server.</p>
         </div>
     </section>
 </main>
 
-<script src="image-compressor.js"></script>
+<script src="image-compressor.js?v=6"></script>
 </body>
 </html>

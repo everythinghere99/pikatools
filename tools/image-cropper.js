@@ -97,6 +97,8 @@ function buildOrientedCanvas(img, rotDeg) {
     canvas.width = w;
     canvas.height = h;
     const ctx = canvas.getContext("2d");
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = "high";
 
     ctx.translate(w / 2, h / 2);
     ctx.rotate((norm * Math.PI) / 180);
@@ -371,6 +373,8 @@ cropBtn.addEventListener("click", () => {
             canvas.height = Math.max(1, Math.round(sh));
 
             const ctx = canvas.getContext("2d");
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = "high";
             const format = outputFormat.value;
 
             if (format === "image/jpeg") {
@@ -380,7 +384,7 @@ cropBtn.addEventListener("click", () => {
 
             ctx.drawImage(orientedCanvas, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
 
-            const quality = format === "image/png" ? undefined : 0.92;
+            const quality = format === "image/png" ? undefined : 0.94;
 
             canvas.toBlob((blob) => {
                 if (!blob) {

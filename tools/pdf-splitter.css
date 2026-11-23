@@ -90,3 +90,39 @@ button { cursor: pointer; }
 a, button, label, select, input {
     -webkit-tap-highlight-color: transparent;
 }
+
+
+.page-grid {
+    max-height: 450px;
+    overflow-y: auto;
+    padding: 4px;
+}
+
+/* Smooth custom scrollbar */
+.file-list::-webkit-scrollbar,
+.result-list::-webkit-scrollbar,
+.results::-webkit-scrollbar,
+.image-list::-webkit-scrollbar,
+.pdf-list::-webkit-scrollbar,
+.page-grid::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+.file-list::-webkit-scrollbar-track,
+.result-list::-webkit-scrollbar-track,
+.results::-webkit-scrollbar-track,
+.image-list::-webkit-scrollbar-track,
+.pdf-list::-webkit-scrollbar-track,
+.page-grid::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 10px;
+}
+.file-list::-webkit-scrollbar-thumb,
+.result-list::-webkit-scrollbar-thumb,
+.results::-webkit-scrollbar-thumb,
+.image-list::-webkit-scrollbar-thumb,
+.pdf-list::-webkit-scrollbar-thumb,
+.page-grid::-webkit-scrollbar-thumb {
+    background: rgba(118, 89, 75, 0.35);
+    border-radius: 10px;
+}

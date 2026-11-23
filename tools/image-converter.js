@@ -212,6 +212,8 @@ function imageToCanvas(img, outputFormat) {
     canvas.height = height;
 
     const ctx = canvas.getContext("2d");
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
     if (outputFormat === "jpg") {
         ctx.fillStyle = "#ffffff";
         ctx.fillRect(0, 0, width, height);
@@ -265,7 +267,7 @@ async function imageToPdfJpeg(img, qualityPercent) {
     let width = img.naturalWidth;
     let height = img.naturalHeight;
 
-    const maxDimension = 1800;
+    const maxDimension = 2400;
     if (Math.max(width, height) > maxDimension) {
         const scale = maxDimension / Math.max(width, height);
         width = Math.round(width * scale);
@@ -277,6 +279,8 @@ async function imageToPdfJpeg(img, qualityPercent) {
     canvas.height = height;
 
     const ctx = canvas.getContext("2d");
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, width, height);
     ctx.drawImage(img, 0, 0, width, height);
