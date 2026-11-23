@@ -20,7 +20,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://everythinghere99.github.io/pikatools/tools/image-compressor.html">
 
-    <link rel="stylesheet" href="image-compressor.css">
+    <link rel="stylesheet" href="image-compressor.css?v=5">
 </head>
 <body>
 
@@ -39,20 +39,20 @@
     </section>
 
     <section class="compressor-card">
-        <div id="dropZone" class="drop-zone">
+        <label id="dropZone" class="drop-zone" for="fileInput">
             <div class="upload-icon">↑</div>
             <h2>Choose images</h2>
             <p>JPG, PNG or WebP • Multiple images supported</p>
-            <button id="chooseBtn" class="primary-btn" type="button">Choose Images</button>
-            <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" multiple hidden>
+            <span id="chooseBtn" class="primary-btn">Choose Images</span>
+            <input type="file" id="fileInput" accept="image/*" multiple hidden>
             <span class="drop-hint">or drag &amp; drop images here</span>
-        </div>
+        </label>
 
         <div id="workspace" class="workspace hidden">
             <div class="selection-topbar">
                 <span id="selectionCount" class="selection-count">1 image selected</span>
                 <div class="selection-actions">
-                    <button id="addMoreBtn" class="mini-btn" type="button">+ Add More</button>
+                    <label id="addMoreBtn" class="mini-btn" for="fileInput">+ Add More</label>
                     <button id="clearAllBtn" class="mini-btn danger" type="button">Clear</button>
                 </div>
             </div>
@@ -128,6 +128,6 @@
     </section>
 </main>
 
-<script src="image-compressor.js"></script>
+<script src="image-compressor.js?v=5"></script>
 </body>
 </html>

@@ -165,12 +165,7 @@ function renderSelectionUI() {
     }
 }
 
-chooseBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    fileInput.click();
-});
-dropZone.addEventListener("click", () => fileInput.click());
-addMoreBtn.addEventListener("click", () => fileInput.click());
+/* Native <label for="fileInput"> handles tap/click directly for reliable Android multi-select */
 
 clearAllBtn.addEventListener("click", () => {
     selectedFiles = [];
