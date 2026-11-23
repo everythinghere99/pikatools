@@ -21,7 +21,7 @@
     <meta property="og:url" content="https://everythinghere99.github.io/pikatools/tools/pdf-compressor.html">
 
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="pdf-compressor.css?v=6">
+    <link rel="stylesheet" href="pdf-compressor.css?v=8">
 </head>
 <body>
 
@@ -55,6 +55,15 @@
       <div id="fileList" class="file-list"></div>
     </div>
 
+    <div id="levelSection" class="level-section hidden">
+      <label for="compressionLevel">Compression Level</label>
+      <select id="compressionLevel">
+        <option value="recommended" selected>Recommended (Balanced Quality &amp; Size)</option>
+        <option value="strong">Strong (Maximum Size Reduction)</option>
+        <option value="light">Light (High Clarity • Gentle Reduction)</option>
+      </select>
+    </div>
+
     <button id="compressBtn" class="primary-btn hidden" type="button">Compress PDFs</button>
     <div id="engineStatus" class="engine-status"></div>
     <div id="results" class="results hidden"></div>
@@ -71,6 +80,13 @@
   </section>
 </main>
 
-<script src="pdf-compressor.js?v=6"></script>
+<script src="pdf-compressor.js?v=8"></script>
+<script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.getRegistrations().then(regs => {
+        regs.forEach(reg => reg.update());
+    }).catch(() => {});
+}
+</script>
 </body>
 </html>

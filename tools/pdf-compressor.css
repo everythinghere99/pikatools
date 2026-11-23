@@ -104,3 +104,35 @@ a, button, label, select, input {
     background: rgba(118, 89, 75, 0.35);
     border-radius: 10px;
 }
+
+
+.level-section {
+    margin-top: 14px;
+    padding: 11px 12px;
+    background: var(--soft);
+    border: 1px solid #eee2d7;
+    border-radius: 13px;
+}
+.level-section label {
+    display: block;
+    margin-bottom: 6px;
+    color: #5a4237;
+    font-size: 12px;
+    font-weight: 700;
+}
+.level-section select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #dfd0c3;
+    border-radius: 10px;
+    background: #ffffff;
+    color: var(--brown);
+    font-family: "Nunito", sans-serif;
+    font-size: 12.5px;
+    font-weight: 700;
+    outline: none;
+    cursor: pointer;
+}
+.level-section select:focus {
+    border-color: #9a6d5b;
+}

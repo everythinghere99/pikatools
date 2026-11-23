@@ -4,6 +4,8 @@ var input = document.querySelector("#fileInput");
 var drop = document.querySelector("#dropZone");
 var list = document.querySelector("#fileList");
 var fileSection = document.querySelector("#fileSection");
+var levelSection = document.querySelector("#levelSection");
+var compressionLevel = document.querySelector("#compressionLevel");
 var compressBtn = document.querySelector("#compressBtn");
 var results = document.querySelector("#results");
 var allBtn = document.querySelector("#downloadAllBtn");
@@ -72,11 +74,11 @@ function startProgress(index) {
             clearInterval(timer);
             return;
         }
-        if (progress < 35) progress += 2.2;
-        else if (progress < 60) progress += 1.3;
-        else if (progress < 80) progress += 0.7;
-        else if (progress < 92) progress += 0.3;
-        else if (progress < 97) progress += 0.08;
+        if (progress < 35) progress += 2.0;
+        else if (progress < 60) progress += 1.1;
+        else if (progress < 80) progress += 0.6;
+        else if (progress < 92) progress += 0.25;
+        else if (progress < 97) progress += 0.06;
 
         if (progress > 97) progress = 97;
         updateProgress(index, progress);
@@ -137,6 +139,7 @@ function render() {
 
     var show = files.length > 0;
     fileSection.classList.toggle("hidden", !show);
+    if (levelSection) levelSection.classList.toggle("hidden", !show);
     compressBtn.classList.toggle("hidden", !show);
 }
 
@@ -176,6 +179,7 @@ clearBtn.onclick = function () {
         activeController = null;
     }
     compressBtn.disabled = false;
+    if (compressionLevel) compressionLevel.disabled = false;
     files = [];
     outputs = [];
     render();
@@ -185,26 +189,120 @@ clearBtn.onclick = function () {
     engineStatus.textContent = "";
 };
 
-/* Local fallback compression using pdf-lib if server is unreachable/offline */
-async function fallbackOptimizePdf(file) {
-    var mod = await import("https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/+esm");
-    var bytes = await file.arrayBuffer();
-    var pdfDoc = await mod.PDFDocument.load(bytes, { ignoreEncryption: true });
-    var optimizedBytes = await pdfDoc.save({ useObjectStreams: true });
-    return new Blob([optimizedBytes], { type: "application/pdf" });
+/*
+ * Deep in-browser PDF compression using pdf.js + pdf-lib.
+ * Re-encodes heavy embedded page images cleanly while preserving exact PDF page dimensions.
+ */
+async function deepCompressInBrowser(file, level, fileIndex) {
+    var pdfjsLib = await import("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs");
+    var pdfLib = await import("https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/+esm");
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs";
+
+    var rawBuffer = await file.arrayBuffer();
+
+    /* Step A: Try fast structural compression first */
+    var structuralBlob = null;
+    try {
+        var quickDoc = await pdfLib.PDFDocument.load(rawBuffer.slice(0), { ignoreEncryption: true });
+        var quickBytes = await quickDoc.save({ useObjectStreams: true });
+        structuralBlob = new Blob([quickBytes], { type: "application/pdf" });
+    } catch (_) {}
+
+    /* Step B: Page-level visual recompression for scanned/photo PDFs */
+    var settings =
+        level === "strong" ? { scale: 1.05, quality: 0.52, maxDim: 1400 } :
+        level === "light"  ? { scale: 1.60, quality: 0.84, maxDim: 2200 } :
+                             { scale: 1.30, quality: 0.68, maxDim: 1800 };
+
+    var loadingTask = pdfjsLib.getDocument({ data: new Uint8Array(rawBuffer.slice(0)) });
+    var srcPdf = await loadingTask.promise;
+    var numPages = srcPdf.numPages;
+
+    var outPdf = await pdfLib.PDFDocument.create();
+    var statusEl = document.querySelector("#status-" + fileIndex);
+
+    for (var p = 1; p <= numPages; p++) {
+        if (cancelled) {
+            await srcPdf.destroy().catch(function () {});
+            throw new DOMException("Aborted", "AbortError");
+        }
+
+        if (statusEl) {
+            statusEl.textContent = "Page " + p + "/" + numPages;
+        }
+        updateProgress(fileIndex, Math.min(96, Math.round((p / numPages) * 92)));
+
+        var page = await srcPdf.getPage(p);
+        var origViewport = page.getViewport({ scale: 1 });
+        var pageWidthPts = origViewport.width;
+        var pageHeightPts = origViewport.height;
+
+        var renderScale = settings.scale;
+        var maxSide = Math.max(pageWidthPts * renderScale, pageHeightPts * renderScale);
+        if (maxSide > settings.maxDim) {
+            renderScale = settings.maxDim / Math.max(pageWidthPts, pageHeightPts);
+        }
+
+        var viewport = page.getViewport({ scale: renderScale });
+        var canvas = document.createElement("canvas");
+        canvas.width = Math.max(1, Math.round(viewport.width));
+        canvas.height = Math.max(1, Math.round(viewport.height));
+
+        var ctx = canvas.getContext("2d", { alpha: false });
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+        var jpgBlob = await new Promise(function (resolve) {
+            canvas.toBlob(resolve, "image/jpeg", settings.quality);
+        });
+
+        /* Free canvas memory immediately */
+        canvas.width = 0;
+        canvas.height = 0;
+
+        if (!jpgBlob) continue;
+
+        var jpgBytes = new Uint8Array(await jpgBlob.arrayBuffer());
+        var embeddedImg = await outPdf.embedJpg(jpgBytes);
+        var newPage = outPdf.addPage([pageWidthPts, pageHeightPts]);
+        newPage.drawImage(embeddedImg, {
+            x: 0,
+            y: 0,
+            width: pageWidthPts,
+            height: pageHeightPts
+        });
+    }
+
+    await srcPdf.destroy().catch(function () {});
+
+    var compressedBytes = await outPdf.save({ useObjectStreams: true });
+    var visualBlob = new Blob([compressedBytes], { type: "application/pdf" });
+
+    var bestBlob = visualBlob;
+    if (structuralBlob && structuralBlob.size < bestBlob.size) {
+        bestBlob = structuralBlob;
+    }
+    return bestBlob;
 }
 
-async function compressOne(file, externalSignal) {
+async function compressOne(file, level, fileIndex, externalSignal) {
     var timeoutController = new AbortController();
-    var timeoutId = setTimeout(function () { timeoutController.abort(); }, 25000);
+    var timeoutId = setTimeout(function () { timeoutController.abort(); }, 18000);
 
     if (externalSignal) {
         externalSignal.addEventListener("abort", function () { timeoutController.abort(); });
     }
 
+    var serverBlob = null;
     try {
         var formData = new FormData();
         formData.append("file", file, file.name);
+        formData.append("level", level);
+        formData.append("quality", level);
 
         var response = await fetch(API_URL, {
             method: "POST",
@@ -214,21 +312,33 @@ async function compressOne(file, externalSignal) {
 
         clearTimeout(timeoutId);
 
-        if (!response.ok) {
-            throw new Error("Server returned " + response.status);
+        if (response.ok) {
+            var blob = await response.blob();
+            if (blob && blob.size > 0 && blob.type.indexOf("pdf") !== -1) {
+                serverBlob = blob;
+            }
         }
-
-        var blob = await response.blob();
-        if (!blob.size) {
-            throw new Error("Empty PDF received");
-        }
-        return blob;
     } catch (err) {
         clearTimeout(timeoutId);
         if (cancelled) throw err;
-        /* Fallback to in-browser structural optimization */
-        return await fallbackOptimizePdf(file);
     }
+
+    /* Check if server achieved solid compression */
+    var minExpectedReduction =
+        level === "strong" ? 0.25 :
+        level === "light"  ? 0.05 : 0.15;
+
+    if (serverBlob && serverBlob.size <= file.size * (1 - minExpectedReduction)) {
+        return serverBlob;
+    }
+
+    /* Otherwise run deep in-browser compression and pick the smallest result */
+    var localBlob = await deepCompressInBrowser(file, level, fileIndex);
+
+    if (serverBlob && serverBlob.size < localBlob.size) {
+        return serverBlob;
+    }
+    return localBlob;
 }
 
 async function compress() {
@@ -237,8 +347,11 @@ async function compress() {
     cancelled = false;
     busy = true;
     compressBtn.disabled = true;
+    if (compressionLevel) compressionLevel.disabled = true;
     outputs = [];
     stopProgressAnimations();
+
+    var selectedLevel = compressionLevel ? compressionLevel.value : "recommended";
 
     results.classList.remove("hidden");
     allBtn.classList.add("hidden");
@@ -267,7 +380,7 @@ async function compress() {
         activeController = new AbortController();
 
         try {
-            var output = await compressOne(file, activeController.signal);
+            var output = await compressOne(file, selectedLevel, i, activeController.signal);
             activeController = null;
             stopCurrentProgress();
 
@@ -277,12 +390,13 @@ async function compress() {
             var smaller = output.size < file.size;
             var finalBlob = smaller ? output : file;
             var finalName = file.name.replace(/\.pdf$/i, "") + (smaller ? "-compressed.pdf" : ".pdf");
+            var savedPercent = smaller ? (((file.size - finalBlob.size) / file.size) * 100).toFixed(0) : 0;
 
             outputs.push({ name: finalName, blob: finalBlob, original: file.size });
 
             if (status) {
                 status.className = "file-status done";
-                status.textContent = "Done";
+                status.textContent = smaller ? ("-" + savedPercent + "%") : "Done";
             }
 
             var row = document.createElement("div");
@@ -301,7 +415,7 @@ async function compress() {
 
             var resultSize = document.createElement("div");
             resultSize.className = "result-size";
-            resultSize.textContent = size(file.size) + " -> " + size(finalBlob.size);
+            resultSize.textContent = size(file.size) + " -> " + size(finalBlob.size) + (smaller ? (" (" + savedPercent + "% smaller)") : " (Already optimal)");
 
             grow.appendChild(resultName);
             grow.appendChild(resultSize);
@@ -360,6 +474,7 @@ async function compress() {
 
     busy = false;
     compressBtn.disabled = false;
+    if (compressionLevel) compressionLevel.disabled = false;
 
     if (outputs.length) {
         engineStatus.textContent = "All PDFs processed successfully!";
@@ -427,6 +542,7 @@ resetBtn.onclick = function () {
         activeController = null;
     }
     compressBtn.disabled = false;
+    if (compressionLevel) compressionLevel.disabled = false;
     files = [];
     outputs = [];
     render();
